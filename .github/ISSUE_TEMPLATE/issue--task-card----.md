@@ -2,7 +2,7 @@
 name: 'Issue: Task Card 템플릿'
 about: 업무분배를위해 사용하며,  각자의 작업현황 및 작업완료 예정을 알 수 있습니다
 title: "[TASK] 이름 / 작업내용"
-labels: ''
+labels: task
 assignees: ''
 
 ---

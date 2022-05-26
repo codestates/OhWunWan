@@ -2,7 +2,7 @@
 name: 'Issue: Error handling  템플릿'
 about: 프로젝트에서 만난 에러를 어떻게 해결했는지 기록하는 템플릿입니다.
 title: "[Error handling] 이름 / 에러제목  "
-labels: ''
+labels: error-log
 assignees: ''
 
 ---
