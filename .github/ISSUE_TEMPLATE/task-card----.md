@@ -10,7 +10,7 @@ assignees: ''
 ### ISSUE
 - Group:  `client`, `server`, `sr`
 - Type: `bug`, `feature`, `delete`
-- Detail: fix actions from client redux
+- Detail: `자세한 업무내용을 적어주세요`
 
 ### TODO
 1. [ ] Job1
