@@ -6,7 +6,7 @@ const morgan = require('morgan');
 const express = require('express');
 const cookieParser = require('cookie-parser')
 
-
+const indexRouter = require('./routes');
 const app = express();
 
 
@@ -29,7 +29,7 @@ app.use(
 );
  
 
-
+app.use('/', indexRouter)
 app.get('/', (req, res) => {
   res.send('ohwunwuan')
 })
