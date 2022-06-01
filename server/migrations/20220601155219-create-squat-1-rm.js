@@ -9,22 +9,30 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       user_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        onDelete: "cascade",
+        references: {
+          model: "Users",
+          key: "id",
+        },
       },
       video: {
         type: Sequelize.BLOB
       },
       text_content: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false,
       },
       kg: {
-        type: Sequelize.INTEGER
-      },
-      createdAt: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      }, 
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE
       }
