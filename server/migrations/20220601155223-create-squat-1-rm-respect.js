@@ -9,16 +9,28 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       user_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        onDelete: "cascade",
+        references: {
+          model: "Users",
+          key: "id",
+        },
       },
       squat_1rm_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        onDelete: "cascade",
+        references: {
+          model: "Squat_1rms",
+          key: "id",
+        },
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE
-      },
-      updatedAt: {
+      }, 
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE
       }
