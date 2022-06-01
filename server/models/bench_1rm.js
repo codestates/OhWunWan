@@ -4,20 +4,46 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Bench_1rm extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+    
     static associate(models) {
-      // define association here
+     //M:1 Bench_1rm:User
+     this.belongsTo(models.User, {
+      foreignKey: "user_id",
+      onDelete: "cascade",
+    });
+
+     //1:M(Bench_1rm:Bench_1rm_respect)
+     this.hasMany(models.Bench_1rm_respect, {
+      foreignKey: "bench_1rm_id",
+      // onUpdate: defaults to CASCADE
+      onDelete: "cascade",
+    });
+    
+    //1:M(Bench_1rm:Bench_1rm_comment)
+    this.hasMany(models.Bench_1rm_comment, {
+      foreignKey: "bench_1rm_id",
+      // onUpdate: defaults to CASCADE
+      onDelete: "cascade",
+    });
     }
   }
   Bench_1rm.init({
-    user_id: DataTypes.INTEGER,
-    video: DataTypes.BLOB,
-    text_content: DataTypes.STRING,
-    kg: DataTypes.INTEGER
+    user_id: {
+      type:DataTypes.INTEGER,
+      allowNull: false,
+    },
+    video: {
+      type:DataTypes.BLOB,
+      allowNull: false,
+    },
+    text_content: {
+      type:DataTypes.STRING,
+      allowNull: false,
+    },
+    kg: {
+      type:DataTypes.INTEGER,
+      allowNull: false,
+    }
   }, {
     sequelize,
     modelName: 'Bench_1rm',
