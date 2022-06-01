@@ -4,18 +4,29 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Ohwunwan_like extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+
     static associate(models) {
-      // define association here
+      //M:1 Ohwunwan:Owunwan_like
+      this.belongsTo(models.User, {
+        foreignKey: "user_id",
+        onDelete: "cascade",
+      });
+      //M:1 User:Owunwan_like
+      this.belongsTo(models.Ohwunwan, {
+        foreignKey: "ohwunwan_id",
+        onDelete: "cascade",
+      });
     }
   }
   Ohwunwan_like.init({
-    user_id: DataTypes.INTEGER,
-    ohwunwan_id: DataTypes.INTEGER
+    user_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    ohwunwan_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    }
   }, {
     sequelize,
     modelName: 'Ohwunwan_like',
