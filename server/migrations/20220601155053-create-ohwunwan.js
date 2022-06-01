@@ -18,7 +18,8 @@ module.exports = {
         },
       },
       picture: {
-        type: Sequelize.BLOB
+        type: Sequelize.BLOB,
+        allowNull: false,
       },
       text_content: {
         allowNull: false,

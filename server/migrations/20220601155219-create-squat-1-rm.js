@@ -18,7 +18,8 @@ module.exports = {
         },
       },
       video: {
-        type: Sequelize.BLOB
+        type: Sequelize.BLOB,
+        allowNull: false,
       },
       text_content: {
         type: Sequelize.STRING,
