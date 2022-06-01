@@ -32,7 +32,10 @@ module.exports = (sequelize, DataTypes) => {
       type:DataTypes.INTEGER,
       allowNull: false,
     },
-    picture: DataTypes.BLOB,
+    picture: {
+      type:DataTypes.BLOB,
+      allowNull:false,
+    },
     text_content:{
       type: DataTypes.STRING,
       allowNull: false
