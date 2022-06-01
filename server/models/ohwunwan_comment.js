@@ -6,12 +6,12 @@ module.exports = (sequelize, DataTypes) => {
   class Ohwunwan_comment extends Model {
    
     static associate(models) {
-      //M:1 Owunwan_comment:User
+      //M:1 Ohwunwan_comment:User
       this.belongsTo(models.User, {
         foreignKey: "user_id",
         onDelete: "cascade",
       });
-      //M:1 Owunwan_comment:Ohwunwan
+      //M:1 Ohwunwan_comment:Ohwunwan
       this.belongsTo(models.Ohwunwan, {
         foreignKey: "ohwunwan_id",
         onDelete: "cascade",
