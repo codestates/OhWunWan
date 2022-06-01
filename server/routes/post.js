@@ -36,3 +36,5 @@ router.get('/squat_1rm', post_controller.squat_1rm.get);//게시글 조화
 router.post('/squat_1rm', post_controller.squat_1rm.post);//게시글 작성
 router.patch('/squat_1rm', post_controller.squat_1rm.patch);//게시글 수정
 router.delete('/squat_1rm/:squat_1rm_id', post_controller.squat_1rm.delete);//게시글 삭제
+
+module.exports = router
