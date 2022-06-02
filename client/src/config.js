@@ -6,5 +6,3 @@ export const API = {
   MAIN: `${BASE_URL}/main`, // 예시
   KAKAO_AUTH_URL: `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`
 };
-
-// 파일명에 example 삭제하고 사용하세요
