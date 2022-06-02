@@ -27,7 +27,11 @@ app.use(
     methods: ['GET', 'POST', 'DELETE', "PEATCH",'OPTIONS']//허용한 메소드들
   })
 );
- 
+
+const { User,Ohwunwan } = require('./models');
+
+
+Ohwunwan.findAll({ include: [ User ] }).then(console.log)
 
 app.use('/', indexRouter)
 app.get('/', (req, res) => {
