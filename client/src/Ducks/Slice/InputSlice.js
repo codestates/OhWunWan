@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 let initialState={}
 
-let input_slice = createSlice({
+let InputSlice = createSlice({
     name: 'name',
     initialState,
     reducers: {
@@ -12,7 +12,6 @@ let input_slice = createSlice({
 });
 
 
-console.log(input_slice.actions)
-export const{ input } = input_slice.actions
+export const { input } = InputSlice.actions
 
-export default input_slice.reducer
+export default InputSlice.reducer

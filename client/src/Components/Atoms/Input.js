@@ -7,7 +7,6 @@ function Input(){
     const select =useSelector((state)=>state)
     const dispatch = useDispatch()
     
-    console.log(1,select)
     return (
         <div>
             <input type="text" onChange={(e)=>{dispatch(input(e.target.value))}}>
