@@ -113,6 +113,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   User.init({
+    kakao_id:{
+      type:DataTypes.BIGINT,
+      unique: true,
+      allowNull: false,
+    },
     nickname:{
       type:DataTypes.STRING,
       unique: true,

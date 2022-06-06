@@ -9,6 +9,11 @@ module.exports = {
         type: Sequelize.INTEGER,
         onDelete: "cascade",
       },
+      kakao_id: {
+        type: Sequelize.BIGINT,
+        allowNull: false,
+        unique: true
+      },
       nickname: {
         type: Sequelize.STRING,
         allowNull: false,
