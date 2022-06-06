@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import STYLE from "../../config"
 
 // img
 import kakao from "../Picture/OauthButton/kakao.png"
@@ -20,13 +21,15 @@ const Button = styled.div`
 `
 
 OauthButton.defaultProps = {
-  img: kakao,
-  login: () => {console.log("로그인 동작")}
+  img: kakao
 }
+
+const KAKAO_LOGIN_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${STYLE.REST_API}&redirect_uri=${STYLE.REDIRECT_URI}&response_type=code`
+
 
 function OauthButton({img, login}) {
   return (
-    <Button img={img} onClick={login}></Button>
+    <Button img={img} onClick={() => {window.location.assign(KAKAO_LOGIN_URL)}}></Button>
   )
 }
 
