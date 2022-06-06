@@ -4,9 +4,11 @@ import styled from 'styled-components';
 import axios from 'axios'
 
 const StyledSubmit = styled.input`
-    
+    border:none;
+    background-color:white;
+    color: skyblue;
+    cursor: pointer;
 `
-
 
 
 function Submit(){
@@ -14,7 +16,7 @@ function Submit(){
 
     return (
     <div>
-    <StyledSubmit type='submit' onClick={(e)=>{axios.post('http://localhost:3000',select)}} >
+    <StyledSubmit type='submit' value="게시"  onClick={(e)=>{axios.post('https://',select)}} >
     </StyledSubmit>
     </div>
     )

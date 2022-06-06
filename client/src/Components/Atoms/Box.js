@@ -1,7 +1,20 @@
-import styled from "styled-components";
+import React, { Fragment } from 'react';
+import styled from 'styled-components';
 
-// const CommentBox = styled.div`
-//   width: 500px;
-//   height: ${props => props.post_cafegory: "100px" ? "300px"};
-//   border: 1px solid #000;
-// `
+const StyledBox = styled.form`
+  display:flex;
+  justify-content: space-between;
+  border: 1px solid black;
+  width: 30vw;
+`
+function Box(props){
+  return (
+    <Fragment>
+      <StyledBox>
+        {props.props}
+      </StyledBox>
+    </Fragment>
+  )
+}
+
+export default Box
