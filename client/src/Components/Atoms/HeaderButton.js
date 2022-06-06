@@ -1,23 +1,35 @@
-import React from 'react';
-import { useSelector,useDispatch } from 'react-redux';
-import styled from 'styled-components';
+import styled from "styled-components"
+import STYLE from "../../config";
 
-const StyledHeaderButton = styled.div`
-  width: 50px;
-  height: 50px;
-  background: beige;
+// img
+import post from "../Picture/HeaderButton/post.png";
+import ohwunwan from "../Picture/HeaderButton/ohwunwan.png";
+import onerm from "../Picture/HeaderButton/1rm.png";
+import feedback from "../Picture/HeaderButton/feedback.png";
+import user from "../Picture/HeaderButton/user.png";
+
+const Button = styled.div`
+  width: ${props => props.type === 'post' ? '2em' : '3em'};
+  height: ${props => props.type === 'post' ? '2em' : '3em'};
+  border: ${props => props.type === 'post' ? `0.1em solid ${STYLE.BORDER_COLOR}` : '0.1em solid #000;'};
+  border-radius: ${props => props.circle ? "1.5em" : 
+  props.type === 'post' ? '1em' : "0.5em"};
+  background-image: url(${props => props.img});
+  background-size: contain; // 배경 사이즈: 사이즈에 맞게
+  background-repeat: no-repeat; // 배경 반복: no
+  background-position: center; // 배경 위치: 가운데
+  background-color: ${props => props.img === onerm ? "#000" : "none"};
+  margin-left: ${props => props.type === 'post' ? '0.1em' : 'none'}; 
+  cursor: pointer;
 `
 
-// 회원정보수정 버튼 포함
+HeaderButton.defaultProps = {
+  img: post
+}
 
-function HeaderButton(){
-  const select = useSelector(state=>state)
-  const dispatch = useDispatch()  
+function HeaderButton({img, circle, type}) {
   return (
-    <div>
-      <StyledHeaderButton inClick={(e)=>{dispatch()}}>
-      </StyledHeaderButton>
-    </div>
+    <Button img={img} circle={circle} type={type} ></Button>
   )
 }
 
