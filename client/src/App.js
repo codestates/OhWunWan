@@ -1,14 +1,22 @@
-import React, { Fragment } from 'react';
-import { useSelector, useDispatch }  from 'react-redux';
-import styled from "styled-components";
-import CommentInputBox from './Components/Molecule/CommentInputBox';
+import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
+
+// GlobalStyle
+import GlobalStyle from "./Styled";
+
+// Page
+import Login from "./Components/Pages/Login";
+import OhWunWan from "./Components/Pages/OhWunWan";
 
 function App() {
   return (
-    <Fragment>
-      <CommentInputBox>
-      </CommentInputBox>
-    </Fragment>
+    <Router>
+      <GlobalStyle />
+
+      <Routes>
+        <Route path="/" element={<Login />}></Route>
+        <Route path="/ohwunwan" element={<OhWunWan />}></Route>
+      </Routes>
+    </Router>
   );
 }
 
