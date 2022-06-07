@@ -43,14 +43,14 @@ module.exports = {
             // console.log('##########',kakao_id,nickname,profile_picture)
 
 
-            //신유저인지 기존유저인지 구분하기
+            //유저정보 조회가능 ::::미가입인지 가입된유저인지 구분하기
             const check_user_info = await User.findOne({ where: { kakao_id } });
             // console.log('!!!!!!!!!!!!!!!!',check_user_info)
 
 
             //3.1 신 유저의 경우 
             if (!check_user_info) {
-                const new_user = {
+                const new_user_info = {
                     kakao_id,
                     nickname,
                     profile_picture,
@@ -58,7 +58,7 @@ module.exports = {
 
 
                 //신규유저 db에 생성
-                const user = await User.create(new_user)
+                const user = await User.create(new_user_info)
                 // console.log('@@@@@@@@@@@',user.data)
 
 
