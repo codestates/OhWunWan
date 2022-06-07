@@ -5,7 +5,7 @@ module.exports = {
     return queryInterface.bulkInsert('Users', [
       {
         id:1,
-        kakao_id:227222989,
+        kakao_id:2227222989,
         nickname: 'woonge_e',
         profile_picture: null,
         createdAt: new Date(),
@@ -13,7 +13,7 @@ module.exports = {
       },
       {
         id:2,
-        kakao_id:227242531,
+        kakao_id:2237242531,
         nickname: 'sunmyung',
         profile_picture: null,
         createdAt: new Date(),
@@ -21,7 +21,7 @@ module.exports = {
       },
       {
         id:3,
-        kakao_id:227242325,
+        kakao_id:2247242325,
         nickname: 'yungjun',
         profile_picture: null,
         createdAt: new Date(),
