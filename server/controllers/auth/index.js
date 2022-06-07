@@ -11,8 +11,8 @@ module.exports = {
         try {
             //쿠키의 어세스토큰
             const { access_token } = req.cookies
-            //어세스토큰이 없는경우 잘못된 요청
-            if (!access_token) return res.status(400).json({ message: 'Bad Request!' })
+            //어세스토큰이 없는경우 
+            if (!access_token) return res.status(204).json({ message: 'There in no access_token'})
             //토큰을이용해 유저인포조회
             const user_info = get_user_info(access_token)
             //유저인포속의 카카오 아이디
