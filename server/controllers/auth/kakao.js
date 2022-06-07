@@ -54,6 +54,7 @@ module.exports = {
             //신 유저의 경우 db에 생성
             if (!check_user_info) {
                 const new_user = {
+                    kakao_id,
                     nickname,
                     profile_picture,
                 }
