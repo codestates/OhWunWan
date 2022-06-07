@@ -1,9 +1,7 @@
 require("dotenv").config();
 const axios = require('axios');
 const { User } = require('../../models');
-const { get_user_info,
-    send_access_token
-} = require("../tokenFunctions")
+const { get_user_info,send_access_token} = require("../tokenFunctions")
 
 module.exports = {
     post: async (req, res) => {
@@ -33,7 +31,7 @@ module.exports = {
 
 
             //2.access_tkoen으로 카카오에게 유저의 정보 요청하기
-            const user_info = get_user_info(access_token)
+            const user_info = await get_user_info(access_token)
             //console.log("%%%%%%%%%%%%%",user_info)
 
 
@@ -63,7 +61,7 @@ module.exports = {
 
 
                 //토큰보내기 
-                send_access_token(req, access_token);
+                send_access_token(res, access_token);
 
 
                 //유저 정보 보내기
@@ -77,7 +75,7 @@ module.exports = {
 
             //3.2 기존유저인 경우
             //토큰전송
-            send_access_token(req, access_token)
+            send_access_token(res, access_token)
             //유저정보보내기
             return res.status(200).json({
                 message: 'This is user info', data: {
