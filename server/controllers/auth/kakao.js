@@ -63,10 +63,10 @@ module.exports = {
 
                 //토큰보내기, 유저 정보 보내기
                 res.cookie("refresh_token", refresh_token, {
-                    httpOnly: true, secure:true
+                    httpOnly: true, secure: true
                 });
                 res.cookie("access_token", access_token, {
-                    httpOnly: true, secure:true
+                    httpOnly: true, secure: true
                 });
                 return res.json({
                     message: 'This is new user info', data: {
@@ -74,11 +74,20 @@ module.exports = {
                     }
                 })
             }
+
+
             //기존유저인 경우
+            res.cookie("refresh_token", refresh_token, {
+                httpOnly: true, secure: true
+            });
+            res.cookie("access_token", access_token, {
+                httpOnly: true, secure: true
+            });
             return res.status(201).json({
                 message: 'This is user info', data: {
                     user_info: check_user_info.dataValues
                 }
+                
             })
         } catch (err) {
             console.log(err)
