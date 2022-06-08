@@ -8,7 +8,7 @@ module.exports = {
         try {
             //카카오 인가 코드
             const { code } = req.body;
-            // console.log(code) 
+            console.log('@@@@@@@@@@@@@@@@@@@@@',code) 
 
 
             //인가 코드가 없는경우 
@@ -23,6 +23,8 @@ module.exports = {
                     'Content-type': 'application/x-www-form-urlencoded;charset=utf-8'
                 },
             })
+
+            console.log('^^^^^^^^^^^^^^^^^^^^',response)
 
 
             //카카오 access_token
