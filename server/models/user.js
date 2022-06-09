@@ -124,7 +124,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     } ,
     profile_picture:{
-      type:DataTypes.BLOB,
+      type:DataTypes.STRING,
     } 
   }, {
     sequelize,
