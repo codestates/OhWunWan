@@ -1,0 +1,24 @@
+import styled from "styled-components"
+import STYLE from "../../config"
+import PostingBlock from "../Organism/PostingBlock"
+import HeaderBlock from "../Organism/HeaderBlock"
+import MarginBox from "../Atoms/MariginBox"
+
+const Div = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+`
+
+function PostFeedback() {
+  return(
+    <Div>
+      <MarginBox />
+      <HeaderBlock />
+      <PostingBlock />
+    </Div>
+  )
+}
+
+export default PostFeedback
