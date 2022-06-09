@@ -4,6 +4,7 @@ import STYLE from "../../config"
 // img
 import pic1 from "../Picture/PostPicture/pic1.webp"
 import pic2 from "../Picture/PostPicture/pic2.webp"
+import preview from "../Picture/PostPicture/preview.webp"
 
 const Picture = styled.img`
   width: ${STYLE.WIDTH};
@@ -11,7 +12,7 @@ const Picture = styled.img`
 `
 
 PostPicture.defaultProps = {
-  img: pic1
+  img: preview
 }
 
 function PostPicture({img}) {

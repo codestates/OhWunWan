@@ -14,7 +14,8 @@ const Div = styled.div`
   border: 0.1em solid ${STYLE.BORDER_COLOR};
   width: ${STYLE.WIDTH};
   justify-content: space-between;
-  margin-top: 2em;
+  /* margin-top: 2em; */
+  height: 2em;
 `
 
 const Div2 = styled.div`

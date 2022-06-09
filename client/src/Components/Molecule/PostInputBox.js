@@ -1,24 +1,23 @@
 import styled from "styled-components"
 import STYLE from "../../config"
 import PostInput from "../Atoms/PostInput"
-import SubmitButton from "../Atoms/SubmitButton"
+import Upload from "../Atoms/Upload"
 
 const Div = styled.div`
   width: ${STYLE.WIDTH};
+  height: 13em;
   border: 0.1em solid ${STYLE.BORDER_COLOR};
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  padding: 0.2em 0;
 `
 
-function CommentInputBox() {
-  return (
+function PostInputBox() {
+  return(
     <Div>
-      <PostInput comment="comment" />
-      <SubmitButton />
+      <PostInput />
+      <Upload />
     </Div>
   )
 }
 
-export default CommentInputBox
+export default PostInputBox

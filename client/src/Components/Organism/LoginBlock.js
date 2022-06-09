@@ -11,7 +11,7 @@ import naver from "../Picture/OauthButton/naver.png"
 const Div = styled.div`
   width: 25em;
   height: 25em;
-  margin-top: 15em;
+  /* margin-top: 15em; */
   border: 0.1em solid #000;
   border-radius: 1em;
   display: flex;
@@ -28,11 +28,9 @@ const Div2 = styled.div`
 function LoginBlock() {
   return(
     <Div>
-      <Logo />
+      <Logo width='15em' />
       <Div2 />
       <OauthButton />
-      <OauthButton img={google} />
-      <OauthButton img={naver} />
     </Div>
   )
 }

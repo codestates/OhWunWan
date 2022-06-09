@@ -4,7 +4,7 @@ import styled from "styled-components"
 import MarginBox from "../Atoms/MarginBox" // CSS용 빈 박스
 
 // Molecule
-import PostCafegoryBox from "../Molecule/PostCategoryBox2"
+import PostCategoryBox from "../Molecule/PostCategoryBox"
 
 // Organism
 import HeaderBlock from "../Organism/HeaderBlock"
@@ -18,12 +18,12 @@ const Div = styled.div`
 `
 
 
-function Feedback() {
+function Onerm() {
   return(
     <Div>
       <HeaderBlock />
       <MarginBox />
-      <PostCafegoryBox />
+      <PostCategoryBox />
       <PostBlock first='first' />
       <PostBlock />
       <PostBlock />
@@ -31,4 +31,4 @@ function Feedback() {
   )
 }
 
-export default Feedback
+export default Onerm

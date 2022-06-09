@@ -1,7 +1,8 @@
-import { Fragment } from "react"
 import styled from "styled-components"
-import LoginBlock from "../Organism/LoginBlock"
 import FooterBlock from "../Organism/FooterBlock"
+
+// Molecule
+import LoginBox from "../Molecule/LoginBox"
 
 const Div = styled.div`
   height: 100vh;
@@ -15,15 +16,14 @@ const Div2 = styled.div`
   height: 0;
 `
 
-
-function Login() {
+function Welcome() {
   return(
     <Div>
       <Div2 />
-      <LoginBlock />
+      <LoginBox />
       <FooterBlock />
     </Div>
   )
 }
 
-export default Login
+export default Welcome

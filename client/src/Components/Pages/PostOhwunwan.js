@@ -1,7 +1,8 @@
 import styled from "styled-components"
+import STYLE from "../../config"
+import PostingBlock from "../Organism/PostingBlock"
 import HeaderBlock from "../Organism/HeaderBlock"
 import MarginBox from "../Atoms/MarginBox"
-import UserInfoBlock from "../Organism/UserInfoBlock"
 
 const Div = styled.div`
   display: flex;
@@ -10,14 +11,14 @@ const Div = styled.div`
   /* justify-content: center; */
 `
 
-function UserInfo() {
+function PostOhwunwan() {
   return(
     <Div>
-      <HeaderBlock />
       <MarginBox />
-      <UserInfoBlock />
+      <HeaderBlock />
+      <PostingBlock />
     </Div>
   )
 }
 
-export default UserInfo
+export default PostOhwunwan

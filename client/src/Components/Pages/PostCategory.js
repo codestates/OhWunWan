@@ -1,23 +1,22 @@
 import styled from "styled-components"
 import HeaderBlock from "../Organism/HeaderBlock"
+import PostCategoryBox3 from "../Molecule/PostCategoryBox3"
 import MarginBox from "../Atoms/MarginBox"
-import UserInfoBlock from "../Organism/UserInfoBlock"
 
 const Div = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: center; */
 `
 
-function UserInfo() {
+function PostCategory() {
   return(
     <Div>
-      <HeaderBlock />
       <MarginBox />
-      <UserInfoBlock />
+      <HeaderBlock />
+      <PostCategoryBox3 />
     </Div>
   )
 }
 
-export default UserInfo
+export default PostCategory

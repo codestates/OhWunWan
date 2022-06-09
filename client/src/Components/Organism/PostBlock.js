@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Fragment } from "react";
 import PostTopBox from "../Molecule/PostTopBox";
 import PictureBox from "../Molecule/PictureBox";
 import PostInfoBox from "../Molecule/PostInfoBox";
@@ -7,11 +8,12 @@ import CommentBox from "../Molecule/CommentBox";
 import CommentInputBox from "../Molecule/CommentInputBox";
 
 const Div = styled.div`
+  margin-top: ${props => props.first === 'first' ? '0.2em' : '1.0em'}
 `
 
-function PostBlock() {
+function PostBlock({first}) {
   return (
-    <Div>
+    <Div first={first}>
       <PostTopBox />
       <PictureBox />
       <PostInfoBox />
