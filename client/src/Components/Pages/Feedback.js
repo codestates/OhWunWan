@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 // Atoms
-import MarginBox from "../Atoms/MariginBox" // CSS용 빈 박스
+import MarginBox from "../Atoms/MarginBox" // CSS용 빈 박스
 
 // Molecule
 import PostCafegoryBox from "../Molecule/PostCategoryBox2"

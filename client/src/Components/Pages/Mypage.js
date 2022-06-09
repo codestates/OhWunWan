@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import HeaderBlock from "../Organism/HeaderBlock"
-import MarginBox from "../Atoms/MariginBox"
+import MarginBox from "../Atoms/MarginBox"
 import UserBlock from "../Organism/UserBlock"
 import PostBlock from '../Organism/PostBlock'
 

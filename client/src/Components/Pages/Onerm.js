@@ -1,10 +1,10 @@
 import styled from "styled-components"
 
 // Atoms
-import MarginBox from "../Atoms/MariginBox" // CSS용 빈 박스
+import MarginBox from "../Atoms/MarginBox" // CSS용 빈 박스
 
 // Molecule
-import PostCafegoryBox from "../Molecule/PostCategoryBox"
+import PostCategoryBox from "../Molecule/PostCategoryBox"
 
 // Organism
 import HeaderBlock from "../Organism/HeaderBlock"
@@ -23,7 +23,7 @@ function Onerm() {
     <Div>
       <HeaderBlock />
       <MarginBox />
-      <PostCafegoryBox />
+      <PostCategoryBox />
       <PostBlock first='first' />
       <PostBlock />
       <PostBlock />

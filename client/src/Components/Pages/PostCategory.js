@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import HeaderBlock from "../Organism/HeaderBlock"
 import PostCategoryBox3 from "../Molecule/PostCategoryBox3"
-import MarginBox from "../Atoms/MariginBox"
+import MarginBox from "../Atoms/MarginBox"
 
 const Div = styled.div`
   display: flex;

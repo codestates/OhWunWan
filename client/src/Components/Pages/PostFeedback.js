@@ -2,7 +2,7 @@ import styled from "styled-components"
 import STYLE from "../../config"
 import PostingBlock from "../Organism/PostingBlock"
 import HeaderBlock from "../Organism/HeaderBlock"
-import MarginBox from "../Atoms/MariginBox"
+import MarginBox from "../Atoms/MarginBox"
 
 const Div = styled.div`
   display: flex;
