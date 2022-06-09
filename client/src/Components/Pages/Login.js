@@ -11,10 +11,15 @@ const Div = styled.div`
   justify-content: space-between;
 `
 
+const Div2 = styled.div`
+  height: 0;
+`
+
 
 function Login() {
   return(
     <Div>
+      <Div2 />
       <LoginBlock />
       <FooterBlock />
     </Div>
