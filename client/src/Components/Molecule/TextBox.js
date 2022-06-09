@@ -5,6 +5,7 @@ import PostContent from "../Atoms/PostContent"
 const Div = styled.div`
   width: ${STYLE.WIDTH};
   border: 0.1em solid ${STYLE.BORDER_COLOR};
+  padding: 0.2em 0;
 `
 
 function TextBox() {
