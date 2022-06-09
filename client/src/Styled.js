@@ -9,6 +9,11 @@ const GlobalStyle = createGlobalStyle`
     align-self: center;
     justify-content: center;
   }
+
+  a {
+    text-decoration: none;
+    color: #000;
+  }
 ` 
 
 export default GlobalStyle
