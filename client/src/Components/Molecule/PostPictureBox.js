@@ -1,19 +1,18 @@
 import styled from "styled-components"
 import STYLE from "../../config"
-import PostContent from "../Atoms/PostContent"
+import PostPicture from "../Atoms/PostPicture"
 
 const Div = styled.div`
   width: ${STYLE.WIDTH};
   border: 0.1em solid ${STYLE.BORDER_COLOR};
-  padding: 0.2em 0;
 `
 
-function TextBox() {
-  return (
+function PostPictureBox() {
+  return(
     <Div>
-      <PostContent text='6월 6일 오운완 인증해요!' />
+      <PostPicture />
     </Div>
   )
 }
 
-export default TextBox
+export default PostPictureBox
