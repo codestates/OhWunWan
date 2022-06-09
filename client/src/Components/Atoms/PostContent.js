@@ -2,10 +2,10 @@ import styled from "styled-components"
 import STYLE from "../../config"
 
 const Content = styled.div`
-  width: ${props => props.type === 'comment' ? '' : `${STYLE.WIDTH}`};
+  width: ${props => props.type === 'comment' ? '22em' : `${STYLE.WIDTH}`};
   /* border: 0.1em solid ${STYLE.BORDER_COLOR}; */
   font-size: 1em;
-  margin-left: 0.2em;
+  margin-left: ${props => props.type === 'comment' ? '0' : '0.2em'};
 `
 
 PostContent.defaultProps = {
