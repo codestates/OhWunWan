@@ -5,6 +5,17 @@ const cors = require('cors');
 const morgan = require('morgan');
 const express = require('express');
 const cookieParser = require('cookie-parser')
+const multer = require("multer");
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './uploads ')
+  },
+  filename: function (req, file, cb) {
+    const filename = +Date.now() + '_' + Math.round(Math.random() * 1E9)
+    cb(null, filename)
+  }
+})
+const upload = multer({ storage: 'uploads/' })
 
 const indexRouter = require('./routes');
 const app = express();
@@ -22,11 +33,15 @@ app.use(express.urlencoded({ extended: false }));
 //cors요청처리
 app.use(
   cors({
-    origin: ['http://localhost:3000','https://localhost:3000'],//요청을 허용할 오리진
+    origin: ['http://localhost:3000', 'https://localhost:3000'],//요청을 허용할 오리진
     credentials: true,//사용자 인증이 필요한 리소스접근이 필요한경우 true설정
-    methods: ['GET', 'POST', 'DELETE', "PATCH",'OPTIONS']//허용한 메소드들
+    methods: ['GET', 'POST', 'DELETE', "PATCH", 'OPTIONS']//허용한 메소드들
   })
 );
+
+app.post('/post/ohwunwan', upload.single('avatar'), function (req, res) {
+  res.json({message:'ok'})
+})
 
 app.use('/', indexRouter)
 app.get('/', (req, res) => {
