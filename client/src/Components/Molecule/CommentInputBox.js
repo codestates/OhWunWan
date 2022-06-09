@@ -9,6 +9,7 @@ const Div = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
+  padding: 0.2em 0;
 `
 
 function CommentInputBox() {
