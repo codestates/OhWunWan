@@ -6,4 +6,4 @@ const STYLE = {
   SERVER: "https://localhost:4000"
 }
 
-// export default STYLE
+export default STYLE
