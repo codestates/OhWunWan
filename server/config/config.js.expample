@@ -1,0 +1,23 @@
+module.exports = {
+  development: {
+    username: "root",
+    password: null,
+    database: "ohwunwan",
+    host: "localhost",
+    dialect: "mysql"
+  },
+  test: {
+    username :null,
+    password:null,
+    database:null,
+    host:null,
+    dialect:"mysql"
+  },
+  production: {
+    username:null,
+    password:null,
+    database:null,
+    host:null,
+    dialect:"mysql"
+  }
+}
