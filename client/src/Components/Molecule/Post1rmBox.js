@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import STYLE from "../../config"
 import PostSubject from "../Atoms/PostSubject"
-import PostInput2 from "../Atoms/PostInput2"
+import PostInput from "../Atoms/PostInput"
 import PostSelect from "../Atoms/PostSelect"
 
 const Div = styled.div`
@@ -36,7 +36,7 @@ function Post1rmBox() {
       <Div2>
         <PostSubject text='1RM' />
         <Div3>
-          <PostInput2 />
+          <PostInput />
           <span>KG</span>
         </Div3>
       </Div2>

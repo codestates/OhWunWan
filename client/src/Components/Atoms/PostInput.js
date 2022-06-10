@@ -1,21 +1,17 @@
 import styled from "styled-components"
-import STYLE  from "../../config";
+import STYLE from "../../config"
 
-const Input = styled.textarea`
-  width: ${props => props.comment === 'comment' ? "34em" : "92%"};
-  height: ${props => props.comment === 'comment' ? "1.5em" : "15em"};
+const Input = styled.input`
+  width: 4em;
   font-size: 1em;
-  resize: none; // 크기 변경 불가
-  border: none;
+  text-align: center;
+  border: 0.1em solid ${STYLE.BORDER_COLOR};
+  margin-right: 0.2em;
 `
 
-PostInput.defaultProps = {
-}
-
-function PostInput({comment, type}) {
+function PostInput() {
   return (
-    <Input comment={comment} placeholder={comment === "comment" ? "댓글을 입력해주세요" : 
-    type === "nickname" ? "바꾸실 닉네임을 입력하세요" : "댓글을 입력해주세요"}></Input>
+    <Input type='text'></Input>
   )
 }
 

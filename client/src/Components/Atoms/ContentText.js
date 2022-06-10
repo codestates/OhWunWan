@@ -7,14 +7,14 @@ const Content = styled.div`
   margin-left: 0.2em;
 `
 
-PostContent.defaultProps = {
+ContentText.defaultProps = {
   text: '텍스트가 들어갈 자리입니다'
 }
 
-function PostContent({text}) {
+function ContentText({text}) {
   return (
     <Content>{text}</Content>
   )
 }
 
-export default PostContent
+export default ContentText
