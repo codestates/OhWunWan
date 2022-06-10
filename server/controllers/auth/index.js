@@ -8,14 +8,11 @@ module.exports = {
     //로그인 유뮤조회 
     get: async (req, res) => {
         try {
-            //쿠키의 어세스토큰
+            //어세스토큰이 없는경우 
+            if (!req.cookies.access_token) return res.status(200).json({ message: 'There is no access_token'})
             const { access_token } = req.cookies
             // console.log(":::::access_token",access_token,)
             // console.log(":::::cookies:",req.cookies)
-
-
-            //어세스토큰이 없는경우 
-            if (!access_token) return res.status(200).json({ message: 'There is no access_token'})
 
 
             //토큰을이용해 유저인포조회
@@ -24,13 +21,12 @@ module.exports = {
             // console.log('::::::::user_info:',user_info)
 
 
-            const { id: kakao_id } = user_info.data
             //카카오아이디가없는것은 유효하지않은 토큰이라는 말
-            if (!kakao_id) return res.status(200).json({ message: 'Invalid token' })
-
-
+            if (!user_info.data.id) return res.status(200).json({ message: 'Invalid token' })
+            
             // 유효한 토큰인 경우
             else {
+                const { id: kakao_id } = user_info.data
                 //유저정보 조회
                 const check_user_info = await User.findOne({ where: { kakao_id } });
 
