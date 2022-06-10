@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import styled from 'styled-components';
 
 const StyledBox = styled.form`
@@ -8,6 +8,8 @@ const StyledBox = styled.form`
   width: 30vw;
 `
 function Box(props){
+  useState()
+
   return (
     <Fragment>
       <StyledBox>
