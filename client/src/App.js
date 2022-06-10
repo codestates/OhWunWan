@@ -17,6 +17,9 @@ import Mypage from "./Components/Pages/Mypage";
 import UserInfo from "./Components/Pages/UserInfo";
 import Menu from "./Components/Pages/Menu"
 
+import OhWunWan2 from "./Components/Pages/OhWunWan2";
+import OhWunWan3 from "./Components/Pages/OhWunWan3";
+
 function App() {
   return (
     <Router>
@@ -35,6 +38,9 @@ function App() {
         <Route path="/user" element={<Mypage />}></Route>
         <Route path="/userinfo" element={<UserInfo />}></Route>
         <Route path="/menu" element={<Menu />}></Route>
+
+        <Route path="/ohwunwan2" element={<OhWunWan2 />}></Route>
+        <Route path="/ohwunwan3" element={<OhWunWan3 />}></Route>
       </Routes>
     </Router>
   );
