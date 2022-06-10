@@ -29,7 +29,7 @@ module.exports = {
       },
       {
         id:4,
-        kakao_id:227242621,
+        kakao_id:2237242621,
         nickname: 'eunukk',
         profile_picture: null,
         createdAt: new Date(),
