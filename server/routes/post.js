@@ -4,8 +4,8 @@ const {post_controller} = require('./../controllers');
 
 
 // ohwunwan
-router.get('/ohwunwan/:count', post_controller.ohwunwan.get);//게시글 조화
-router.post('/ohwunwan', post_controller.ohwunwan.post);//게시글 작성
+router.get('/ohwunwan/:count', post_controller.ohwunwan.get);//게시글 조회
+router.post('/ohwunwan' ,post_controller.ohwunwan.post);//게시글 작성
 router.patch('/ohwunwan', post_controller.ohwunwan.patch);//게시글 수정
 router.delete('/ohwunwan/:owunwan_id', post_controller.ohwunwan.delete);//게시글 삭제
 

@@ -7,46 +7,12 @@ const express = require('express');
 const cookieParser = require('cookie-parser')
 const indexRouter = require('./routes');
 const app = express();
-// 파일형식의 데이터를 받기위한 미들웨어---------------------------------
-const multer = require("multer");
-const storage = multer.diskStorage({
-  //파일이 저장될 위치설정
-  destination: function (req, file, cb) {
-    if (file.fieldname === 'img') {
-      cb(null, 'uploads/picture')
-    }
-    if (file.fieldname === 'video') {
-      cb(null, 'uploads/video')
-    }
-  },
-  //저장되는 파일의 이름 설정
-  filename: function (req, file, cb) {
-    let filename
-    console.log(file)
-    if (file.fieldname === 'img') {
-      filename = +Date.now() + '_' + Math.round(Math.random() * 1E9) + '.png'
-    }
-    if (file.fieldname === 'video') {
-      filename = +Date.now() + '_' + Math.round(Math.random() * 1E9) + '.mp4'
-    }
-    cb(null, filename)
-  },
-})
-// 확장자 필터링 
-const fileFilter = (req, file, cb) => { 
-  if (file.mimetype === 'image/png'
-    || file.mimetype === 'image/jpg' 
-    || file.mimetype === 'image/jpeg'
-    ) {
-    cb(null, true); // 해당 mimetype만 받겠다는 의미 
-  }
-  else { // 다른 mimetype은 저장되지 않음 
-    cb(null, false);
-  }
-}
+const upload = require('./modules/multer');
 
-const upload = multer({ storage: storage, fileFilter: fileFilter })
-//--------------------------------------------------------------
+
+//미들웨어
+//req.file 객체를 생성함
+app.use( upload.single('img'))
 //로그를 남겨줌
 app.use(morgan('dev'))
 //요청의 쿠를 쉽게 추출할수있게 도와줌
@@ -64,7 +30,7 @@ app.use(
   })
 );
 
-app.use(upload.single('img'))
+
 app.use('/', indexRouter)
 app.get('/', (req, res) => {
   res.send('ohwunwuan')
