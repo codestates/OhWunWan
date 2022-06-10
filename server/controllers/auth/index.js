@@ -1,9 +1,8 @@
 const { User } = require('../../models');
-const axios = require('axios');
 const {
     get_user_info,
     send_access_token
-} = require("../tokenFunctions")
+} = require("../../modules/tokenFunctions")
 
 module.exports = {
     //로그인 유뮤조회 
@@ -16,7 +15,7 @@ module.exports = {
 
 
             //어세스토큰이 없는경우 
-            if (!access_token) return res.status(204).json({ message: 'There in no access_token'})
+            if (!access_token) return res.status(200).json({ message: 'There is no access_token'})
 
 
             //토큰을이용해 유저인포조회
@@ -27,7 +26,7 @@ module.exports = {
 
             const { id: kakao_id } = user_info.data
             //카카오아이디가없는것은 유효하지않은 토큰이라는 말
-            if (!kakao_id) return res.status(204).json({ message: 'Invalid token' })
+            if (!kakao_id) return res.status(200).json({ message: 'Invalid token' })
 
 
             // 유효한 토큰인 경우
@@ -42,7 +41,8 @@ module.exports = {
 
                 //유저정보보내기
                 return res.status(200).json({
-                    message: 'This is user info', data: {
+                    message: 'This is user info',
+                     data: {
                         user_info: check_user_info.dataValues
                     }
                 })

@@ -1,18 +1,18 @@
 require("dotenv").config();
 const axios = require('axios');
 const { User } = require('../../models');
-const { get_user_info,send_access_token} = require("../tokenFunctions")
+const { get_user_info,send_access_token} = require("../../modules/tokenFunctions")
 
 module.exports = {
     post: async (req, res) => {
         try {
             //카카오 인가 코드
             const { code } = req.body;
-            console.log('::::::::::::code:',code) 
+            // console.log('::::::::::::code:',code) 
 
 
             //인가 코드가 없는경우 
-            if (!code) return res.status(400).json({ message: 'Bad Request!' })
+            if (!code) return res.status(200).json({ message: 'Bad Request!' })
 
 
             //1.카카오 로그인 요청과 응답(토큰제공)
