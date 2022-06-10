@@ -19,6 +19,7 @@ import Menu from "./Components/Pages/Menu"
 
 import OhWunWan2 from "./Components/Pages/OhWunWan2";
 import OhWunWan3 from "./Components/Pages/OhWunWan3";
+import PostingBlock from './Components/Organism/PostingBlock';
 
 function App() {
   return (
@@ -26,21 +27,8 @@ function App() {
       <GlobalStyle />
 
       <Routes>
-        <Route path="/" element={<Welcome />}></Route>
-        <Route path="/oauth/kakao" element={<Login />}></Route>
-        <Route path="/ohwunwan" element={<OhWunWan />}></Route>
-        <Route path="/1rm" element={<Onerm />}></Route>
-        <Route path="/feedback" element={<Feedback />}></Route>
-        <Route path="/post" element={<PostCategory />}></Route>
-        <Route path="/post/ohwunwan" element={<PostOhwunwan />}></Route>
-        <Route path="/post/1rm" element={<Post1rm />}></Route>
-        <Route path="/post/feedback" element={<PostFeedback />}></Route>
-        <Route path="/user" element={<Mypage />}></Route>
-        <Route path="/userinfo" element={<UserInfo />}></Route>
-        <Route path="/menu" element={<Menu />}></Route>
-
-        <Route path="/ohwunwan2" element={<OhWunWan2 />}></Route>
-        <Route path="/ohwunwan3" element={<OhWunWan3 />}></Route>
+        <Route path="/" element={<PostingBlock></PostingBlock>}></Route>
+        
       </Routes>
     </Router>
   );
