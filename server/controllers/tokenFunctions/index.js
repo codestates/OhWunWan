@@ -18,9 +18,9 @@ module.exports = {
     send_access_token : async(res,access_token)=>{
         res.cookie("access_token", access_token, {
             //자바스크립트 접근x,https에서만 쿠키사용
-            httpOnly: true, secure: true
+            httpOnly: true, secure: true,maxAge: 900000
         });
     }
-
+    
 
 }
