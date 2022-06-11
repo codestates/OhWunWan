@@ -35,5 +35,17 @@ module.exports = {
         }
     },
     //ohwunwan_comment 삭제
-    delete: () => { },
+    delete: async(req,res) => {
+        try{
+            const { ohwunwan_comment_id } = req.params
+           await  Ohwunwan_comment.destroy({
+                where: { id: ohwunwan_comment_id },
+            });
+           return  res.json({ message: 'The comment has been deleted' })
+        }catch(err){
+            console.log(err);
+            return  res.status(500).json({ message: 'Server Error!' })
+        }
+
+     },
 }

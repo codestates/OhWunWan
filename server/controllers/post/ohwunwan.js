@@ -7,7 +7,7 @@ module.exports = {
     get: async (req, res) => {
         try {
             const { count } = req.params
-            const page = count.slice(1)
+           
             const ohwunwan_count = await Ohwunwan.count()
             console.log(ohwunwan_count)
             const ohwunwans = await Ohwunwan.findAll({
@@ -39,14 +39,14 @@ module.exports = {
                 order: [['id', 'DESC']],//정렬 id순으로 꺼꾸로
                 raw: true,//dataValues만 가져오기
                 limit: 5,//몇개불러올껀가
-                offset: page * 5,//어디서부터시작할껀지
+                offset: count * 5,//어디서부터시작할껀지
             });
 
             console.log(ohwunwans)
-            res.json({ message: 'ok', data: ohwunwans })
+            return res.json({ message: 'ok', data: ohwunwans })
         } catch (err) {
             console.log(err);
-            res.status(500).json({})
+            return res.status(500).json({ message: 'Server Error!' })
         }
 
     },
@@ -67,10 +67,10 @@ module.exports = {
             }
             await Ohwunwan.create(post_info);
 
-            res.status(201).json({ message: 'The post has been created' })
+            return res.status(201).json({ message: 'The post has been created' })
         }
         catch (err) {
-            res.status(500).json({ message: 'Server Error!' })
+            return res.status(500).json({ message: 'Server Error!' })
         }
     },
 
@@ -94,7 +94,7 @@ module.exports = {
                         where: { id: ohwunwan_id, }
                     },
                 );
-                res.json({ message: 'The post has been changed' })
+                return res.json({ message: 'The post has been changed' })
             }
             //텍스트만 바꾸는경우
             else if (req.body.text_content) {
@@ -107,7 +107,7 @@ module.exports = {
                         where: { id: ohwunwan_id, }
                     },
                 );
-                res.json({ message: 'The post has been changed' })
+                return res.json({ message: 'The post has been changed' })
             }
             //사진만 바꾸는경우
             else if (req.file.location) {
@@ -121,26 +121,26 @@ module.exports = {
                         where: { id: ohwunwan_id, }
                     },
                 );
-                res.json({ message: 'The post has been changed' })
+                return res.json({ message: 'The post has been changed' })
             }
         } catch (err) {
             console.log(err);
-            res.status(500).json({ message: 'Server Error!' })
+            return res.status(500).json({ message: 'Server Error!' })
         }
     },
 
     //ohwunwan게시물 삭제
     delete: (req, res) => {
-        try{
-            const { ohwunwan_id: params } = req.params
-            const ohwunwan_id = params.slice(1)
+        try {
+            const { ohwunwan_id } = req.params
+            
             Ohwunwan.destroy({
                 where: { id: ohwunwan_id },
             });
-           return  res.json({ message: 'The post has been deleted' })
-        }catch(err){
+            return res.json({ message: 'The post has been deleted' })
+        } catch (err) {
             console.log(err);
-            return  res.json({ message: 'Server Error!' })
+            return res.status(500).json({ message: 'Server Error!' })
         }
 
     },
