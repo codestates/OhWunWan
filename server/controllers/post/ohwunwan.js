@@ -7,7 +7,7 @@ module.exports = {
     get: async (req, res) => {
         try {
             const { count } = req.params
-            const page = 2
+            const page = count.slice(1)
             const ohwunwan_count = await Ohwunwan.count()
             console.log(ohwunwan_count)
             const ohwunwans = await Ohwunwan.findAll({
@@ -129,8 +129,21 @@ module.exports = {
         }
     },
 
+    //ohwunwan게시물 삭제
+    delete: (req, res) => {
+        try{
+            const { ohwunwan_id: params } = req.params
+            const ohwunwan_id = params.slice(1)
+            Ohwunwan.destroy({
+                where: { id: ohwunwan_id },
+            });
+           return  res.json({ message: 'The post has been deleted' })
+        }catch(err){
+            console.log(err);
+            return  res.json({ message: 'Server Error!' })
+        }
 
-    delete: () => { },//ohwunwan게시물 삭제
+    },
 }
 
 
