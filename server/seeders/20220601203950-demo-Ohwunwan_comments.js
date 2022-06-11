@@ -14,7 +14,7 @@ module.exports = {
       {
         id:2,
         user_id:4,
-        ohwunwan_id:16,
+        ohwunwan_id:14,
         text_content:"츠지기노",
         createdAt: new Date(),
         updatedAt: new Date(),
