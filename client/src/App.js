@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Routes, Route,useNavigate} from "react-router-dom";
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import {useSelector, useDispatch} from "react-redux" 
 import axios from 'axios';
-import { IsLogin, IsLogout, GetUserInfo } from "./Ducks/Slice/AuthSlice.js"
+import { IsLogin, IsLogout, GetUserInfo } from "./Ducks/Slice/AuthSlice"
 
 
 // GlobalStyle
