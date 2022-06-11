@@ -15,7 +15,7 @@ module.exports = {
                 include: [
                     {
                         model: User,
-                        attributes: [ 'nickname', 'profile_picture'],
+                        attributes: ['nickname', 'profile_picture'],
                         require: true,
                     },
                     {
@@ -76,10 +76,58 @@ module.exports = {
 
 
 
-
-    patch: () => { },//ohwunwan게시물 수정
-
-
+    //ohwunwan게시물 수정
+    patch: async (req, res) => {
+        //잘못된 요청
+        try {
+            if (!req.body.ohwunwan_id) return res.status(400).json({ message: 'Bad Request!' });
+            //사진 내용 모두 바꾸는 경우
+            if (req.file.location && req.body.text_content) {
+                const { ohwunwan_id, text_content } = req.body
+                const { location } = req.file
+                const changed_ohwunwan = await Ohwunwan.update(
+                    {
+                        text_content,
+                        picture: location
+                    },
+                    {
+                        where: { id: ohwunwan_id, }
+                    },
+                );
+                res.json({ message: 'The post has been changed' })
+            }
+            //텍스트만 바꾸는경우
+            else if (req.body.text_content) {
+                const { ohwunwan_id, text_content } = req.body
+                const changed_ohwunwan = await Ohwunwan.update(
+                    {
+                        text_content,
+                    },
+                    {
+                        where: { id: ohwunwan_id, }
+                    },
+                );
+                res.json({ message: 'The post has been changed' })
+            }
+            //사진만 바꾸는경우
+            else if (req.file.location) {
+                const { ohwunwan_id } = req.body
+                const { location } = req.file
+                const changed_ohwunwan = await Ohwunwan.update(
+                    {
+                        picture: location
+                    },
+                    {
+                        where: { id: ohwunwan_id, }
+                    },
+                );
+                res.json({ message: 'The post has been changed' })
+            }
+        } catch (err) {
+            console.log(err);
+            res.status(500).json({ message: 'Server Error!' })
+        }
+    },
 
 
     delete: () => { },//ohwunwan게시물 삭제
