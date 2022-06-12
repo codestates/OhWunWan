@@ -1,15 +1,19 @@
 const { Ohwunwan, Ohwunwan_comment, Ohwunwan_like, User } = require('../../models');
 const { Op } = require('sequelize');
+const { ohwunwan } = require('.');
+const comment = require('../comment');
 
 
 module.exports = {
     //ohwunwan게시물 조회
     get: async (req, res) => {
         try {
+            //조회할 게시물 페이지들
             const { count } = req.params
-           
-            const ohwunwan_count = await Ohwunwan.count()
-            console.log(ohwunwan_count)
+
+
+
+            //오운완게시물+user정보 
             const ohwunwans = await Ohwunwan.findAll({
                 attributes: ['id', 'picture', 'text_content', 'createdAt'],//ohwunwan 컬럼들
                 include: [
@@ -18,31 +22,70 @@ module.exports = {
                         attributes: ['nickname', 'profile_picture'],
                         require: true,
                     },
-                    {
-                        model: Ohwunwan_comment,
-                        attributes: ['id', 'text_content', 'createdAt',/*'user_id'*/],
-                        require: true,
-                        include: [{
-                            model: User,
-                            attributes: ['id', 'nickname', 'profile_picture'],
-                            require: true,
-                        }]
-                    },
-                    {
-                        model: Ohwunwan_like,
-                        attributes: ['id'],
-                        require: true,
-
-                    }
                 ],
-
                 order: [['id', 'DESC']],//정렬 id순으로 꺼꾸로
                 raw: true,//dataValues만 가져오기
                 limit: 5,//몇개불러올껀가
                 offset: count * 5,//어디서부터시작할껀지
             });
 
-            console.log(ohwunwans)
+
+
+
+            //조회한 게시물들의 고유번호값들 맵
+            const ohwunwan_id = ohwunwans.map(item => item.id)
+            console.log(ohwunwan_id)
+
+
+
+
+            // 조회한 게시물들의 댓글 + 유저정보
+            const ohwunwan_comments = await Ohwunwan_comment.findAll({
+                where: { ohwunwan_id },
+                attributes: ['id', 'ohwunwan_id', 'text_content', 'createdAt'],
+                include: [
+                    {
+                        model: User,
+                        attributes: ['id', 'nickname', 'profile_picture'],
+                        require: true,
+                    }
+                ],
+                raw: true,//dataValues만 가져오기
+            })
+
+
+
+
+            //조회한 게시물들 라이크 
+            const ohwunwan_likes = await Ohwunwan_like.findAll({
+                where: { ohwunwan_id },
+                attributes: ['id', 'user_id', 'ohwunwan_id', 'createdAt'],
+                raw: true,//dataValues만 가져오기
+            })
+            console.log(':::::::::::::ohwunwan_likes:', ohwunwan_likes)
+
+
+
+            //조회한게시물+유저정보에 댓글+유저정보 push하기
+            for (const ohwunwan of ohwunwans) {
+                ohwunwan.comment = []
+                ohwunwan.like = []
+                for (const comment of ohwunwan_comments) {
+                    if (ohwunwan.id === comment.ohwunwan_id) {
+                        ohwunwan.comment.push(comment)
+                    }
+                }
+                for (const like of ohwunwan_likes) {
+                    if (ohwunwan.id === like.ohwunwan_id) {
+                        ohwunwan.like.push(like)
+                    }
+                }
+
+            }
+
+            console.log(':::::::::::::ohwunwans:', ohwunwans)
+
+
             return res.json({ message: 'ok', data: ohwunwans })
         } catch (err) {
             console.log(err);
@@ -133,7 +176,7 @@ module.exports = {
     delete: (req, res) => {
         try {
             const { ohwunwan_id } = req.params
-            
+
             Ohwunwan.destroy({
                 where: { id: ohwunwan_id },
             });
