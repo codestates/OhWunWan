@@ -5,6 +5,7 @@
 
 ###config###
 config.js
+s3.json
 
 ### macOS ###
 # General
