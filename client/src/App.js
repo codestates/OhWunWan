@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route,useNavigate} from "react-router-dom";
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import {useSelector, useDispatch} from "react-redux" 
 import axios from 'axios';
 import { IsLogin, IsLogout, GetUserInfo } from "./Ducks/Slice/AuthSlice.js"
@@ -46,14 +46,12 @@ function App() {
       dispatch(IsLogout());
     }
 
-    console.log("로그인",is_login)
-  console.log("리덕스에 저장된 유저정보",user_info)
   };
 
   const redirect= ()=> {
     axios.post('https://localhost:4000/auth/kakao',{code})
     .then((res)=>{console.log("post요청에 대한 서버응답",res.data.data.user_info);return res.data.data.user_info})
-    //.then((res)=>{window.location.replace("https://localhost:3000/ohwunwan")})
+    .then((res)=>{window.location.replace("https://localhost:3000/ohwunwan")})
   }
 
 
@@ -63,6 +61,9 @@ function App() {
     if(code)redirect();
   }, []);
   
+
+  console.log("로그인",is_login)
+  console.log("리덕스에 저장된 유저정보",user_info)
   return (
     <Router>
       <GlobalStyle />
