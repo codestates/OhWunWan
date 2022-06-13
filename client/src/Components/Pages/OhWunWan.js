@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import STYLE from "../../config";
 
 // header, 마진
@@ -26,6 +26,8 @@ import ContentText from "../Atoms/ContentText"
 import Comment from "../Atoms/Comment"
 import CommentInput from "../Atoms/CommentInput"
 import CommentSubmit from "../Atoms/CommentSubmit";
+
+import MenuBox from "../Molecule/MenuBox";
 
 const Wrap = styled.div`
   display: flex;
@@ -60,10 +62,23 @@ const FlexBox = styled.div`
   align-items: center;
 `
 
-function OhWunWan3() {
+function OhWunWan() {
+  // const [modalOpen, setModalOpen] = useState(true)
+
+  // const openModal = () => {
+  //   setModalOpen(true)
+  //   console.log(modalOpen)
+  // }
+
+  // const closeModal = () => {
+  //   setModalOpen(false)
+  //   console.log(modalOpen)
+  // }
+
   return(
     <Fragment>
       <Wrap>
+        {/* <MenuBox /> */}
         <HeaderBlock />
         <MarginBox />
         
@@ -75,7 +90,7 @@ function OhWunWan3() {
                 <ProfilePicture img={user} />
                 <Id nickname='손흥민'></Id>
               </FlexBox>
-              <MenuButton />
+              <MenuButton onClick={() => {}} />
             </BetweenBox>
           </BorderBox>
           
@@ -115,10 +130,9 @@ function OhWunWan3() {
           </BorderBox>
         </PostBlock>
 
-
       </Wrap>
     </Fragment>
   )
 }
 
-export default OhWunWan3
+export default OhWunWan
