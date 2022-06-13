@@ -6,7 +6,7 @@ module.exports = {
       {
         id:1,
         user_id:4,
-        ohwunwan_id:2,
+        ohwunwan_id:15,
         text_content:"지기노",
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -14,7 +14,7 @@ module.exports = {
       {
         id:2,
         user_id:4,
-        ohwunwan_id:2,
+        ohwunwan_id:14,
         text_content:"츠지기노",
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -22,7 +22,7 @@ module.exports = {
       {
         id:3,
         user_id:3,
-        ohwunwan_id:2,
+        ohwunwan_id:14,
         text_content:"츠츠지기노",
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -30,7 +30,7 @@ module.exports = {
       {
         id:4,
         user_id:1,
-        ohwunwan_id:2,
+        ohwunwan_id:13,
         text_content:"츠츠츠지기노",
         createdAt: new Date(),
         updatedAt: new Date(),

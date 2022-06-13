@@ -14,14 +14,14 @@ module.exports = (sequelize, DataTypes) => {
       
       //1:M(Ohwunwan:Ohwunwan_like)
       this.hasMany(models.Ohwunwan_like, {
-        foreignKey: "owunwan_id",
+        foreignKey: "ohwunwan_id",
         // onUpdate: defaults to CASCADE
         onDelete: "cascade",
       });
       
       //1:M(Ohwunwan:Ohwunwan_comment)
       this.hasMany(models.Ohwunwan_comment, {
-        foreignKey: "owunwan_id",
+        foreignKey: "ohwunwan_id",
         // onUpdate: defaults to CASCADE
         onDelete: "cascade",
       });
@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     picture: {
-      type:DataTypes.BLOB,
+      type:DataTypes.STRING,
       allowNull:false,
     },
     text_content:{
