@@ -1,7 +1,5 @@
 const { Ohwunwan, Ohwunwan_comment, Ohwunwan_like, User } = require('../../models');
-const { Op } = require('sequelize');
-const { ohwunwan } = require('.');
-const comment = require('../comment');
+
 
 
 module.exports = {
