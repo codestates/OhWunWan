@@ -10,7 +10,6 @@ module.exports = {
             const { count } = req.params
 
 
-
             //오운완게시물+user정보 
             const ohwunwans = await Ohwunwan.findAll({
                 attributes: ['id', 'picture', 'text_content', 'createdAt'],//ohwunwan 컬럼들
