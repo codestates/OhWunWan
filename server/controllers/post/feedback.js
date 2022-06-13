@@ -64,7 +64,7 @@ module.exports = {
             else if (req.file.location) {
                 const { feedback_id } = req.body
                 const { location } = req.file
-                 await Feedback.update(
+                await Feedback.update(
                     {
                         picture: location
                     },
@@ -78,10 +78,19 @@ module.exports = {
             console.log(err);
             return res.status(500).json({ message: 'Server Error!' })
         }
-
     },
     //feedback게시물 삭제
     delete: async (req, res) => {
+        try {
+            const { feedback_id } = req.params
 
+            Feedback.destroy({
+                where: { id: feedback_id },
+            });
+            return res.json({ message: 'The post has been deleted' })
+        } catch (err) {
+            console.log(err);
+            return res.status(500).json({ message: 'Server Error!' })
+        }
     },
 }
