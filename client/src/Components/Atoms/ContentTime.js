@@ -1,5 +1,7 @@
 import styled from "styled-components"
 
+// 게시글 좋아요, 댓글 갯수 옆 게시글 작성 시간
+
 const Time = styled.span`
   font-size: 1em;
   background-color: ${props => props.subject === "comment" ? "#000" : "#fff" };

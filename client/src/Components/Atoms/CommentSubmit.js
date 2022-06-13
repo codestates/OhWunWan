@@ -1,5 +1,8 @@
 import styled from "styled-components"
 
+// 게시글 - 댓글 게시 버튼
+// 마이페이지 - 회원정보수정 - 프로필 사진 바꾸기
+
 const Button = styled.span`
   user-select: none; // 드래그 금지
   display: inline-block;
@@ -12,7 +15,7 @@ CommentSubmit.defaultProps = {
   onClick: () => {console.log('제출 버튼 동작')}
 }
 
-function CommentSubmit({text, onClick, }) {
+function CommentSubmit({text, onClick}) {
   return(
     <Button onClick={onClick}>{text}</Button>
   )

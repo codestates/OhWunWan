@@ -1,8 +1,8 @@
 import styled from "styled-components"
-import STYLE from "../../config"
+
+// 글 작성 버튼 => 글 카테고리 선택 버튼 => 해당 카테고리 이동
 
 const Button = styled.span`
-  /* border: 0.1em solid #000; */
   width: 3em;
   text-align: center;
   border: none;

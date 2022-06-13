@@ -1,6 +1,8 @@
 import styled from "styled-components"
 import STYLE from "../../config";
 
+// 헤더 버튼 이미지
+
 // img
 import post from "../Picture/HeaderButton/post.png";
 import ohwunwan from "../Picture/HeaderButton/ohwunwan.png";

@@ -1,5 +1,7 @@
 import styled from "styled-components"
 
+// 게시글 좋아요 버튼 아래 좋아요 갯수
+
 const Like = styled.span`
   font-size: 1em;
   font-weight: bold;

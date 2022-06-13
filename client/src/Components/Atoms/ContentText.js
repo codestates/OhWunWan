@@ -1,6 +1,8 @@
 import styled from "styled-components"
 import STYLE from "../../config"
 
+// 게시글 - 게시글 내용
+
 const Content = styled.div`
   width: ${STYLE.WIDTH};
   font-size: 1em;

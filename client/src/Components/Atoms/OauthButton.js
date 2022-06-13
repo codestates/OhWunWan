@@ -1,6 +1,8 @@
 import styled from "styled-components"
 import STYLE from '../../config'
 
+// 카카오 로그인 버튼
+
 // img
 import kakao from "../Picture/OauthButton/kakao.png"
 
@@ -14,6 +16,7 @@ const Button = styled.div`
   background-repeat: no-repeat; // 배경 반복: no
   background-position: center; // 배경 위치: 가운데
   cursor: pointer;
+  margin-top: 2em;
 `
 
 OauthButton.defaultProps = {

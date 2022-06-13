@@ -1,6 +1,8 @@
 import styled from "styled-components"
 import STYLE from "../../config"
 
+// 게시글 - 댓글부분의 내용
+
 const Content = styled.span`
   font-size: 1em;
   margin-left: 3em;

@@ -1,5 +1,7 @@
 import styled from "styled-components"
 
+// 게시글 댓글 버튼 아래 댓글 갯수
+
 const Comment = styled.span`
   font-size: 1em;
   font-weight: bold;

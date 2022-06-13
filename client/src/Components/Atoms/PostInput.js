@@ -1,12 +1,14 @@
 import styled from "styled-components"
 import STYLE from "../../config"
 
-const Input = styled.input`
-  width: 4em;
-  font-size: 1em;
-  text-align: center;
+// 포스팅 페이지 => 텍스트 입력창
+
+const Input = styled.textarea`
+  width: 37.5em;
+  height: 10em;
   border: 0.1em solid ${STYLE.BORDER_COLOR};
-  margin-right: 0.2em;
+  resize: none;
+  outline: none;
 `
 
 function PostInput() {

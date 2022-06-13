@@ -1,13 +1,12 @@
 import styled from "styled-components"
 
-// 게시글에 들어가는 사진 중간사이즈
-// 일단 댓글에도 사용중
+// 마이페이지 - 유저정보수정의 프로필 사진
 
 const Picture = styled.div`
-  width: 1.6em;
-  height: 1.6em;
+  width: 2.4em;
+  height: 2.4em;
   border: 0.1em solid #000;
-  border-radius: 0.8em;
+  border-radius: 1.2em;
   background-image: url(${props => props.img});
   background-size: contain; // 배경 사이즈: 사이즈에 맞게
   background-repeat: no-repeat; // 배경 반복: no
@@ -16,10 +15,10 @@ const Picture = styled.div`
   cursor: pointer;
 `
 
-function ProfilePicture({img}) {
+function UserinfoPicture({img}) {
   return(
     <Picture img={img}></Picture>
   )
 }
 
-export default ProfilePicture
+export default UserinfoPicture

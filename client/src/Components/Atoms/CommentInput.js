@@ -1,6 +1,8 @@
 import styled from "styled-components"
 import STYLE  from "../../config";
 
+// 게시글 - 댓글 입력창
+
 const Input = styled.textarea`
   width: 40em;
   height: 1.5em;
