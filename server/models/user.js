@@ -124,7 +124,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     } ,
     profile_picture:{
-      type:DataTypes.STRING,
+      type:DataTypes.STRING(1000),
     } 
   }, {
     sequelize,

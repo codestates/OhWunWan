@@ -1,7 +1,5 @@
 const { Ohwunwan, Ohwunwan_comment, Ohwunwan_like, User } = require('../../models');
-const { Op } = require('sequelize');
-const { ohwunwan } = require('.');
-const comment = require('../comment');
+
 
 
 module.exports = {
@@ -10,7 +8,6 @@ module.exports = {
         try {
             //조회할 게시물 페이지들
             const { count } = req.params
-
 
 
             //오운완게시물+user정보 
@@ -98,7 +95,7 @@ module.exports = {
     //ohwunwan게시물 생성
     post: async (req, res) => {
         try {
-            if (!Boolean(req.body.user_id && req.body.text_content && req.file.location)) return res.status(400).json({ message: 'Bad Request!' })
+            if (!(req.body.user_id && req.body.text_content && req.file.location)) return res.status(400).json({ message: 'Bad Request!' })
             const { user_id, text_content } = req.body
             console.log('::::::::::::::::user_id:', user_id, text_content)
             const { location } = req.file
@@ -121,14 +118,14 @@ module.exports = {
 
     //ohwunwan게시물 수정
     patch: async (req, res) => {
-        //잘못된 요청
         try {
+            //잘못된 요청
             if (!req.body.ohwunwan_id) return res.status(400).json({ message: 'Bad Request!' });
             //사진 내용 모두 바꾸는 경우
             if (req.file.location && req.body.text_content) {
                 const { ohwunwan_id, text_content } = req.body
                 const { location } = req.file
-                const changed_ohwunwan = await Ohwunwan.update(
+                await Ohwunwan.update(
                     {
                         text_content,
                         picture: location
@@ -142,7 +139,7 @@ module.exports = {
             //텍스트만 바꾸는경우
             else if (req.body.text_content) {
                 const { ohwunwan_id, text_content } = req.body
-                const changed_ohwunwan = await Ohwunwan.update(
+                 await Ohwunwan.update(
                     {
                         text_content,
                     },
@@ -156,7 +153,7 @@ module.exports = {
             else if (req.file.location) {
                 const { ohwunwan_id } = req.body
                 const { location } = req.file
-                const changed_ohwunwan = await Ohwunwan.update(
+                await Ohwunwan.update(
                     {
                         picture: location
                     },
@@ -185,7 +182,6 @@ module.exports = {
             console.log(err);
             return res.status(500).json({ message: 'Server Error!' })
         }
-
     },
 }
 
