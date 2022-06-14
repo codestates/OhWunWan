@@ -1,6 +1,8 @@
 import styled from "styled-components"
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import STYLE from "../../config";
+import {useSelector} from "react-redux" 
+
 
 // header, 마진
 import HeaderBlock from "../Organism/HeaderBlock";
@@ -33,6 +35,25 @@ const BetweenBox = styled.div`
 
 
 function PostOhwunwan() {
+
+  const user_info = useSelector((state)=> state.auth.user_info)
+  const copied = JSON.parse(JSON.stringify(user_info))
+  
+  const [text_content,setText_content] = useState('')
+
+  const formdata = new FormData()
+
+  const textHandler = (value) => {
+    setText_content(value)
+  }   
+  
+  const imageHandler = (value) => {
+    formdata.append('file', value)
+  }
+
+  formdata.append('user_id', copied.id)
+  formdata.append('text_content', text_content)
+
   return(
     <Fragment>
       <Wrap>
@@ -42,12 +63,12 @@ function PostOhwunwan() {
         <BetweenBox>
           <PostSubject text='' />
           <PostSubject text='오운완' />
-          <PostSubmit onClick={() => {}} />
+          <PostSubmit formdata={formdata}/>
         </BetweenBox>
 
         <BetweenBox>
-          <PostInput />
-          <PostUpload />
+          <PostInput textHandler={textHandler}/>
+          <PostUpload imageHandler={imageHandler}/>
         </BetweenBox>
 
         <BetweenBox>
