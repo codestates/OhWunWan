@@ -97,16 +97,11 @@ module.exports = {
 
     //ohwunwan게시물 생성
     post: async (req, res) => {
-        try {console.log(req.body.user_id)
-            console.log(req.body.text_content)
-            console.log(req.file)
-            if (!(req.body.user_id && req.body.text_content && req.file.location)) return res.status(400).json({ message: 'Bad Request!' })
-            //const { user_id, text_content } = req.body
-            const user_id = req.body.user_id
-            const text_content = req.body.text_content
-            const location = req.file.location
+        try {
+            if (!Boolean(req.body.user_id && req.body.text_content && req.file.location)) return res.status(400).json({ message: 'Bad Request!' })
+            const { user_id, text_content } = req.body
             console.log('::::::::::::::::user_id:', user_id, text_content)
-            //const { location } = req.file
+            const { location } = req.file
             console.log(':::::::::::::location:', location)
             const post_info = {
                 user_id,
