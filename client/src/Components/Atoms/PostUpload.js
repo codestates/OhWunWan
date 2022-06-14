@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { Fragment } from "react"
-import post from "../Picture/HeaderButton/post.png";
+import post from "../Picture/Upload/upload.png"
 
 // 포스팅 => 오운완 사진 입력하는 버튼
 

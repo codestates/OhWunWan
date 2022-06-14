@@ -9,7 +9,7 @@ const Button = styled.span`
   border-radius: 0.5em;
   user-select: none; // 드래그 금지
   display:inline-block; // padding 작동시키려고 작성
-  padding: 0.2em 1em;
+  padding: 0.4em 11em;
   cursor: pointer;
   /* font-size: 1.2em; */
 `

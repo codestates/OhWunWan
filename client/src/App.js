@@ -20,7 +20,6 @@ import Post1rm from "./Components/Pages/Post1rm"
 import PostFeedback from "./Components/Pages/PostFeedback";
 import Mypage from "./Components/Pages/Mypage";
 import UserInfo from "./Components/Pages/UserInfo";
-import Menu from "./Components/Pages/Menu"
 
 function App() {
   
@@ -83,7 +82,6 @@ function App() {
         <Route path="/post/feedback" element={<PostFeedback />}></Route>
         <Route path="/user" element={<Mypage />}></Route>
         <Route path="/userinfo" element={<UserInfo />}></Route>
-        <Route path="/menu" element={<Menu />}></Route>
       </Routes>
     </Router>
   );

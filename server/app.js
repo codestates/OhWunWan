@@ -12,7 +12,7 @@ const upload = require('./modules/multer');
 
 //미들웨어
 //req.file 객체를 생성함
-app.use( upload.single('img'))
+app.use( upload.single('file'))
 //로그를 남겨줌
 app.use(morgan('dev'))
 //요청의 쿠를 쉽게 추출할수있게 도와줌

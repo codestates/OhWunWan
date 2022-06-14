@@ -7,7 +7,7 @@ const Button = styled.span`
   user-select: none; // 드래그 금지
   cursor: pointer;
   width: 6em;
-  color: ${props => props.select === 'select' ? 'blue' : '#000'};
+  color: ${props => props.select === 'select' ? '#2D9BF0' : '#000'};
   text-align: center;
   font-weight: bold;
 `

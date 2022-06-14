@@ -6,7 +6,7 @@ import SubmitButton from "../Atoms/SubmitButton"
 const Div = styled.div`
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   z-index: 99;
   display: flex;
@@ -23,7 +23,7 @@ const Div2 = styled.div`
   background-color: #fff;
 `
 
-function MenuBox() {
+function ContentModal(props) {
 
   return(
     <Fragment>
@@ -35,11 +35,11 @@ function MenuBox() {
           <SubmitButton text='삭제' type='red' />
         </Div2>
         <Div2>
-          <SubmitButton text='취소' type='black' onClick={() => {}} />
+          <SubmitButton text='취소' type='black' onClick={() => {props.setContentMenu(false)}} />
         </Div2>
       </Div>
     </Fragment>
   )
 }
 
-export default MenuBox
+export default ContentModal
