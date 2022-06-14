@@ -15,6 +15,7 @@ import logouticon from "../Picture/HeaderButton/logout.png";
 // Atmos
 import HeaderButton from "../Atoms/HeaderButton";
 import Logo from "../Atoms/Logo";
+import axios from 'axios';
 
 const Div = styled.div`
   width: 100vw;

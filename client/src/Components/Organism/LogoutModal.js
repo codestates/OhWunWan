@@ -25,7 +25,7 @@ const Div2 = styled.div`
   background-color: #fff;
 `
 
-function LogoutModal(props) {
+function LogoutModal({logoutHandler}) {
   let select = useSelector(state => state)
   const dispatch = useDispatch()
 
@@ -33,7 +33,7 @@ function LogoutModal(props) {
     <Fragment>
       <Div>
         <Div2>
-          <SubmitButton text='로그아웃' type='red' onClick={() => {console.log('로그아웃')}} />
+          <SubmitButton text='로그아웃' type='red' onClick={() => {logoutHandler()}} />
         </Div2>
         <Div2>
           <SubmitButton text='취소' type='black' onClick={() => dispatch(logout_modal(false))} />

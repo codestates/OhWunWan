@@ -4,6 +4,9 @@ import { useSelector, useDispatch } from "react-redux"
 import STYLE from "../../config";
 import { header } from "../../Ducks/Slice/HeaderSlice";
 import { Link } from "react-router-dom";
+import axios from 'axios';
+
+import { logout_modal } from '../../Ducks/Slice/LogoutSlice';
 
 // header, 마진
 import HeaderBlock from "../Organism/HeaderBlock";
@@ -121,12 +124,18 @@ function Mypage() {
   useEffect(() => {
     dispatch(header({header: 'mypage'}))
   }, [])
+  
+  //로그아웃 핸들러 
+  const logoutHandler = () => {
+    axios.post("https://localhost:4000/auth/logout")
+    .then((res)=>{dispatch(logout_modal(false));window.location.replace("https://localhost:3000/")})
+  }
 
   return(
     <Fragment>
       <Wrap>
         {/* 로그아웃 모달 */}
-        {select.logout_modal.logout_modal ? <LogoutModal /> : null}
+        {select.logout_modal.logout_modal ? <LogoutModal logoutHandler={logoutHandler}/> : null}
 
         {/* 메뉴 열고 닫기 */}
         {contentMenu ? <ContentModal setContentMenu={setContentMenu} /> : null}
