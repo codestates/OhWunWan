@@ -1,12 +1,14 @@
-import styled from "styled-components"
+import styled from "styled-components";
+import { useSelector, useDispatch } from "react-redux"
 import { Fragment } from "react";
 import STYLE from "../../config"
 import SubmitButton from "../Atoms/SubmitButton"
+import { logout_modal } from "../../Ducks/Slice/LogoutSlice";
 
 const Div = styled.div`
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   z-index: 99;
   display: flex;
@@ -23,22 +25,22 @@ const Div2 = styled.div`
   background-color: #fff;
 `
 
-function MenuBlock(props) {
+function LogoutModal(props) {
+  let select = useSelector(state => state)
+  const dispatch = useDispatch()
+
   return(
     <Fragment>
       <Div>
         <Div2>
-          <SubmitButton text='수정' type='black' />
+          <SubmitButton text='로그아웃' type='red' onClick={() => {console.log('로그아웃')}} />
         </Div2>
         <Div2>
-          <SubmitButton text='삭제' type='red' />
-        </Div2>
-        <Div2>
-          <SubmitButton text='취소' type='black' onClick={() => {props.setContentMenu(false)}} />
+          <SubmitButton text='취소' type='black' onClick={() => dispatch(logout_modal(false))} />
         </Div2>
       </Div>
     </Fragment>
   )
 }
 
-export default MenuBlock
+export default LogoutModal

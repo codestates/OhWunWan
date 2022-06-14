@@ -1,16 +1,17 @@
 import styled from "styled-components"
+import { useSelector, useDispatch } from "react-redux"
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
-
-// 사용중
+import { logout_modal } from "../../Ducks/Slice/LogoutSlice";
 
 // img
 import logo from "../Picture/Logo/logo.svg"
 import post from "../Picture/HeaderButton/post.png";
 import ohwunwan from "../Picture/HeaderButton/ohwunwan.png";
-import onerm from "../Picture/HeaderButton/1rm.png";
+import onerm from "../Picture/HeaderButton/1rm2.png";
 import feedback from "../Picture/HeaderButton/feedback.png";
 import user from "../Picture/HeaderButton/user.png";
+import logouticon from "../Picture/HeaderButton/logout.png";
 
 // Atmos
 import HeaderButton from "../Atoms/HeaderButton";
@@ -38,32 +39,56 @@ const Div2 = styled.div`
 `
 
 function HeaderBlock() {
+  let select = useSelector(state => state)
+  const dispatch = useDispatch()
+  // console.log(select.header.header)
+
   return(
     <Fragment>
-    <Div>
-      <Logo />
-      <Div2>
-        <Link to='/post'>
-          <HeaderButton img={post} circle='circle' />
-        </Link>
+      <Div>
+        <Logo />
+        <Div2>
+          <Link to='/post'>
+            {select.header.header === 'post' ? 
+              <HeaderButton img={post} circle='circle' select/>
+            : <HeaderButton img={post} circle='circle'  />
+            }
+          </Link>
 
-        <Link to='/ohwunwan'>
-          <HeaderButton img={ohwunwan} />
-        </Link>
+          <Link to='/ohwunwan'>
+            {select.header.header === 'ohwunwan' ? 
+              <HeaderButton img={ohwunwan} circle='circle' select/>
+            : <HeaderButton img={ohwunwan} circle='circle'  />
+            }
+          </Link>
 
-        <Link to='/1rm'>
-          <HeaderButton img={onerm} />
-        </Link>
+          <Link to='/1rm'>
+            {select.header.header === '1rm' ? 
+              <HeaderButton img={onerm} circle='circle' select/>
+            : <HeaderButton img={onerm} circle='circle'  />
+            }
+          </Link>
 
-        <Link to='/feedback'>
-        <HeaderButton img={feedback} />
-        </Link>
+          <Link to='/feedback'>
+            {select.header.header === 'feedback' ? 
+              <HeaderButton img={feedback} circle='circle' select/>
+            : <HeaderButton img={feedback} circle='circle'  />
+            }
+          </Link>
 
-        <Link to='/user'> 
-        <HeaderButton img={user} circle='circle' />
-        </Link>
-      </Div2>
-    </Div>
+          <Link to='/user'> 
+          {select.header.header === 'mypage' ? 
+            <HeaderButton 
+              img={logouticon} 
+              circle='circle' 
+              select
+              onClick={() => dispatch(logout_modal(true))}
+            /> 
+            : <HeaderButton img={user} circle='circle' 
+          />}
+          </Link>
+        </Div2>
+      </Div>
     </Fragment>
   )
 }
