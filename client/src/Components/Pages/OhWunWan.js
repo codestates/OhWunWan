@@ -155,7 +155,7 @@ function OhWunWan() {
                       <CommentBlock key={index}>
                         <BetweenBox>
                           <FlexBox>
-                            <ProfilePicture img={comment.picture} />
+                            <ProfilePicture img={comment['User.profile_picture']} />
                             <Id nickname={comment['User.nickname']} />
                           </FlexBox>
                           <CommentMenu onClick={() => setCommentMenu(true)} />
