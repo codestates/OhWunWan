@@ -10,9 +10,9 @@ const Input = styled.input`
   text-align: center;
 `
 
-function PostInput2() {
+function PostInput2({weightHandler}) {
   return (
-    <Input type='text'></Input>
+    <Input type='text' onChange={(e)=>{weightHandler(e.target.value)}}></Input>
   )
 }
 

@@ -21,11 +21,11 @@ PostSubmit.defaultProps = {
   onClick: () => {console.log('제출 버튼 동작')}
 }
 
-function PostSubmit({ formdata}) {
+function PostSubmit({formdata}) {
   return(
     <Button onClick={()=>{axios({
       method: 'post',
-      url: 'https://localhost:4000/post/ohwunwan',
+      url: 'https://localhost:4000/post/bench_1rm',
       data: formdata,
       headers: {
         'Content-Type': 'multipart/form-data',

@@ -50,7 +50,6 @@ function PostOhwunwan() {
   
   const imageHandler = (value) => {
     setPicture(value)
-    console.log(value)
   }
   formdata.append('user_id', copied.id)
   formdata.append('text_content', text_content)

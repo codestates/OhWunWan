@@ -41,6 +41,9 @@ function Post1rm() {
   const user_info = useSelector((state)=> state.auth.user_info)
   const copied = JSON.parse(JSON.stringify(user_info))
   const [text_content,setText_content] = useState('')
+  const [video, setVideo] = useState('')
+  const [fitness, setFitness] = useState('')
+  const [weight, setWeight] = useState('')
 
   const formdata = new FormData()
 
@@ -48,12 +51,24 @@ function Post1rm() {
     setText_content(value)
   }   
   
-  const imageHandler = (value) => {
-    formdata.append('file', value)
+  const videoHandler = (value) => {
+    setVideo(value)
   }
-  
+
+  const selectFitness = (value) => {
+    setFitness(value)
+  }
+
+  const weightHandler = (value) => {
+    setWeight(value)
+  }
+
+  //console.log(fitness)
+  // console.log(weight)
   formdata.append('user_id', copied.id)
   formdata.append('text_content', text_content)  
+  formdata.append('kg',weight)
+  formdata.append('file', video)
     
   return(
     <Fragment>
@@ -68,19 +83,19 @@ function Post1rm() {
         </BetweenBox>
 
         <BetweenBox>
-          <PostInput />
-          <PostUpload />
+          <PostInput textHandler={textHandler}/>
+          <PostUpload videoHandler={videoHandler}/>
         </BetweenBox>
 
         <BetweenBox>
           <PostMenu text='종목선택' />
-          <PostSelect />
+          <PostSelect selectFitness={selectFitness}/>
         </BetweenBox>
 
         <BetweenBox>
           <PostMenu text='1RM' />
           <FlexBox>
-            <PostInput2 />
+            <PostInput2 weightHandler={weightHandler}/>
             <PostMenu text='KG' />
           </FlexBox>
         </BetweenBox>

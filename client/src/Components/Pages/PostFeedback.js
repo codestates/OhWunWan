@@ -1,6 +1,8 @@
 import styled from "styled-components"
-import { Fragment } from "react";
+import { Fragment,useState } from "react";
 import STYLE from "../../config";
+import axios from 'axios';
+import { useSelector,useDispatch } from 'react-redux';
 
 // header, 마진
 import HeaderBlock from "../Organism/HeaderBlock";
@@ -33,6 +35,27 @@ const BetweenBox = styled.div`
 
 
 function PostFeedback() {
+  const user_info = useSelector((state)=> state.auth.user_info)
+  const copied = JSON.parse(JSON.stringify(user_info))
+  const [text_content,setText_content] = useState('')
+  const [video, setVideo] = useState('')
+
+  const formdata = new FormData()
+
+  const textHandler = (value) => {
+    setText_content(value)
+  }   
+  
+  const videoHandler = (value) => {
+    setVideo(value)
+  }
+
+  //console.log(fitness)
+  // console.log(weight)
+  formdata.append('user_id', copied.id)
+  formdata.append('text_content', text_content)  
+  formdata.append('file', video)
+    
   return(
     <Fragment>
       <Wrap>
@@ -42,16 +65,16 @@ function PostFeedback() {
         <BetweenBox>
           <PostSubject text='' />
           <PostSubject text='피드백' />
-          <PostSubmit onClick={() => {}} />
+          <PostSubmit formdata={formdata} />
         </BetweenBox>
 
         <BetweenBox>
-          <PostInput />
-          <PostUpload />
+          <PostInput textHandler={textHandler}/>
+          <PostUpload videoHandler={videoHandler} />
         </BetweenBox>
 
         <BetweenBox>
-          <PostPicture img={preview} />
+          <PostPicture img={preview}/>
         </BetweenBox>
 
       </Wrap>
