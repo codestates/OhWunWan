@@ -34,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     video: {
-      type:DataTypes.BLOB,
+      type:DataTypes.STRING,
       allowNull: false,
     },
     text_content: {
