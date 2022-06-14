@@ -3,6 +3,7 @@ import { Fragment, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux"
 import STYLE from "../../config";
 import { header } from "../../Ducks/Slice/HeaderSlice";
+import axios from "axios";
 
 // header, 마진
 import HeaderBlock from "../Organism/HeaderBlock";
@@ -76,11 +77,30 @@ function OhWunWan() {
   const [contentMenu, setContentMenu] = useState(false)
   const [commentMenu, setCommentMenu] = useState(false)
 
+  // get 정보 // info[0]으로 map 함수 실행
+  const [info, setInfo] = useState([])
+  // 요청시 parameter로 들어가는 숫자
+  const [params, setParams] = useState(0)
+
   // 현재 페이지
   const dispatch = useDispatch()
+
   useEffect(() => {
-    dispatch(header({header: 'ohwunwan'}))
+    // 게시판 테두리 변경
+    dispatch(header({header: 'ohwunwan'}));
+    
+    // 초기 정보 받기
+    axios({
+      method: 'get',
+      url: `${STYLE.SERVER}/post/ohwunwan/${params}`
+    })
+    .then(res => {
+      // console.log(res.data.data)
+      setInfo([res.data.data])
+      // setParams(params++)
+    })
   }, [])
+    // console.log(info[0])
 
   return(
     <Fragment>
@@ -92,58 +112,70 @@ function OhWunWan() {
         <HeaderBlock/>
         <MarginBox />
 
-        <PostBlock>
-          <BorderBox>
-            <BetweenBox>
-              <FlexBox>
-                <ProfilePicture img={user} />
-                <Id nickname='손흥민'></Id>
-              </FlexBox>
-              <ContentButton onClick={() => {setContentMenu(true)}} />
-            </BetweenBox>
-          </BorderBox>
-          
-          <BorderBox>
-            <ContentPicture img={pic1} />
-          </BorderBox>
+        {!info[0] ? <p>로딩중</p> : 
+          info[0].map((post, index) => {
+            return(
+              <PostBlock key={index}>
+                <BorderBox>
+                  <BetweenBox>
+                    <FlexBox>
+                      <ProfilePicture img={post["User.profile_picture"]} />
+                      <Id nickname={post["User.nickname"]}></Id>
+                    </FlexBox>
+                    <ContentButton onClick={() => {setContentMenu(true)}} />
+                  </BetweenBox>
+                </BorderBox>
+                
+                <BorderBox>
+                  <ContentPicture img={post.picture} />
+                </BorderBox>
 
-          <Box>
-            <FlexBox>
-              <LikeButton />
-              <LikeButton img={liked} />
-              <CommentButton />
-            </FlexBox>
-            <BetweenBox>
-              <FlexBox>
-                <LikeCounts count='0' />
-                <CommentCounts count='0' />
-              </FlexBox>
-              <ContentTime time='2022-06-10 20:40:08' />
-            </BetweenBox>
-          </Box>
+                <Box>
+                  <FlexBox>
+                    <LikeButton />
+                    <LikeButton img={liked} />
+                    <CommentButton />
+                  </FlexBox>
+                  <BetweenBox>
+                    <FlexBox>
+                      <LikeCounts count={post.like.length} />
+                      <CommentCounts count={post.comment.length} />
+                    </FlexBox>
+                    <ContentTime time={post.createdAt.slice(0, 10) + ' ' + post.createdAt.slice(11, 19)} />
+                  </BetweenBox>
+                </Box>
 
-          <Box>
-            <ContentText text='텍스트가 들어갈 자리입니다' />
-          </Box>
-          
-          <CommentBlock>
-            <BetweenBox>
-              <FlexBox>
-                <ProfilePicture img={user} />
-                <Id nickname='helloworld123' />
-              </FlexBox>
-              <CommentMenu onClick={() => setCommentMenu(true)} />
-            </BetweenBox>
-            <FlexBox>
-              <Comment text='댓글이 들어갈 자리입니다'  time='2022-06-13 20:40:08'/>
-            </FlexBox>
-          </CommentBlock>
-            
-          <BorderBox>
-            <CommentInput />
-            <CommentSubmit />
-          </BorderBox>
-        </PostBlock>
+                <Box>
+                  <ContentText text={post.text_content} />
+                </Box>
+
+                {post.comment.length === 0 ? null : (
+                  post.comment.map((comment, index) => {
+                    return(
+                      <CommentBlock key={index}>
+                        <BetweenBox>
+                          <FlexBox>
+                            <ProfilePicture img={comment.picture} />
+                            <Id nickname={comment['User.nickname']} />
+                          </FlexBox>
+                          <CommentMenu onClick={() => setCommentMenu(true)} />
+                        </BetweenBox>
+                        <FlexBox>
+                          <Comment text={comment.text_content}  time={comment.createdAt.slice(0, 10) + ' ' + comment.createdAt.slice(11, 19)}/>
+                        </FlexBox>
+                      </CommentBlock>
+                    )
+                  })
+                )}
+
+                <BorderBox>
+                  <CommentInput />
+                  <CommentSubmit />
+                </BorderBox>
+              </PostBlock>
+            )
+          })
+        }
 
       </Wrap>
     </Fragment>
