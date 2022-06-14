@@ -5,10 +5,7 @@ import STYLE from "../../config";
 
 // img
 import post from "../Picture/HeaderButton/post.png";
-import ohwunwan from "../Picture/HeaderButton/ohwunwan.png";
 import onerm from "../Picture/HeaderButton/1rm.png";
-import feedback from "../Picture/HeaderButton/feedback.png";
-import user from "../Picture/HeaderButton/user.png";
 
 const Button = styled.div`
   width: 2.4em;

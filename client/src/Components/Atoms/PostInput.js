@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import STYLE from "../../config"
-
+import {useDispatch,useSelector} from "react-redux"
 // 포스팅 페이지 => 텍스트 입력창
 
 const Input = styled.textarea`
@@ -11,9 +11,9 @@ const Input = styled.textarea`
   outline: none;
 `
 
-function PostInput() {
+function PostInput({textHandler}) {
   return (
-    <Input type='text'></Input>
+    <Input type='text' onChange={(e)=>{textHandler(e.target.value)}}></Input>
   )
 }
 

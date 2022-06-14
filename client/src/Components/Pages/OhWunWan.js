@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import { Fragment, useState } from "react";
 import STYLE from "../../config";
+import {useSelector, useDispatch} from "react-redux" 
+import { OhwunwanText, OhwunwanImage } from '../../Ducks/Slice/PostSlice'
+
 
 // header, 마진
 import HeaderBlock from "../Organism/HeaderBlock";
@@ -33,7 +36,7 @@ function OhWunWan() {
         {/* <MenuBox /> */}
         <HeaderBlock />
         <MarginBox />
-        <Posting></Posting>
+        {<Posting></Posting>}
       </Wrap>
     </Fragment>
   )

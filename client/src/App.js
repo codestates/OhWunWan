@@ -36,9 +36,7 @@ function App() {
   // 서버가 카카오로부터 받은 유저의 정보를 가져오고 로그인으로 바꿔주는 함수 
   const authentication = async () => {
     try {
-      const res = await axios.get('https://localhost:4000/auth',{withCredentials:true})  // 
-      
-
+      const res = await axios.get('https://localhost:4000/auth',{withCredentials:true}) 
       // 유저의 정보가 DB에 있을 때 
       if (res.data.data.user_info) {  
         dispatch(IsLogin());  // 로그인 상태를 true로 변경 
@@ -67,10 +65,13 @@ function App() {
     if(code)redirect()
   }, []);
   
+  // console.log(is_login)
+  // console.log(user_info)
   return (
     <Router>
       <GlobalStyle />
       <Routes>
+        
         <Route path="/" element={<Welcome />}></Route>
         <Route path="/oauth/kakao" element={<Login />}></Route>
         <Route path="/ohwunwan" element={<OhWunWan />}></Route>

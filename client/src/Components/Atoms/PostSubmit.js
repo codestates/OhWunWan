@@ -1,4 +1,8 @@
 import styled from "styled-components"
+import {useSelector} from "react-redux" 
+import { useState } from 'react'
+import axios from 'axios'
+
 
 // 포스팅 페이지 업로드 버튼
 
@@ -17,9 +21,16 @@ PostSubmit.defaultProps = {
   onClick: () => {console.log('제출 버튼 동작')}
 }
 
-function PostSubmit({text, onClick}) {
+function PostSubmit({ formdata}) {
   return(
-    <Button onClick={onClick}>{text}</Button>
+    <Button onClick={()=>{axios({
+      method: 'post',
+      url: 'https://localhost:4000/post/ohwunwan',
+      data: formdata,
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })}}>업로드</Button>
   )
 }
 

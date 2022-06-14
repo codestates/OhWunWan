@@ -14,7 +14,7 @@ PostUpload.defaultProps = {
   onChange: (e) => console.log(e.target.files[0])
 }
 
-function PostUpload({onChange}) {
+function PostUpload({imageHandler}) {
   return(
     <Fragment>
       <label htmlFor='upload'>
@@ -24,7 +24,7 @@ function PostUpload({onChange}) {
         type='file'
         id='upload'
         accept="image/*"
-        onChange={onChange}
+        onChange={(e)=>{imageHandler(e.target.files[0])}}
         style={{ display: "none" }} 
       />
     </Fragment>
