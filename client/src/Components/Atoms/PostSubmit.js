@@ -30,7 +30,7 @@ function PostSubmit({ formdata}) {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
-    })}}>업로드</Button>
+    }).then((res)=>window.location.replace("https://localhost:3000/ohwunwan"))}}>업로드</Button>
   )
 }
 
