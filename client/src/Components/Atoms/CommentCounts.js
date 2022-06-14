@@ -5,7 +5,7 @@ import styled from "styled-components"
 const Comment = styled.span`
   font-size: 1em;
   font-weight: bold;
-  margin-left: 0.2em;
+  margin-left: 0.5em;
 `
 
 CommentCounts.defaultProps = {

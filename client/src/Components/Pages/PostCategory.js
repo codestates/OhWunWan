@@ -1,6 +1,8 @@
-import styled from "styled-components"
-import { Fragment } from "react";
+import styled from "styled-components";
+import { Fragment, useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux"
 import STYLE from "../../config";
+import { header } from "../../Ducks/Slice/HeaderSlice";
 import { Link } from "react-router-dom";
 
 // header, 마진
@@ -27,6 +29,12 @@ const AroundBox = styled.div`
 `
 
 function PostCategory() {
+  // 현재 페이지
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(header({header: 'post'}))
+  }, [])
+
   return(
     <Fragment>
       <Wrap>

@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from "styled-components";
 import { Fragment } from "react";
 import STYLE from "../../config"
 import SubmitButton from "../Atoms/SubmitButton"
@@ -6,7 +6,7 @@ import SubmitButton from "../Atoms/SubmitButton"
 const Div = styled.div`
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   z-index: 99;
   display: flex;
@@ -23,10 +23,14 @@ const Div2 = styled.div`
   background-color: #fff;
 `
 
-function MenuBlock(props) {
+function FeedbackModal(props) {
+
   return(
     <Fragment>
       <Div>
+        <Div2>
+          <SubmitButton text='채택' type='blue' />
+        </Div2>
         <Div2>
           <SubmitButton text='수정' type='black' />
         </Div2>
@@ -41,4 +45,4 @@ function MenuBlock(props) {
   )
 }
 
-export default MenuBlock
+export default FeedbackModal

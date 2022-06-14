@@ -38,6 +38,7 @@ function PostOhwunwan() {
 
   const user_info = useSelector((state)=> state.auth.user_info)
   const copied = JSON.parse(JSON.stringify(user_info))
+  
   const [text_content,setText_content] = useState('')
 
   const formdata = new FormData()
@@ -49,7 +50,6 @@ function PostOhwunwan() {
   const imageHandler = (value) => {
     formdata.append('file', value)
   }
-  
   formdata.append('user_id', copied.id)
   formdata.append('text_content', text_content)
 
