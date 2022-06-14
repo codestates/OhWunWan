@@ -20,7 +20,7 @@ module.exports = {
         unique: true
       },
       profile_picture: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(1000)
       },
       createdAt: {
         allowNull: false,

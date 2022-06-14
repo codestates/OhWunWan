@@ -18,7 +18,7 @@ module.exports = {
         },
       },
       picture: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(1000),
         allowNull: false,
       },
       text_content: {

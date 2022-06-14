@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('Bench_1rm_repects', [
+    return queryInterface.bulkInsert('Bench_1rm_respects', [
      {
       user_id: 1,
       bench_1rm_id:1,
@@ -103,6 +103,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('Bench_1rm_repects', null, {})
+    return queryInterface.bulkDelete('Bench_1rm_respects', null, {})
   }
 };
