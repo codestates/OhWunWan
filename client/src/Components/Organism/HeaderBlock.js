@@ -2,8 +2,9 @@ import styled from "styled-components"
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
 
+// 사용중
+
 // img
-import logo from "../Picture/Logo/logo.svg"
 import post from "../Picture/HeaderButton/post.png";
 import ohwunwan from "../Picture/HeaderButton/ohwunwan.png";
 import onerm from "../Picture/HeaderButton/1rm.png";

@@ -1,5 +1,7 @@
 import styled from "styled-components"
 
+// 게시글 좋아요 버튼 (하트)
+
 // img
 import like from "../Picture/LikeButton/like.png"
 import liked from "../Picture/LikeButton/liked.png"

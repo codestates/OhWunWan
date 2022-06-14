@@ -1,5 +1,7 @@
 import styled from "styled-components"
 
+// 일단 살려두기
+
 // img
 import loding from "../Picture/Loding/loding.svg"
 

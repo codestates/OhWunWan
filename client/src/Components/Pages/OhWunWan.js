@@ -1,13 +1,15 @@
-import styled from "styled-components"
+import styled from "styled-components";
+import { Fragment, useState } from "react";
+import STYLE from "../../config";
+import {useSelector, useDispatch} from "react-redux" 
 
-// Atoms
-import MarginBox from "../Atoms/MarginBox" // CSS용 빈 박스
 
-// Organism
-import HeaderBlock from "../Organism/HeaderBlock"
-import PostBlock from "../Organism/PostBlock"
+// header, 마진
+import HeaderBlock from "../Organism/HeaderBlock";
+import MarginBox from "../Atoms/MarginBox";
+import Posting from '../Organism/Posting';
 
-const Div = styled.div`
+const Wrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,14 +17,27 @@ const Div = styled.div`
 `
 
 function OhWunWan() {
+  // const [modalOpen, setModalOpen] = useState(true)
+
+  // const openModal = () => {
+  //   setModalOpen(true)
+  //   console.log(modalOpen)
+  // }
+
+  // const closeModal = () => {
+  //   setModalOpen(false)
+  //   console.log(modalOpen)
+  // }
+
   return(
-    <Div>
-      <HeaderBlock />
-      <MarginBox /> 
-      <PostBlock first='first' />
-      <PostBlock />
-      <PostBlock />
-    </Div>
+    <Fragment>
+      <Wrap>
+        {/* <MenuBox /> */}
+        <HeaderBlock />
+        <MarginBox />
+        {<Posting></Posting>}
+      </Wrap>
+    </Fragment>
   )
 }
 
