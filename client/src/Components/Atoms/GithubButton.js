@@ -1,5 +1,7 @@
 import styled from "styled-components"
 
+// footer 깃허브 버튼
+
 // img
 import github from "../Picture/GithubButton/github.png"
 

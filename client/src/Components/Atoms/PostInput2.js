@@ -1,13 +1,13 @@
 import styled from "styled-components"
 import STYLE from "../../config"
 
+// 포스팅 페이지 (1RM) => KG 작성창
+
 const Input = styled.input`
-  width: 4em;
-  /* height: 1.5em; */
-  font-size: 1em;
-  text-align: center;
+  width: 4.7em;
   border: 0.1em solid ${STYLE.BORDER_COLOR};
-  margin-right: 0.2em;
+  outline: none;
+  text-align: center;
 `
 
 function PostInput2() {

@@ -15,7 +15,6 @@ module.exports = {
 
 
 
-
             //1.카카오 로그인 요청과 응답(토큰제공)
             const response = await axios({
                 method: 'post',
@@ -48,7 +47,6 @@ module.exports = {
             const check_user_info = await User.findOne({ where: { kakao_id } });
             // console.log('::::check_user_info:',check_user_info)
 
-
             //3.1 신 유저의 경우 
             if (!check_user_info) {
                 const new_user_info = {
@@ -65,8 +63,6 @@ module.exports = {
 
                 //토큰보내기 
                 send_access_token(res, access_token);
-
-
                 //유저 정보 보내기
                 return res.status(201).json({
                     message: 'This is new user info', data: {
@@ -74,8 +70,6 @@ module.exports = {
                     }
                 })
             }
-
-
             //3.2 기존유저인 경우
             //토큰전송
             send_access_token(res, access_token)
@@ -85,7 +79,6 @@ module.exports = {
                     user_info: check_user_info.dataValues
                 }
             })
-
             //에러잡기
         } catch (err) {
             console.log(err)
@@ -93,8 +86,3 @@ module.exports = {
         }
     }
 }
-
-
-
-
-

@@ -1,5 +1,7 @@
 import styled from "styled-components"
 
+// 게시글 댓글 버튼 (말풍선)
+
 // img
 import comment from "../Picture/CommentButton/comment.png"
 
