@@ -12,10 +12,10 @@ import user from "../Picture/HeaderButton/user.png"
 // Atoms
 import UserinfoPicture from "../Atoms/UserinfoPicture";
 import Id from "../Atoms/Id";
-import CommentSubmit from "../Atoms/CommentSubmit";
 import UserInfoInput from "../Atoms/UserInfoInput";
 import UserInfoSubmit from "../Atoms/UserInfoSubmit";
 import UserInfoSubmit2 from "../Atoms/UserInfoSubmit2";
+import ProfileUpload from "../Atoms/ProfileUpload";
 
 const Wrap = styled.div`
   display: flex;
@@ -64,7 +64,7 @@ function UserInfo() {
             <UserinfoPicture img={user} />
             <FlexBox2>
               <Id nickname='코드스테이츠' />
-              <CommentSubmit text='프로필 사진 바꾸기' />
+              <ProfileUpload text='프로필 사진 바꾸기' />
             </FlexBox2>
           </FlexBox>
 

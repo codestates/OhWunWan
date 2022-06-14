@@ -1,6 +1,8 @@
 import styled from "styled-components"
-import { Fragment } from "react";
+import { Fragment, useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux"
 import STYLE from "../../config";
+import { header } from "../../Ducks/Slice/HeaderSlice";
 import { Link } from "react-router-dom";
 
 // header, 마진
@@ -11,6 +13,7 @@ import MypageButton from "../Atoms/MypageButton";
 // 더미 사진
 import user from "../Picture/HeaderButton/user.png"
 import pic1 from "../Picture/ContentPicture/pic1.webp"
+import liked from "../Picture/LikeButton/liked.png"
 
 // Atoms
 import MypagePicture from "../Atoms/MypagePicture";
@@ -21,7 +24,6 @@ import RecordTotal from "../Atoms/RecordTotal";
 import RecordWeight from "../Atoms/RecordWeight";
 import Id from "../Atoms/Id";
 import ProfilePicture from "../Atoms/ProfilePicture";
-import MenuButton from "../Atoms/MenuButton";
 import ContentPicture from "../Atoms/ContentPicture";
 import LikeButton from "../Atoms/LikeButton";
 import CommentButton from "../Atoms/CommentButton";
@@ -32,6 +34,13 @@ import ContentText from "../Atoms/ContentText";
 import Comment from "../Atoms/Comment";
 import CommentInput from "../Atoms/CommentInput";
 import CommentSubmit from "../Atoms/CommentSubmit";
+import ContentButton from "../Atoms/ContentButton";
+import CommentMenu from "../Atoms/CommentMenu";
+
+// Organism
+import LogoutModal from "../Organism/LogoutModal";
+import ContentModal from "../Organism/ContentModal";
+import CommentModal from "../Organism/CommentModal";
 
 const Wrap = styled.div`
   display: flex;
@@ -96,10 +105,33 @@ const PostBlock = styled.div`
   margin-bottom: 2em;
 `
 
+const CommentBlock = styled.div`
+  width: ${STYLE.WIDTH};
+  border: 0.1em solid ${STYLE.BORDER_COLOR};
+`
+
 function Mypage() {
+  // 메뉴 열고 닫기
+  const [contentMenu, setContentMenu] = useState(false)
+  const [commentMenu, setCommentMenu] = useState(false)
+
+  // 현재 페이지
+  let select = useSelector(state => state)
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(header({header: 'mypage'}))
+  }, [])
+
   return(
     <Fragment>
       <Wrap>
+        {/* 로그아웃 모달 */}
+        {select.logout_modal.logout_modal ? <LogoutModal /> : null}
+
+        {/* 메뉴 열고 닫기 */}
+        {contentMenu ? <ContentModal setContentMenu={setContentMenu} /> : null}
+        {commentMenu ? <CommentModal setCommentMenu={setCommentMenu} /> : null}
+        
         <HeaderBlock />
         <MarginBox />
 
@@ -161,7 +193,7 @@ function Mypage() {
                 <ProfilePicture img={user} />
                 <Id nickname='손흥민'></Id>
               </FlexBox>
-              <MenuButton />
+              <ContentButton onClick={() => {setContentMenu(true)}} />
             </BetweenBox>
           </BorderBox>
           
@@ -172,6 +204,7 @@ function Mypage() {
           <Box>
             <FlexBox>
               <LikeButton />
+              <LikeButton img={liked} />
               <CommentButton />
             </FlexBox>
             <BetweenBox>
@@ -187,13 +220,18 @@ function Mypage() {
             <ContentText text='텍스트가 들어갈 자리입니다' />
           </Box>
           
-          <Box>
+          <CommentBlock>
+            <BetweenBox>
+              <FlexBox>
+                <ProfilePicture img={user} />
+                <Id nickname='helloworld123' />
+              </FlexBox>
+              <CommentMenu onClick={() => setCommentMenu(true)} />
+            </BetweenBox>
             <FlexBox>
-              <ProfilePicture img={user} />
-              <Id nickname='helloworld123' />
-              <Comment text='댓글이 들어갈 자리입니다'/>
+              <Comment text='댓글이 들어갈 자리입니다'  time='2022-06-13 20:40:08'/>
             </FlexBox>
-          </Box>
+          </CommentBlock>
             
           <BorderBox>
             <CommentInput />
