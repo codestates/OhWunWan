@@ -1,24 +1,25 @@
 import styled from "styled-components"
 import { Fragment } from "react"
-import post from "../Picture/Upload/upload.png"
 
-// 포스팅 => 오운완 사진 입력하는 버튼
+// 마이페이지 - 회원정보수정 - 프로필 사진 바꾸기
 
-const Button = styled.img`
-  width: 2em;
-  border-radius: 1em;
-  margin-right: 0.5em;
+const Button = styled.span`
+  user-select: none; // 드래그 금지
+  display: inline-block;
+  color: #2D9BF0;
+  cursor: pointer;
 `
 
-PostUpload.defaultProps = {
+ProfileUpload.defaultProps = {
+  text: '게시',
   onChange: (e) => console.log(e.target.files[0])
 }
 
-function PostUpload({onChange}) {
+function ProfileUpload({text, onChange}) {
   return(
     <Fragment>
       <label htmlFor='upload'>
-        <Button src={post} />
+        <Button>{text}</Button>
       </label>
       <input
         type='file'
@@ -31,4 +32,4 @@ function PostUpload({onChange}) {
   )
 }
 
-export default PostUpload
+export default ProfileUpload
