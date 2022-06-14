@@ -95,7 +95,7 @@ module.exports = {
     //ohwunwan게시물 생성
     post: async (req, res) => {
         try {
-            if (!Boolean(req.body.user_id && req.body.text_content && req.file.location)) return res.status(400).json({ message: 'Bad Request!' })
+            if (!(req.body.user_id && req.body.text_content && req.file.location)) return res.status(400).json({ message: 'Bad Request!' })
             const { user_id, text_content } = req.body
             console.log('::::::::::::::::user_id:', user_id, text_content)
             const { location } = req.file

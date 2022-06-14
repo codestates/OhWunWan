@@ -1,16 +1,16 @@
 const { Bench_1rm, Bench_1rm_comment, Bench_1rm_respect, User } = require('../../models');
 
-module.exports={
+module.exports = {
     //bench_1rm게시물 조회
-    get:async(req,res)=>{
+    get: async (req, res) => {
         try {
             //조회할 게시물 페이지들
             const { count } = req.params
 
-            
+
             //bench__1rm게시물+user정보 
             const bench_1rms = await Bench_1rm.findAll({
-                attributes: ['id', 'video', 'text_content','kg', 'createdAt'],//bench_1rm 컬럼들
+                attributes: ['id', 'video', 'text_content', 'kg', 'createdAt'],//bench_1rm 컬럼들
                 include: [
                     {
                         model: User,
@@ -29,7 +29,7 @@ module.exports={
 
             //조회한 게시물들의 고유번호값들 맵
             const bench_1rm_id = bench_1rms.map(item => item.id)
-            console.log('::::::bench_1rm_id:',bench_1rm_id)
+            console.log('::::::bench_1rm_id:', bench_1rm_id)
 
 
 
@@ -37,7 +37,7 @@ module.exports={
             // 조회한 게시물들의 댓글 + 유저정보
             const bench_1rm_comments = await Bench_1rm_comment.findAll({
                 where: { bench_1rm_id },
-                attributes: ['id', 'bench_1rm_id', 'text_content','selection', 'createdAt'],
+                attributes: ['id', 'bench_1rm_id', 'text_content', 'createdAt'],
                 include: [
                     {
                         model: User,
@@ -86,17 +86,93 @@ module.exports={
             console.log(err);
             return res.status(500).json({ message: 'Server Error!' })
         }
-    }, 
+    },
     //bench_1rm게시묵 작성
-    post:async(req,res)=>{
+    post: async (req, res) => {
+        try {
+            if (!(req.body.user_id && req.body.text_content && req.file.location)) return res.status(400).json({ message: 'Bad Request!' })
+            const { user_id, text_content, kg } = req.body
+            console.log('::::::::::::::::user_id, text_content,kg:', user_id, text_content, kg)
+            const { location } = req.file
+            console.log(':::::::::::::location:', location)
+            const post_info = {
+                user_id,
+                text_content,
+                kg,
+                video: location
+            }
+            await Bench_1rm.create(post_info);
+
+            return res.status(201).json({ message: 'The post has been created' })
+        }
+        catch (err) {
+            return res.status(500).json({ message: 'Server Error!' })
+        }
 
     },
     //bench_1rm게시물 수정
-    patch:async(req,res)=>{
-
+    patch: async (req, res) => {
+        try {
+            //잘못된 요청
+            if (!req.body.bench_1rm_id) return res.status(400).json({ message: 'Bad Request!' });
+            //동영상 text_content 모두 바꾸는 경우
+            if (req.file.location && req.body.text_content) {
+                const { bench_1rm_id, text_content } = req.body
+                const { location } = req.file
+                await Bench_1rm.update(
+                    {
+                        text_content,
+                        picture: location
+                    },
+                    {
+                        where: { id: bench_1rm_id, }
+                    },
+                );
+                return res.json({ message: 'The post has been changed' })
+            }
+            //텍스트만 바꾸는경우
+            else if (req.body.text_content) {
+                const { bench_1rm_id, text_content } = req.body
+                const changed_bench_1rm = await Bench_1rm.update(
+                    {
+                        text_content,
+                    },
+                    {
+                        where: { id: bench_1rm_id, }
+                    },
+                );
+                return res.json({ message: 'The post has been changed' })
+            }
+            //동영상만 바꾸는경우
+            else if (req.file.location) {
+                const { bench_1rm_id } = req.body
+                const { location } = req.file
+                await Bench_1rm.update(
+                    {
+                        picture: location
+                    },
+                    {
+                        where: { id: bench_1rm_id, }
+                    },
+                );
+                return res.json({ message: 'The post has been changed' })
+            }
+        } catch (err) {
+            console.log(err);
+            return res.status(500).json({ message: 'Server Error!' })
+        }
     },
     //bench_1rm게시물 삭제
-    delete:async(req,res)=>{
-
+    delete: async (req, res) => {
+        try {
+            const { bench_1rm_id } = req.params
+            await Bench_1rm.destroy({
+                where: { id: bench_1rm_id },
+            });
+            return res.json({ message: 'The post has been deleted' })
+        } catch (err) {
+            console.log(err);
+            return res.status(500).json({ message: 'Server Error!' })
+        }
     },
 }

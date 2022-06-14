@@ -7,7 +7,7 @@ module.exports = {
             //조회할 게시물 페이지들
             const { count } = req.params
 
-            
+
             //피드백게시물+user정보 
             const feedbacks = await Feedback.findAll({
                 attributes: ['id', 'video', 'text_content', 'createdAt'],//Feedback 컬럼들
@@ -29,7 +29,7 @@ module.exports = {
 
             //조회한 게시물들의 고유번호값들 맵
             const feedback_id = feedbacks.map(item => item.id)
-            console.log('::::::feedback_id:',feedback_id)
+            console.log('::::::feedback_id:', feedback_id)
 
 
 
@@ -37,7 +37,7 @@ module.exports = {
             // 조회한 게시물들의 댓글 + 유저정보
             const feedback_comments = await Feedback_comment.findAll({
                 where: { feedback_id },
-                attributes: ['id', 'feedback_id', 'text_content','selection', 'createdAt'],
+                attributes: ['id', 'feedback_id', 'text_content', 'selection', 'createdAt'],
                 include: [
                     {
                         model: User,
@@ -121,7 +121,7 @@ module.exports = {
                 await Feedback.update(
                     {
                         text_content,
-                        picture: location
+                        video: location
                     },
                     {
                         where: { id: feedback_id, }
@@ -148,7 +148,7 @@ module.exports = {
                 const { location } = req.file
                 await Feedback.update(
                     {
-                        picture: location
+                        video: location
                     },
                     {
                         where: { id: feedback_id, }
@@ -166,7 +166,7 @@ module.exports = {
         try {
             const { feedback_id } = req.params
 
-            Feedback.destroy({
+            await Feedback.destroy({
                 where: { id: feedback_id },
             });
             return res.json({ message: 'The post has been deleted' })
