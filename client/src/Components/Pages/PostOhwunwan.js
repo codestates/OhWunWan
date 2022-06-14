@@ -40,6 +40,7 @@ function PostOhwunwan() {
   const copied = JSON.parse(JSON.stringify(user_info))
   
   const [text_content,setText_content] = useState('')
+  const [picture, setPicture] = useState('')
 
   const formdata = new FormData()
 
@@ -48,10 +49,13 @@ function PostOhwunwan() {
   }   
   
   const imageHandler = (value) => {
-    formdata.append('file', value)
+    setPicture(value)
+    console.log(value)
   }
   formdata.append('user_id', copied.id)
   formdata.append('text_content', text_content)
+  formdata.append('file', picture)
+  console.log(formdata.getAll("file"))
 
   return(
     <Fragment>
@@ -71,7 +75,7 @@ function PostOhwunwan() {
         </BetweenBox>
 
         <BetweenBox>
-          <PostPicture img={preview} />
+          <PostPicture img={picture? URL.createObjectURL(picture):preview} />
         </BetweenBox>
 
       </Wrap>
