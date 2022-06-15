@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import axios from 'axios'
-import { Link } from "react-router-dom"
+import STYLE from "../../config";
+
 
 
 // 포스팅 페이지 업로드 버튼
@@ -24,12 +25,12 @@ function PostSubmit({formdata,url,replace}) {
   return(
     <Button onClick={()=>{axios({
       method: 'post',
-      url: `https://localhost:4000/post/${url}`,
+      url: `${STYLE.SERVER}/post/${url}`,
       data: formdata,
       headers: {
         'Content-Type': 'multipart/form-data',
       },
-    }).then((res)=>window.location.replace(`https://localhost:3000/${replace}`))}}>업로드</Button>
+    }).then((res)=>window.location.replace(`${STYLE.CLIENT}/${replace}`))}}>업로드</Button>
   )
 }
 

@@ -92,11 +92,25 @@ function Onerm() {
     dispatch(header({header: '1rm'}))
   }, [])
 
+  const categorySelector = (select1,select2,select3) => {
+    if(select1){
+      return "bench_1rm"
+    }
+
+    if(select2){
+      return "dead_1rm"
+    }
+
+    if(select3){
+      return "squat_1rm"
+    }
+  }
+
   return(
     <Fragment>
       <Wrap>
         {/* 메뉴 열고 닫기 */}
-        {contentMenu ? <ContentModal setContentMenu={setContentMenu} category={"Onerm"}/> : null}
+        {contentMenu ? <ContentModal setContentMenu={setContentMenu} category={categorySelector(select1,select2,select3)}/> : null}
         {commentMenu ? <CommentModal setCommentMenu={setCommentMenu} /> : null}
 
         <HeaderBlock />

@@ -35,23 +35,30 @@ const BetweenBox = styled.div`
 
 
 function PostFeedback() {
+  // 리덕스에서 유저 정보 가져오기 
   const user_info = useSelector((state)=> state.auth.user_info)
+  // 가져온 정보 깊은복사
   const copied = JSON.parse(JSON.stringify(user_info))
+  
+  // 작성글, 업로드 비디오 상태관리
   const [text_content,setText_content] = useState('')
   const [video, setVideo] = useState('')
-
+  
+  // 서버 전송을 위한 객체 생성 
   const formdata = new FormData()
+  
 
+  // 핸들러를 통한 상태관리
   const textHandler = (value) => {
     setText_content(value)
   }   
-  
   const videoHandler = (value) => {
     setVideo(value)
   }
-
+  
   //console.log(fitness)
   // console.log(weight)
+  // 생성된 객체에 데이터 담아주기 
   formdata.append('user_id', copied.id)
   formdata.append('text_content', text_content)  
   formdata.append('file', video)

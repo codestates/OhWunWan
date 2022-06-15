@@ -119,7 +119,7 @@ function OhWunWan() {
     <Fragment>
       <Wrap>
         {/* 메뉴 열고 닫기 */}
-        {contentMenu ? <ContentModal setContentMenu={setContentMenu} category={"OhWunWan"}/> : null}
+        {contentMenu ? <ContentModal setContentMenu={setContentMenu} category={"ohwunwan"}/> : null}
         {commentMenu ? <CommentModal setCommentMenu={setCommentMenu} /> : null}
         
         <HeaderBlock/>

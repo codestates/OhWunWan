@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Fragment } from "react";
 import STYLE from "../../config"
 import SubmitButton from "../Atoms/SubmitButton"
+import axios from 'axios';
 
 const Div = styled.div`
   width: 100vw;
@@ -23,14 +24,15 @@ const Div2 = styled.div`
   background-color: #fff;
 `
 
-function ContentModal(props) {
+function ContentModal({setContentMenu,category}) {
   
   const editHandler = () => {
-
+    
+    axios.patch(`${STYLE.SERVER}/post/${category}`,{})
   }
   
   const deleteHandler = () => {
-
+    //axios.delete(`${STYLE.SERVER}/post/${category}/${id}`{})
   }
 
   return(
@@ -43,7 +45,7 @@ function ContentModal(props) {
           <SubmitButton text='삭제' type='red' onClick={deleteHandler}/>
         </Div2>
         <Div2>
-          <SubmitButton text='취소' type='black' onClick={() => {props.setContentMenu(false)}} />
+          <SubmitButton text='취소' type='black' onClick={() => {setContentMenu(false)}} />
         </Div2>
       </Div>
     </Fragment>

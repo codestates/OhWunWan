@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import {useSelector, useDispatch} from "react-redux" 
 import axios from 'axios';
 import { IsLogin, IsLogout, GetUserInfo } from "./Ducks/Slice/AuthSlice.js"
+import STYLE from './config.js';
 
 
 // GlobalStyle
@@ -35,7 +36,7 @@ function App() {
   // 서버가 카카오로부터 받은 유저의 정보를 가져오고 로그인으로 바꿔주는 함수 
   const authentication = async () => {
     try {
-      const res = await axios.get('https://localhost:4000/auth',{withCredentials:true}) 
+      const res = await axios.get(`${STYLE.SERVER}/auth`,{withCredentials:true}) 
       // 유저의 정보가 DB에 있을 때 
       if (res.data.data.user_info) {  
         dispatch(IsLogin());  // 로그인 상태를 true로 변경 
@@ -54,8 +55,8 @@ function App() {
 
   // 카카오로부터 auth code를 받을때 한번 실행되는 함수 
   const redirect= ()=> {
-    axios.post('https://localhost:4000/auth/kakao',{code})
-    .then((res)=>window.location.replace("https://localhost:3000/ohwunwan")) 
+    axios.post(`${STYLE.SERVER}/auth/kakao`,{code})
+    .then((res)=>window.location.replace(`${STYLE.CLIENT}/ohwunwan`)) 
   }
 
   // 페이지가 렌더링 될때 마다 실행

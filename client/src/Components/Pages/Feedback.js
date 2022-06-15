@@ -92,7 +92,7 @@ function Feedback() {
     <Fragment>
       <Wrap>
         {/* 메뉴 열고 닫기 */}
-        {contentMenu ? <FeedbackModal setContentMenu={setContentMenu} category={"Feedback"}/> : null}
+        {contentMenu ? <FeedbackModal setContentMenu={setContentMenu} category={"feedback"}/> : null}
         {commentMenu ? <CommentModal setCommentMenu={setCommentMenu} /> : null}
 
         <HeaderBlock />
