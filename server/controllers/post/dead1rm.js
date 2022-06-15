@@ -1,4 +1,7 @@
 const { Dead_1rm, Dead_1rm_comment, Dead_1rm_respect, User } = require('../../models');
+const sequelize = require('sequelize');
+const Op = sequelize.Op;
+
 
 module.exports = {
     //Dead_1rm게시물 조회
@@ -8,7 +11,7 @@ module.exports = {
             const { count } = req.params
 
 
-            //dead__1rm게시물+user정보 
+            //1.dead__1rm게시물+user정보 쿼리
             const dead_1rms = await Dead_1rm.findAll({
                 attributes: ['id', 'video', 'text_content', 'kg', 'createdAt'],//dead_1rm 컬럼들
                 include: [
@@ -26,15 +29,13 @@ module.exports = {
 
 
 
-
-            //조회한 게시물들의 고유번호값들 맵
+            //2. 조회한 게시물들의 고유번호값들 맵핑해서 뽑기
             const dead_1rm_id = dead_1rms.map(item => item.id)
             console.log('::::::dead_1rm_id:', dead_1rm_id)
 
 
 
-
-            // 조회한 게시물들의 댓글 + 유저정보
+            //3. 조회한 게시물들의 댓글 + 유저정보 쿼리
             const dead_1rm_comments = await Dead_1rm_comment.findAll({
                 where: { dead_1rm_id },
                 attributes: ['id', 'dead_1rm_id', 'text_content', 'createdAt'],
@@ -51,20 +52,48 @@ module.exports = {
 
 
 
-            //조회한 게시물들 라이크 
+            //4.조회한 게시물들 리스펙 정보 쿼리
             const dead_1rm_respects = await Dead_1rm_respect.findAll({
                 where: { dead_1rm_id },
                 attributes: ['id', 'user_id', 'dead_1rm_id', 'createdAt'],
                 raw: true,//dataValues만 가져오기
             })
-            console.log(':::::::::::::dead_1rm_respects:', dead_1rm_respects)
+            // console.log(':::::::::::::dead_1rm_respects:', dead_1rm_respects)
 
 
 
-            //조회한게시물+유저정보에 댓글+유저정보 push하기
+
+            //5.조회환 게시물들의 랭킹 정보 쿼리
+            const ranks = await Dead_1rm_respect.findAll({
+
+                attributes: ['dead_1rm_id', [sequelize.fn('COUNT', 'dead_1rm_id'), 'respect_count']],
+                group: ['dead_1rm_id'],
+                having: {
+                    'respect_count': { [Op.gte]: 5 }
+                },
+                require: true,
+                raw: true,//dataValues만 가져오기
+                include: [
+                    {
+                        model: Dead_1rm,
+                        attributes: ['kg', [sequelize.literal('(RANK() OVER (ORDER BY kg DESC))'), 'ranking']],
+                        require: true,
+                        raw: true,//dataValues만 가져오기
+
+                    },
+                ],
+
+            });
+            console.log(':::::::::::rank', ranks)
+
+
+
+
+            //6.(조회한게시물+유저정보)+(댓글+유저정보)+리스펙정보+랭킹정보
             for (const dead_1rm of dead_1rms) {
                 dead_1rm.comment = []
                 dead_1rm.respect = []
+                dead_1rm.rank = []
                 for (const comment of dead_1rm_comments) {
                     if (dead_1rm.id === comment.dead_1rm_id) {
                         dead_1rm.comment.push(comment)
@@ -75,12 +104,15 @@ module.exports = {
                         dead_1rm.respect.push(respect)
                     }
                 }
-
+                for (const rank of ranks) {
+                    if (dead_1rm.id === rank.dead_1rm_id) {
+                        dead_1rm.rank.push(rank)
+                    }
+                }
             }
-
             console.log(':::::::::::::dead_1rms:', dead_1rms)
 
-
+            //7. 데이터 보내주기
             return res.json({ message: 'ok', data: dead_1rms })
         } catch (err) {
             console.log(err);
