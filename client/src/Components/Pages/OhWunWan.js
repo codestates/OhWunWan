@@ -29,6 +29,7 @@ import CommentInput from "../Atoms/CommentInput"
 import CommentSubmit from "../Atoms/CommentSubmit";
 import CommentMenu from "../Atoms/CommentMenu";
 import ContentButton from "../Atoms/ContentButton";
+import ContentMoreButton from "../Atoms/ContentMoreButton";
 
 // Organism
 import ContentModal from "../Organism/ContentModal";
@@ -97,10 +98,22 @@ function OhWunWan() {
     .then(res => {
       // console.log(res.data.data)
       setInfo([res.data.data])
-      // setParams(params++)
     })
   }, [])
-    // console.log(info[0])
+  
+  useEffect(() => {
+    // Read-More 버튼 클릭시 정보 추가로 받기
+    axios({
+      method: 'get',
+      url: `${STYLE.SERVER}/post/ohwunwan/${params}`
+    })
+    .then(res => {
+      // console.log(res.data.data)
+      setInfo([...info, res.data.data])
+    })
+  }, [params])
+
+  // console.log(info)
 
   return(
     <Fragment>
@@ -112,70 +125,84 @@ function OhWunWan() {
         <HeaderBlock/>
         <MarginBox />
 
-        {!info[0] ? <p>로딩중</p> : 
-          info[0].map((post, index) => {
+        {!info.length ? <p>로딩중</p> : 
+          info.map((arr, index) => {
             return(
-              <PostBlock key={index}>
-                <BorderBox>
-                  <BetweenBox>
-                    <FlexBox>
-                      <ProfilePicture img={post["User.profile_picture"]} />
-                      <Id nickname={post["User.nickname"]}></Id>
-                    </FlexBox>
-                    <ContentButton onClick={() => {setContentMenu(true)}} />
-                  </BetweenBox>
-                </BorderBox>
-                
-                <BorderBox>
-                  <ContentPicture img={post.picture} />
-                </BorderBox>
-
-                <Box>
-                  <FlexBox>
-                    <LikeButton />
-                    <LikeButton img={liked} />
-                    <CommentButton />
-                  </FlexBox>
-                  <BetweenBox>
-                    <FlexBox>
-                      <LikeCounts count={post.like.length} />
-                      <CommentCounts count={post.comment.length} />
-                    </FlexBox>
-                    <ContentTime time={post.createdAt.slice(0, 10) + ' ' + post.createdAt.slice(11, 19)} />
-                  </BetweenBox>
-                </Box>
-
-                <Box>
-                  <ContentText text={post.text_content} />
-                </Box>
-
-                {post.comment.length === 0 ? null : (
-                  post.comment.map((comment, index) => {
+              <div key={index}>
+                {arr.length === 0 ? null : (
+                  arr.map((post, index2) => {
                     return(
-                      <CommentBlock key={index}>
-                        <BetweenBox>
+                      <PostBlock key={index2}>
+                        <BorderBox>
+                          <BetweenBox>
+                            <FlexBox>
+                              <ProfilePicture img={post["User.profile_picture"]} />
+                              <Id nickname={post["User.nickname"]}></Id>
+                            </FlexBox>
+                            <ContentButton onClick={() => {setContentMenu(true)}} />
+                          </BetweenBox>
+                        </BorderBox>
+                        
+                        <BorderBox>
+                          <ContentPicture img={post.picture} />
+                        </BorderBox>
+
+                        <Box>
                           <FlexBox>
-                            <ProfilePicture img={comment['User.profile_picture']} />
-                            <Id nickname={comment['User.nickname']} />
+                            <LikeButton />
+                            <LikeButton img={liked} />
+                            <CommentButton />
                           </FlexBox>
-                          <CommentMenu onClick={() => setCommentMenu(true)} />
-                        </BetweenBox>
-                        <FlexBox>
-                          <Comment text={comment.text_content}  time={comment.createdAt.slice(0, 10) + ' ' + comment.createdAt.slice(11, 19)}/>
-                        </FlexBox>
-                      </CommentBlock>
+                          <BetweenBox>
+                            <FlexBox>
+                              <LikeCounts count={post.like.length} />
+                              <CommentCounts count={post.comment.length} />
+                            </FlexBox>
+                            <ContentTime time={post.createdAt.slice(0, 10) + ' ' + post.createdAt.slice(11, 19)} />
+                          </BetweenBox>
+                        </Box>
+
+                        <Box>
+                          <ContentText text={post.text_content} />
+                        </Box>
+                        
+                        {post.comment.length === 0 ? null : (
+                          post.comment.map((comment, index3) => {
+                            return(
+                              <CommentBlock key={index3}>
+                                <BetweenBox>
+                                  <FlexBox>
+                                    <ProfilePicture img={comment['User.profile_picture']} />
+                                    <Id nickname={comment['User.nickname']} />
+                                  </FlexBox>
+                                  <CommentMenu onClick={() => setCommentMenu(true)} />
+                                </BetweenBox>
+                                <FlexBox>
+                                  <Comment text={comment.text_content}  time={comment.createdAt.slice(0, 10) + ' ' + comment.createdAt.slice(11, 19)}/>
+                                </FlexBox>
+                              </CommentBlock>
+                            )
+                          })
+                        )}
+                          
+                        <BorderBox>
+                          <CommentInput />
+                          <CommentSubmit />
+                        </BorderBox>
+                      </PostBlock>
                     )
                   })
                 )}
-
-                <BorderBox>
-                  <CommentInput />
-                  <CommentSubmit />
-                </BorderBox>
-              </PostBlock>
+                
+              </div>
             )
           })
         }
+
+        <ContentMoreButton onClick={() => {
+          setParams(params + 1)
+          console.log(params)
+        }} />
 
       </Wrap>
     </Fragment>
