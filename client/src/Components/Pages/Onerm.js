@@ -91,7 +91,9 @@ function Onerm() {
   useEffect(() => {
     dispatch(header({header: '1rm'}))
   }, [])
+  
 
+  // state를 이용해 선택된 종목을 반환하는 함수
   const categorySelector = (select1,select2,select3) => {
     if(select1){
       return "bench_1rm"
