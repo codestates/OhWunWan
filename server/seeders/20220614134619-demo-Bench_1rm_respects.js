@@ -159,12 +159,12 @@ module.exports = {
       createdAt: new Date(),
       updatedAt: new Date(),
      },
-     {
-      user_id: 5,
-      bench_1rm_id:5,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-     },
+    //  {
+    //   user_id: 5,
+    //   bench_1rm_id:5,
+    //   createdAt: new Date(),
+    //   updatedAt: new Date(),
+    //  },
   ])
   },
 
