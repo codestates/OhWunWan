@@ -143,7 +143,7 @@ function Feedback() {
                 <ProfilePicture img={user} />
                 <Id nickname='손흥민'></Id>
               </FlexBox>
-              <ContentButton onClick={() => {setContentMenu(true)}} />
+              <ContentButton onClick={() => {setContentMenu(true)}} category={"Feedback"} />
             </BetweenBox>
           </BorderBox>
           

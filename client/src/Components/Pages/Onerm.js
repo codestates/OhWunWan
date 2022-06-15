@@ -150,7 +150,7 @@ function Onerm() {
               <FlexBox>
                 <OnermLogo />
                 <OnermRank count='12' />/<OnermRank count='28' />
-                <ContentButton onClick={() => {setContentMenu(true)}} />
+                <ContentButton onClick={() => {setContentMenu(true)}} category={"Onerm"}/>
               </FlexBox>
             </BetweenBox>
           </BorderBox>

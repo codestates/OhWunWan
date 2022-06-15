@@ -24,15 +24,23 @@ const Div2 = styled.div`
 `
 
 function ContentModal(props) {
+  
+  const editHandler = () => {
+
+  }
+  
+  const deleteHandler = () => {
+
+  }
 
   return(
     <Fragment>
       <Div>
         <Div2>
-          <SubmitButton text='수정' type='skyblue' />
+          <SubmitButton text='수정' type='skyblue' onClick={editHandler}/>
         </Div2>
         <Div2>
-          <SubmitButton text='삭제' type='red' />
+          <SubmitButton text='삭제' type='red' onClick={deleteHandler}/>
         </Div2>
         <Div2>
           <SubmitButton text='취소' type='black' onClick={() => {props.setContentMenu(false)}} />

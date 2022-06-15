@@ -139,7 +139,7 @@ function OhWunWan() {
                               <ProfilePicture img={post["User.profile_picture"]} />
                               <Id nickname={post["User.nickname"]}></Id>
                             </FlexBox>
-                            <ContentButton onClick={() => {setContentMenu(true)}} />
+                            <ContentButton onClick={() => {setContentMenu(true)}} category={"OhWunWan"} />
                           </BetweenBox>
                         </BorderBox>
                         

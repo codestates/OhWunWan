@@ -23,7 +23,7 @@ SubmitButton.defaultProps = {
 
 function SubmitButton({text, type, onClick}) {
   return(
-    <Button onClick={onClick} type={type}>{text}</Button>
+    <Button onClick={()=>onClick()} type={type}>{text}</Button>
   )
 }
 
