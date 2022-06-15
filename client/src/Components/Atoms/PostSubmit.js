@@ -1,7 +1,6 @@
 import styled from "styled-components"
-import {useSelector} from "react-redux" 
-import { useState } from 'react'
 import axios from 'axios'
+import { Link } from "react-router-dom"
 
 
 // 포스팅 페이지 업로드 버튼

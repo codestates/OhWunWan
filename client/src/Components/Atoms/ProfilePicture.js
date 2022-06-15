@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { useNavigate } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 // 게시글에 들어가는 사진 중간사이즈
 // 일단 댓글에도 사용중
@@ -19,10 +19,11 @@ const Picture = styled.div`
 
 function ProfilePicture({img}) {
   
-  const navigate = useNavigate()
 
   return(
-    <Picture img={img} onClick={()=>navigate(`/`)}></Picture>
+    <Link to="/user">
+        <Picture img={img} ></Picture>
+    </Link>
   )
 }
 
