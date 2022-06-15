@@ -29,7 +29,7 @@ function ContentModal(props) {
     <Fragment>
       <Div>
         <Div2>
-          <SubmitButton text='수정' type='black' />
+          <SubmitButton text='수정' type='skyblue' />
         </Div2>
         <Div2>
           <SubmitButton text='삭제' type='red' />
