@@ -9,7 +9,8 @@ const Button = styled.span`
   display:inline-block;
   color: ${props => props.type === 'blue' ? '#2D9BF0' : 
   props.type === 'red' ? '#F24726' :
-  props.type === 'black' ? '#000' : '#fff'};
+  props.type === 'black' ? '#000' : 
+  props.type === 'skyblue' ? '#2d9bf0':"#fff"};
   padding: ${props => props.type === 'comment' ? 'none' : '0.1em;'};
   cursor: pointer;
 `
@@ -22,7 +23,7 @@ SubmitButton.defaultProps = {
 
 function SubmitButton({text, type, onClick}) {
   return(
-    <Button onClick={onClick} type={type}>{text}</Button>
+    <Button onClick={()=>onClick()} type={type}>{text}</Button>
   )
 }
 

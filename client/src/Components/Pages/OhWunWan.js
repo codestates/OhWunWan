@@ -78,6 +78,15 @@ function OhWunWan() {
   const [contentMenu, setContentMenu] = useState(false)
   const [commentMenu, setCommentMenu] = useState(false)
 
+  // 게시물의 id를 가져오기 위한 상태관리
+  const [postingId, setPostingId] = useState('')
+  // 게시물의 id를 끌어올려 전달해주는 핸들러 
+  const postingIdHandler = (value) => {
+    setPostingId(value)
+  }
+  //console.log("아래 mapping에서 가져온 게시물의 Id:",postingId)
+
+
   // get 정보 // info[0]으로 map 함수 실행
   const [info, setInfo] = useState([])
   // 요청시 parameter로 들어가는 숫자
@@ -96,7 +105,7 @@ function OhWunWan() {
       url: `${STYLE.SERVER}/post/ohwunwan/${params}`
     })
     .then(res => {
-      // console.log(res.data.data)
+      //console.log(res.data.data)
       setInfo([res.data.data])
     })
   }, [])
@@ -113,13 +122,13 @@ function OhWunWan() {
     })
   }, [params])
 
-  // console.log(info)
+  console.log(info)
 
   return(
     <Fragment>
       <Wrap>
         {/* 메뉴 열고 닫기 */}
-        {contentMenu ? <ContentModal setContentMenu={setContentMenu} /> : null}
+        {contentMenu ? <ContentModal setContentMenu={setContentMenu} category={"ohwunwan"} postingId={postingId}/> : null}
         {commentMenu ? <CommentModal setCommentMenu={setCommentMenu} /> : null}
         
         <HeaderBlock/>
@@ -139,7 +148,7 @@ function OhWunWan() {
                               <ProfilePicture img={post["User.profile_picture"]} />
                               <Id nickname={post["User.nickname"]}></Id>
                             </FlexBox>
-                            <ContentButton onClick={() => {setContentMenu(true)}} />
+                            <ContentButton onClick={() => {setContentMenu(true);postingIdHandler(post.id)}}/>
                           </BetweenBox>
                         </BorderBox>
                         

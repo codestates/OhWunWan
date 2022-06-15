@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import {useSelector, useDispatch} from "react-redux" 
 import axios from 'axios';
 import { IsLogin, IsLogout, GetUserInfo } from "./Ducks/Slice/AuthSlice.js"
+import STYLE from './config.js';
+import { logout_modal } from './Ducks/Slice/LogoutSlice.js';
 
 
 // GlobalStyle
@@ -22,10 +24,9 @@ import Mypage from "./Components/Pages/Mypage";
 import UserInfo from "./Components/Pages/UserInfo";
 
 function App() {
-  
+  // store에서 state를 가져온다
   const is_login = useSelector((state)=>state.auth.login)
   const user_info = useSelector((state)=>state.auth.user_info)
-  // stor에서 state를 가져온다
   
   const dispatch = useDispatch()
   const url = new URL(window.location.href); // 새로운 객체를 생성해준다
@@ -35,7 +36,7 @@ function App() {
   // 서버가 카카오로부터 받은 유저의 정보를 가져오고 로그인으로 바꿔주는 함수 
   const authentication = async () => {
     try {
-      const res = await axios.get('https://localhost:4000/auth',{withCredentials:true}) 
+      const res = await axios.get(`${STYLE.SERVER}/auth`,{withCredentials:true}) 
       // 유저의 정보가 DB에 있을 때 
       if (res.data.data.user_info) {  
         dispatch(IsLogin());  // 로그인 상태를 true로 변경 
@@ -46,16 +47,14 @@ function App() {
       }
     } catch (err) {
       // 에러
-      console.log("에러",err)
       dispatch(IsLogout());
     }
   };
 
-
   // 카카오로부터 auth code를 받을때 한번 실행되는 함수 
   const redirect= ()=> {
-    axios.post('https://localhost:4000/auth/kakao',{code})
-    .then((res)=>window.location.replace("https://localhost:3000/ohwunwan")) 
+    axios.post(`${STYLE.SERVER}/auth/kakao`,{code})
+    .then((res)=>window.location.replace(`${STYLE.CLIENT}/ohwunwan`)) 
   }
 
   // 페이지가 렌더링 될때 마다 실행
@@ -73,15 +72,15 @@ function App() {
         
         <Route path="/" element={<Welcome />}></Route>
         <Route path="/oauth/kakao" element={<Login />}></Route>
-        <Route path="/ohwunwan" element={<OhWunWan />}></Route>
-        <Route path="/1rm" element={<Onerm />}></Route>
-        <Route path="/feedback" element={<Feedback />}></Route>
-        <Route path="/post" element={<PostCategory />}></Route>
-        <Route path="/post/ohwunwan" element={<PostOhwunwan />}></Route>
-        <Route path="/post/1rm" element={<Post1rm />}></Route>
-        <Route path="/post/feedback" element={<PostFeedback />}></Route>
-        <Route path="/user" element={<Mypage />}></Route>
-        <Route path="/userinfo" element={<UserInfo />}></Route>
+        <Route path="/ohwunwan" element={is_login ?<OhWunWan />:<Welcome />}></Route>
+        <Route path="/1rm" element={is_login ?<Onerm />:<Welcome />}></Route>
+        <Route path="/feedback" element={is_login ?<Feedback />:<Welcome />}></Route>
+        <Route path="/post" element={is_login ?<PostCategory />:<Welcome />}></Route>
+        <Route path="/post/ohwunwan" element={is_login ?<PostOhwunwan />:<Welcome />}></Route>
+        <Route path="/post/1rm" element={is_login ?<Post1rm />:<Welcome />}></Route>
+        <Route path="/post/feedback" element={is_login ?<PostFeedback />:<Welcome />}></Route>
+        <Route path="/user" element={is_login ?<Mypage />:<Welcome />}></Route>
+        <Route path="/userinfo" element={is_login ?<UserInfo />:<Welcome />}></Route>
       </Routes>
     </Router>
   );

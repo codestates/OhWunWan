@@ -105,6 +105,22 @@ function Onerm() {
   useEffect(() => {
     dispatch(header({header: '1rm'}))
   }, [])
+  
+
+  // state를 이용해 선택된 종목을 반환하는 함수
+  const categorySelector = (select1,select2,select3) => {
+    if(select1){
+      return "bench_1rm"
+    }
+
+    if(select2){
+      return "dead_1rm"
+    }
+
+    if(select3){
+      return "squat_1rm"
+    }
+  }
 
   // 페이지 전환시 초기값(벤치프레스)
   useEffect(() => {
@@ -166,7 +182,7 @@ function Onerm() {
     <Fragment>
       <Wrap>
         {/* 메뉴 열고 닫기 */}
-        {contentMenu ? <ContentModal setContentMenu={setContentMenu} /> : null}
+        {contentMenu ? <ContentModal setContentMenu={setContentMenu} category={categorySelector(select1,select2,select3)}/> : null}
         {commentMenu ? <CommentModal setCommentMenu={setCommentMenu} /> : null}
 
         <HeaderBlock />
