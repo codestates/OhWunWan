@@ -119,7 +119,7 @@ function OhWunWan() {
     <Fragment>
       <Wrap>
         {/* 메뉴 열고 닫기 */}
-        {contentMenu ? <ContentModal setContentMenu={setContentMenu} /> : null}
+        {contentMenu ? <ContentModal setContentMenu={setContentMenu} category={"OhWunWan"}/> : null}
         {commentMenu ? <CommentModal setCommentMenu={setCommentMenu} /> : null}
         
         <HeaderBlock/>
@@ -139,7 +139,7 @@ function OhWunWan() {
                               <ProfilePicture img={post["User.profile_picture"]} />
                               <Id nickname={post["User.nickname"]}></Id>
                             </FlexBox>
-                            <ContentButton onClick={() => {setContentMenu(true)}} category={"OhWunWan"} />
+                            <ContentButton onClick={() => {setContentMenu(true)}}  />
                           </BetweenBox>
                         </BorderBox>
                         

@@ -96,7 +96,7 @@ function Onerm() {
     <Fragment>
       <Wrap>
         {/* 메뉴 열고 닫기 */}
-        {contentMenu ? <ContentModal setContentMenu={setContentMenu} /> : null}
+        {contentMenu ? <ContentModal setContentMenu={setContentMenu} category={"Onerm"}/> : null}
         {commentMenu ? <CommentModal setCommentMenu={setCommentMenu} /> : null}
 
         <HeaderBlock />
@@ -150,7 +150,7 @@ function Onerm() {
               <FlexBox>
                 <OnermLogo />
                 <OnermRank count='12' />/<OnermRank count='28' />
-                <ContentButton onClick={() => {setContentMenu(true)}} category={"Onerm"}/>
+                <ContentButton onClick={() => {setContentMenu(true)}} />
               </FlexBox>
             </BetweenBox>
           </BorderBox>
