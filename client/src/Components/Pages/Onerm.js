@@ -34,6 +34,7 @@ import OnermLogo from "../Atoms/OnermLogo";
 import OnermRank from "../Atoms/OnermRank";
 import OnermRecord from "../Atoms/OnermRecord";
 import ContentMoreButton from "../Atoms/ContentMoreButton";
+import ContentVideo from "../Atoms/ContentVideo";
 
 // Organism
 import ContentModal from "../Organism/ContentModal";
@@ -156,10 +157,10 @@ function Onerm() {
     })
   }, [params3])
 
-  console.log('벤치프레스', info1, params1)
-  console.log('데드리프트', info2, params2)
-  console.log('스쿼트', info3, params3)
-  console.log('-----------------')
+  // console.log('벤치프레스', info1, params1)
+  // console.log('데드리프트', info2, params2)
+  // console.log('스쿼트', info3, params3)
+  // console.log('-----------------')
 
   return(
     <Fragment>
@@ -241,7 +242,7 @@ function Onerm() {
                         </BorderBox>
                         
                         <BorderBox>
-                          <ContentPicture img={pic1} />
+                          <ContentVideo video={post.video} />
                         </BorderBox>
 
                         <Box>
@@ -322,7 +323,7 @@ function Onerm() {
                         </BorderBox>
                         
                         <BorderBox>
-                          <ContentPicture img={pic1} />
+                          <ContentVideo video={post.video} />
                         </BorderBox>
 
                         <Box>
@@ -403,7 +404,7 @@ function Onerm() {
                         </BorderBox>
                         
                         <BorderBox>
-                          <ContentPicture img={pic1} />
+                          <ContentVideo video={post.video} />
                         </BorderBox>
 
                         <Box>
