@@ -82,7 +82,7 @@ function Post1rm() {
         <BetweenBox>
           <PostSubject text='' />
           <PostSubject text='1RM' />
-          <PostSubmit formdata={formdata} url={selectFitness} replace={"1rm"}/>
+          <PostSubmit formdata={formdata} url={fitness} replace={"1rm"}/>
         </BetweenBox>
 
         <BetweenBox>
