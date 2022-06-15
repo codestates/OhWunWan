@@ -19,9 +19,9 @@ function PostSelect({selectFitness}) {
     <Fragment>
       <Select id='selectbox' defaultValue="select" onChange={(e) => selectFitness(e.target.value)}>
         <option value="select" disabled>종목선택</option>
-        <option value="bench">벤치프레스</option>
-        <option value="dead">데드리프트</option>
-        <option value="squt">스쿼트</option>
+        <option value="bench_1rm">벤치프레스</option>
+        <option value="dead_1rm">데드리프트</option>
+        <option value="squat_1rm">스쿼트</option>
       </Select>
     </Fragment>
   )

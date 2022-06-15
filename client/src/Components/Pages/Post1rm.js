@@ -63,7 +63,7 @@ function Post1rm() {
     setWeight(value)
   }
 
-  //console.log(fitness)
+  console.log(fitness)
   // console.log(weight)
   formdata.append('user_id', copied.id)
   formdata.append('text_content', text_content)  
@@ -79,7 +79,7 @@ function Post1rm() {
         <BetweenBox>
           <PostSubject text='' />
           <PostSubject text='1RM' />
-          <PostSubmit formdata={formdata} />
+          <PostSubmit formdata={formdata} url={selectFitness} replace={"1rm"}/>
         </BetweenBox>
 
         <BetweenBox>

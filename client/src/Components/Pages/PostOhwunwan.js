@@ -54,7 +54,7 @@ function PostOhwunwan() {
   formdata.append('user_id', copied.id)
   formdata.append('text_content', text_content)
   formdata.append('file', picture)
-  console.log(formdata.getAll("file"))
+  // console.log(formdata.getAll("file"))
 
   return(
     <Fragment>
@@ -65,7 +65,7 @@ function PostOhwunwan() {
         <BetweenBox>
           <PostSubject text='' />
           <PostSubject text='오운완' />
-          <PostSubmit formdata={formdata}/>
+          <PostSubmit formdata={formdata} url={"ohwunwan"} replace={"ohwunwan"}/>
         </BetweenBox>
 
         <BetweenBox>

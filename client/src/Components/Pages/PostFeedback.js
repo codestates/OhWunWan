@@ -65,7 +65,7 @@ function PostFeedback() {
         <BetweenBox>
           <PostSubject text='' />
           <PostSubject text='피드백' />
-          <PostSubmit formdata={formdata} />
+          <PostSubmit formdata={formdata} url={"feedback"} replace={"feedback"}/>
         </BetweenBox>
 
         <BetweenBox>
