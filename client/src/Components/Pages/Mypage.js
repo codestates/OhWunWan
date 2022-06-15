@@ -127,8 +127,8 @@ function Mypage() {
   
   //로그아웃 핸들러 
   const logoutHandler = () => {
-    axios.post("https://localhost:4000/auth/logout")
-    .then((res)=>{dispatch(logout_modal(false));window.location.replace("https://localhost:3000/")})
+    axios.post(`${STYLE.SERVER}/auth/logout`)
+    .then((res)=>{dispatch(logout_modal(false));window.location.replace(`${STYLE.CLIENT}/`)})
   }
 
   return(

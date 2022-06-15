@@ -92,7 +92,7 @@ function Feedback() {
     <Fragment>
       <Wrap>
         {/* 메뉴 열고 닫기 */}
-        {contentMenu ? <FeedbackModal setContentMenu={setContentMenu} /> : null}
+        {contentMenu ? <FeedbackModal setContentMenu={setContentMenu} category={"feedback"}/> : null}
         {commentMenu ? <CommentModal setCommentMenu={setCommentMenu} /> : null}
 
         <HeaderBlock />
@@ -143,7 +143,7 @@ function Feedback() {
                 <ProfilePicture img={user} />
                 <Id nickname='손흥민'></Id>
               </FlexBox>
-              <ContentButton onClick={() => {setContentMenu(true)}} />
+              <ContentButton onClick={() => {setContentMenu(true)}}/>
             </BetweenBox>
           </BorderBox>
           

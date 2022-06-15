@@ -1,7 +1,7 @@
 import styled from "styled-components"
-import {useSelector} from "react-redux" 
-import { useState } from 'react'
 import axios from 'axios'
+import STYLE from "../../config";
+
 
 
 // 포스팅 페이지 업로드 버튼
@@ -21,16 +21,16 @@ PostSubmit.defaultProps = {
   onClick: () => {console.log('제출 버튼 동작')}
 }
 
-function PostSubmit({ formdata}) {
+function PostSubmit({formdata,url,replace}) {
   return(
     <Button onClick={()=>{axios({
       method: 'post',
-      url: 'https://localhost:4000/post/ohwunwan',
+      url: `${STYLE.SERVER}/post/${url}`,
       data: formdata,
       headers: {
         'Content-Type': 'multipart/form-data',
       },
-    }).then((res)=>window.location.replace("https://localhost:3000/ohwunwan"))}}>업로드</Button>
+    }).then((res)=>window.location.replace(`${STYLE.CLIENT}/${replace}`))}}>업로드</Button>
   )
 }
 

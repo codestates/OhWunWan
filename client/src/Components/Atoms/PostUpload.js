@@ -14,19 +14,25 @@ PostUpload.defaultProps = {
   onChange: (e) => console.log(e.target.files[0])
 }
 
-function PostUpload({imageHandler}) {
+function PostUpload({imageHandler,videoHandler}) {
   return(
     <Fragment>
       <label htmlFor='upload'>
         <Button src={post} />
       </label>
-      <input
+      {videoHandler ? <input
+        type='file'
+        id='upload'
+        accept="video/*"
+        onChange={(e)=>{videoHandler(e.target.files[0])}}
+        style={{ display: "none" }} 
+      />:<input
         type='file'
         id='upload'
         accept="image/*"
         onChange={(e)=>{imageHandler(e.target.files[0])}}
         style={{ display: "none" }} 
-      />
+      />}
     </Fragment>
   )
 }

@@ -1,4 +1,6 @@
 import styled from "styled-components"
+import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 // 게시글에 들어가는 아이디
 // 일단 댓글에도 사용중
@@ -16,8 +18,12 @@ Id.defaultProps = {
 }
 
 function Id({nickname}) {
+  const user = useSelector((state)=>state.auth.user_info.nickname)
+
   return(
-    <Name >{nickname}</Name>
+    <Link to={`/mypage/${user}`}>
+      <Name >{nickname}</Name>
+    </Link>
   )
 }
 
