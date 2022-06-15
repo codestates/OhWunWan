@@ -29,9 +29,6 @@ function FeedbackModal(props) {
     <Fragment>
       <Div>
         <Div2>
-          <SubmitButton text='채택' type='blue' />
-        </Div2>
-        <Div2>
           <SubmitButton text='수정' type='black' />
         </Div2>
         <Div2>
