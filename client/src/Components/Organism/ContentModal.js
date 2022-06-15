@@ -3,6 +3,7 @@ import { Fragment } from "react";
 import STYLE from "../../config"
 import SubmitButton from "../Atoms/SubmitButton"
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 const Div = styled.div`
   width: 100vw;
@@ -24,8 +25,12 @@ const Div2 = styled.div`
   background-color: #fff;
 `
 
-function ContentModal({setContentMenu,category}) {
-  
+function ContentModal({setContentMenu,category,postingId}) {
+  // 리덕스에 저장된 유저 정보 가져오기 
+  const user_info = useSelector((state)=>state.auth.user_info)
+  //console.log("컨텐츠 모달이 전달받은 유저 정보:",user_info)  
+  //console.log("컨텐츠 모달에서 전달받은 게시물 Id:",postingId)
+
   const editHandler = () => {
     
     axios.patch(`${STYLE.SERVER}/post/${category}`,{})
