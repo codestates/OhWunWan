@@ -41,7 +41,6 @@ const Div2 = styled.div`
 function HeaderBlock() {
   let select = useSelector(state => state)
   const dispatch = useDispatch()
-  // console.log(select.header.header)
 
   return(
     <Fragment>
@@ -84,7 +83,7 @@ function HeaderBlock() {
               select
               onClick={() => dispatch(logout_modal(true))}
             /> 
-            : <HeaderButton img={user} circle='circle' 
+            : <HeaderButton img={select.auth.user_info.profile_picture} circle='circle' 
           />}
           </Link>
         </Div2>
