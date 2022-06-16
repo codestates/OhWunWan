@@ -38,6 +38,17 @@ function LikeButton ({img, post_id, where}) {
         .then(() => {
           window.location.href = `${STYLE.CLIENT}/${where}`
         })
+      } else 
+
+      // 피드백 좋아요
+      if(where === 'feedback') {
+        axios.post(`${STYLE.SERVER}/like/${where}_like`, {
+          feedback_id: post_id,
+          user_id: select.auth.user_info.id
+        })
+        .then(() => {
+          window.location.href = `${STYLE.CLIENT}/${where}`
+        })
       }
     }}></Button>
   )

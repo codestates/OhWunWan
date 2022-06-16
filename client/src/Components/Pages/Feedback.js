@@ -29,6 +29,7 @@ import CommentMenu from "../Atoms/CommentMenu";
 import ContentButton from "../Atoms/ContentButton";
 import ContentMoreButton from "../Atoms/ContentMoreButton";
 import ContentVideo from "../Atoms/ContentVideo";
+import LikedButton from "../Atoms/LikedButton";
 
 // Organism
 import FeedbackModal from "../Organism/FeedbackModal";
@@ -115,6 +116,9 @@ function Feedback() {
     })
   }, [params])
 
+  // state 값 가져오기
+  let select = useSelector(state => state)
+
   // console.log(info)
 
   return(
@@ -151,8 +155,22 @@ function Feedback() {
 
                         <Box>
                           <FlexBox>
-                            <LikeButton />
-                            <LikeButton img={liked} />
+                            {/* 좋아요 버튼 */}
+                            {post.like.length === 0 ? <LikeButton post_id={post.id} where='feedback'/> : (
+                              (post.like.map((like) => {
+                                if(like.user_id === select.auth.user_info.id) {
+                                  return(1)
+                                } 
+                              })).indexOf(1) !== -1 ?
+                              post.like.map((like) => {
+                                if(like.user_id === select.auth.user_info.id) {
+                                  return(
+                                    <LikedButton key={index} post_id={post.id} where='feedback' like_id={like.id}/>
+                                  )
+                                } 
+                              })
+                              : <LikeButton post_id={post.id} where='feedback'/>
+                            )}
                             <CommentButton />
                           </FlexBox>
                           <BetweenBox>

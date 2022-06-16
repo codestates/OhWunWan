@@ -38,6 +38,17 @@ function LikedButton ({img, post_id, where, like_id}) {
         .then(() => {
           window.location.href = `${STYLE.CLIENT}/${where}`
         })
+      } else 
+
+      // 피드백 좋아요 취소
+      if(where === 'feedback') {
+        axios.delete(`${STYLE.SERVER}/like/${where}_like/${like_id}`, {
+          feedback_id: post_id,
+          user_id: select.auth.user_info.id
+        })
+        .then(() => {
+          window.location.href = `${STYLE.CLIENT}/${where}`
+        })
       }
     }}></Button>
   )
