@@ -11,6 +11,125 @@ const Op = sequelize.Op;
 
 module.exports = {
     //user가 작성한ohwunwan 게시물 들고오기
+    user_info: async (req, res) => {
+        try{
+            const { user_id } = req.params;
+        const data={};
+        const user_infor = await User.findOne({
+            where: { id: user_id },
+            attributes: ['id', 'profile_picture', 'nickname'],//ohwunwan 컬럼들
+            raw: true,//dataValues만 가져오기
+        })
+        // console.log(user_infor)
+       //유저정보 넣기
+        data.user_info= user_infor
+
+
+
+        //-------------------------------------------------------------------------------------------------------------------
+        const bench_ranks_info = await Bench_1rm_respect.findAll({
+
+            attributes: ['bench_1rm_id', [sequelize.fn('COUNT', 'bench_1rm_id'), 'respect_count']],
+            group: ['bench_1rm_id'],
+            having: {
+                'respect_count': { [Op.gte]: 5 }
+            },
+            require: true,
+            raw: true,//dataValues만 가져오기
+            include: [
+                {
+                    model: Bench_1rm,
+                    attributes: ['user_id', 'kg', [sequelize.literal('(RANK() OVER (ORDER BY kg DESC))'), 'ranking']],
+                    require: true,
+                    raw: true,//dataValues만 가져오기
+
+                },
+            ],
+
+        });
+        // console.log(':::::::::::bench_ranks_info', bench_ranks_info)
+        const bench_rank =bench_ranks_info.filter((item)=>item['Bench_1rm.user_id']==user_id )
+        console.log('bench_rank::::::::::::',bench_rank, bench_ranks_info.length)
+        //bench랭킹정보 넣기
+        data.bench_rank =[bench_rank,bench_ranks_info.length]
+
+
+
+
+        //-------------------------------------------------------------------------------------------------------------------
+        const dead_ranks_info = await Dead_1rm_respect.findAll({
+
+            attributes: ['dead_1rm_id', [sequelize.fn('COUNT', 'dead_1rm_id'), 'respect_count']],
+            group: ['dead_1rm_id'],
+            having: {
+                'respect_count': { [Op.gte]: 5 }
+            },
+            require: true,
+            raw: true,//dataValues만 가져오기
+            include: [
+                {
+                    model: Dead_1rm,
+                    // where: { user_id },
+                    attributes: ['user_id', 'kg', [sequelize.literal('(RANK() OVER (ORDER BY kg DESC))'), 'ranking']],
+                    require: true,
+                    raw: true,//dataValues만 가져오기
+
+                },
+            ],
+
+        });
+        // console.log(':::::::::::dead_ranks_info', dead_ranks_info)
+        const dead_rank =dead_ranks_info.filter((item)=>item['Dead_1rm.user_id']==user_id )
+        console.log('dead_rank::::::::::::',dead_rank, dead_ranks_info.length)
+        //dead랭킹정보 넣기
+        data.dead_rank =[dead_rank,dead_ranks_info.length]
+        
+        
+        
+        //-------------------------------------------------------------------------------------------------------------------
+        const squat_ranks_info = await Squat_1rm_respect.findAll({
+
+            attributes: ['squat_1rm_id', [sequelize.fn('COUNT', 'squat_1rm_id'), 'respect_count']],
+            group: ['squat_1rm_id'],
+            having: {
+                'respect_count': { [Op.gte]: 5 }
+            },
+            require: true,
+            raw: true,//dataValues만 가져오기
+            include: [
+                {
+                    model: Squat_1rm,
+                    // where: { user_id },
+                    attributes: ['user_id', 'kg', [sequelize.literal('(RANK() OVER (ORDER BY kg DESC))'), 'ranking']],
+                    require: true,
+                    raw: true,//dataValues만 가져오기
+
+                },
+            ],
+
+        });
+        // console.log(':::::::::::squat_ranks_info', squat_ranks_info)
+        const squat_rank =squat_ranks_info.filter((item)=>item['Squat_1rm.user_id']==user_id )
+        console.log('squat_rank::::::::::::',squat_rank, squat_ranks_info.length)
+        //squat랭킹정보 넣기
+        data.squat_rank =[squat_rank,squat_ranks_info.length]
+
+        console.log(data)
+        //---------------------------------------------------------------------------------------------------------
+        
+        
+        res.json({message: 'This is the user information',data})
+        }catch(err){
+            console.log(err)
+            return res.status(500).json({ message: 'Server Error!' })
+        }
+    },
+
+
+
+
+
+
     ohwunwan: async (req, res) => {
         try {
             const { user_id, count } = req.params
@@ -88,6 +207,10 @@ module.exports = {
             return res.status(500).json({ message: 'Server Error!' })
         }
     },
+
+
+
+
 
 
     //user가 작성한feedback 게시물 들고오기
@@ -170,11 +293,17 @@ module.exports = {
             return res.status(500).json({ message: 'Server Error!' })
         }
     },
+
+
+
+
+
+
     //유저가 작성한 bench_1rm 게시물 가져오기
-    bench_1rm: async(req,res) => { 
+    bench_1rm: async (req, res) => {
         try {
             //조회할 게시물 페이지들
-            const { count,user_id } = req.params
+            const { count, user_id } = req.params
 
 
             //1.bench__1rm게시물+user정보 쿼리
@@ -287,10 +416,16 @@ module.exports = {
             return res.status(500).json({ message: 'Server Error!' })
         }
     },
-    dead_1rm: async(req,res) => {
+
+
+
+
+
+
+    dead_1rm: async (req, res) => {
         try {
             //조회할 게시물 페이지들
-            const { count,user_id } = req.params
+            const { count, user_id } = req.params
 
 
             //1.dead__1rm게시물+user정보 쿼리
@@ -403,12 +538,18 @@ module.exports = {
             return res.status(500).json({ message: 'Server Error!' })
         }
 
-     },
+    },
 
-    squat_1rm: async(req,res) => { 
+
+
+
+
+
+
+    squat_1rm: async (req, res) => {
         try {
             //조회할 게시물 페이지들
-            const { count,user_id } = req.params
+            const { count, user_id } = req.params
 
 
             //1.squat__1rm게시물+user정보 쿼리
@@ -512,7 +653,7 @@ module.exports = {
                     }
                 }
             }
-            
+
             console.log(':::::::::::::squat_1rms:', squat_1rms)
 
             //7. 데이터 보내주기
@@ -522,7 +663,24 @@ module.exports = {
             return res.status(500).json({ message: 'Server Error!' })
         }
     },
-    patch: (req,res) => { },
-    delete: () => { },
+
+
+
+
+
+
+    patch: (req, res) => {
+
+     },
+
+
+
+
+
+
+
+    delete: (req,res) => {
+        
+     },
 
 } 
