@@ -11,9 +11,9 @@ const Input = styled.textarea`
   outline: none;
 `
 
-function PostInput({textHandler}) {
+function PostInput({textHandler,editText}) {
   return (
-    <Input type='text' onChange={(e)=>{textHandler(e.target.value)}}></Input>
+    <Input type='text' defaultValue={editText} onChange={(e)=>{textHandler(e.target.value)}}></Input>
   )
 }
 

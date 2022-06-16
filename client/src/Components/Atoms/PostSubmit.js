@@ -22,7 +22,7 @@ PostSubmit.defaultProps = {
   onClick: () => {console.log('제출 버튼 동작')}
 }
 
-function PostSubmit({formdata,url,replace}) {
+function PostSubmit({formdata,editformdata,url,replace}) {
   // props로 전달받은 formedata를 서버로 전송하는 함수 
   const submitHandler = () => {
     axios({
@@ -35,6 +35,18 @@ function PostSubmit({formdata,url,replace}) {
     }).then((res)=>window.location.replace(`${STYLE.CLIENT}/${replace}`))
   .catch((err)=>console.log(err))
   } 
+
+  const editHandler = () => {
+    axios({
+      method: 'patch',
+      url: `${STYLE.SERVER}/post/${url}`,
+      data: editformdata,
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    }).then((res)=>window.location.replace(`${STYLE.CLIENT}/${replace}`))
+  .catch((err)=>console.log(err))
+  }
   return(
     <Button onClick={()=>submitHandler()}>업로드</Button>
   )

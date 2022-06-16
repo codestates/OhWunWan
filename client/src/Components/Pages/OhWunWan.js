@@ -124,7 +124,7 @@ function OhWunWan() {
     })
   }, [params])
 
-  console.log(info)
+  //console.log(info)
 
   return(
     <Fragment>

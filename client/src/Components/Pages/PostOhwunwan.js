@@ -1,7 +1,8 @@
 import styled from "styled-components"
-import { Fragment, useState } from "react";
+import { Fragment, useState ,useEffect} from "react";
 import STYLE from "../../config";
 import {useSelector} from "react-redux" 
+
 
 
 // header, 마진
@@ -35,12 +36,14 @@ const BetweenBox = styled.div`
 
 
 function PostOhwunwan() {
-  const post_info = useSelector((state)=>state.edit)
-  console.log("수정을 위해 보내는 게시물 정보",post_info)
   // 리덕스에서 유저 정보 가져오기
   const user_info = useSelector((state)=> state.auth.user_info) 
   // 가져온 정보 깊은복사
   const copied = JSON.parse(JSON.stringify(user_info))
+
+  // 게시물 수정을 위해 리덕스에 저장된 해당 게시물 정보 가져오기
+  const post_info = useSelector((state)=>state.edit.postInfo)
+  //console.log("수정을 위해 보내는 게시물 정보",post_info)
   
   // 작성글, 업로드 사진 상태관리
   const [text_content,setText_content] = useState('')
@@ -48,21 +51,24 @@ function PostOhwunwan() {
   
   // 서버로 전송을 위한 객체 생성
   const formdata = new FormData()
+  // 수정을 위한 객체 생성 
+  const editFormdata = new FormData()
   
   // 핸들러를 통한 상태 관리
   const textHandler = (value) => {
     setText_content(value)
   }   
+  //console.log(text_content)
   const imageHandler = (value) => {
     setPicture(value)
   }
-
+  
   // 생성된 객체에 데이터 담아주기
   formdata.append('user_id', copied.id)
   formdata.append('text_content', text_content)
   formdata.append('file', picture)
-  // console.log(formdata.getAll("file"))
-
+  console.log(formdata.getAll("file"))
+  
   return(
     <Fragment>
       <Wrap>
@@ -76,7 +82,7 @@ function PostOhwunwan() {
         </BetweenBox>
 
         <BetweenBox>
-          <PostInput textHandler={textHandler} />
+          <PostInput textHandler={textHandler} editText={post_info.text_content}/>
           <PostUpload imageHandler={imageHandler}/>
         </BetweenBox>
 

@@ -26,13 +26,13 @@ function PostUpload({imageHandler,videoHandler}) {
         accept="video/*"
         onChange={(e)=>{videoHandler(e.target.files[0])}}
         style={{ display: "none" }} 
-      />:<input
+      />: imageHandler? <input
         type='file'
         id='upload'
         accept="image/*"
         onChange={(e)=>{imageHandler(e.target.files[0])}}
         style={{ display: "none" }} 
-      />}
+      />:console.log("err")}
     </Fragment>
   )
 }
