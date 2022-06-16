@@ -12,114 +12,114 @@ const Op = sequelize.Op;
 module.exports = {
     //user가 작성한ohwunwan 게시물 들고오기
     user_info: async (req, res) => {
-        try{
+        try {
             const { user_id } = req.params;
-        const data={};
-        const user_infor = await User.findOne({
-            where: { id: user_id },
-            attributes: ['id', 'profile_picture', 'nickname'],//ohwunwan 컬럼들
-            raw: true,//dataValues만 가져오기
-        })
-        // console.log(user_infor)
-       //유저정보 넣기
-        data.user_info= user_infor
+            const data = {};
+            const user_infor = await User.findOne({
+                where: { id: user_id },
+                attributes: ['id', 'profile_picture', 'nickname'],//ohwunwan 컬럼들
+                raw: true,//dataValues만 가져오기
+            })
+            // console.log(user_infor)
+            //유저정보 넣기
+            data.user_info = user_infor
 
 
 
-        //-------------------------------------------------------------------------------------------------------------------
-        const bench_ranks_info = await Bench_1rm_respect.findAll({
+            //-------------------------------------------------------------------------------------------------------------------
+            const bench_ranks_info = await Bench_1rm_respect.findAll({
 
-            attributes: ['bench_1rm_id', [sequelize.fn('COUNT', 'bench_1rm_id'), 'respect_count']],
-            group: ['bench_1rm_id'],
-            having: {
-                'respect_count': { [Op.gte]: 5 }
-            },
-            require: true,
-            raw: true,//dataValues만 가져오기
-            include: [
-                {
-                    model: Bench_1rm,
-                    attributes: ['user_id', 'kg', [sequelize.literal('(RANK() OVER (ORDER BY kg DESC))'), 'ranking']],
-                    require: true,
-                    raw: true,//dataValues만 가져오기
-
+                attributes: ['bench_1rm_id', [sequelize.fn('COUNT', 'bench_1rm_id'), 'respect_count']],
+                group: ['bench_1rm_id'],
+                having: {
+                    'respect_count': { [Op.gte]: 5 }
                 },
-            ],
+                require: true,
+                raw: true,//dataValues만 가져오기
+                include: [
+                    {
+                        model: Bench_1rm,
+                        attributes: ['user_id', 'kg', [sequelize.literal('(RANK() OVER (ORDER BY kg DESC))'), 'ranking']],
+                        require: true,
+                        raw: true,//dataValues만 가져오기
 
-        });
-        // console.log(':::::::::::bench_ranks_info', bench_ranks_info)
-        const bench_rank =bench_ranks_info.filter((item)=>item['Bench_1rm.user_id']==user_id )
-        console.log('bench_rank::::::::::::',bench_rank, bench_ranks_info.length)
-        //bench랭킹정보 넣기
-        data.bench_rank =[bench_rank,bench_ranks_info.length]
+                    },
+                ],
+
+            });
+            // console.log(':::::::::::bench_ranks_info', bench_ranks_info)
+            const bench_rank = bench_ranks_info.filter((item) => item['Bench_1rm.user_id'] == user_id)
+            console.log('bench_rank::::::::::::', bench_rank, bench_ranks_info.length)
+            //bench랭킹정보 넣기
+            data.bench_rank = [bench_rank, bench_ranks_info.length]
 
 
 
 
-        //-------------------------------------------------------------------------------------------------------------------
-        const dead_ranks_info = await Dead_1rm_respect.findAll({
+            //-------------------------------------------------------------------------------------------------------------------
+            const dead_ranks_info = await Dead_1rm_respect.findAll({
 
-            attributes: ['dead_1rm_id', [sequelize.fn('COUNT', 'dead_1rm_id'), 'respect_count']],
-            group: ['dead_1rm_id'],
-            having: {
-                'respect_count': { [Op.gte]: 5 }
-            },
-            require: true,
-            raw: true,//dataValues만 가져오기
-            include: [
-                {
-                    model: Dead_1rm,
-                    // where: { user_id },
-                    attributes: ['user_id', 'kg', [sequelize.literal('(RANK() OVER (ORDER BY kg DESC))'), 'ranking']],
-                    require: true,
-                    raw: true,//dataValues만 가져오기
-
+                attributes: ['dead_1rm_id', [sequelize.fn('COUNT', 'dead_1rm_id'), 'respect_count']],
+                group: ['dead_1rm_id'],
+                having: {
+                    'respect_count': { [Op.gte]: 5 }
                 },
-            ],
+                require: true,
+                raw: true,//dataValues만 가져오기
+                include: [
+                    {
+                        model: Dead_1rm,
+                        // where: { user_id },
+                        attributes: ['user_id', 'kg', [sequelize.literal('(RANK() OVER (ORDER BY kg DESC))'), 'ranking']],
+                        require: true,
+                        raw: true,//dataValues만 가져오기
 
-        });
-        // console.log(':::::::::::dead_ranks_info', dead_ranks_info)
-        const dead_rank =dead_ranks_info.filter((item)=>item['Dead_1rm.user_id']==user_id )
-        console.log('dead_rank::::::::::::',dead_rank, dead_ranks_info.length)
-        //dead랭킹정보 넣기
-        data.dead_rank =[dead_rank,dead_ranks_info.length]
-        
-        
-        
-        //-------------------------------------------------------------------------------------------------------------------
-        const squat_ranks_info = await Squat_1rm_respect.findAll({
+                    },
+                ],
 
-            attributes: ['squat_1rm_id', [sequelize.fn('COUNT', 'squat_1rm_id'), 'respect_count']],
-            group: ['squat_1rm_id'],
-            having: {
-                'respect_count': { [Op.gte]: 5 }
-            },
-            require: true,
-            raw: true,//dataValues만 가져오기
-            include: [
-                {
-                    model: Squat_1rm,
-                    // where: { user_id },
-                    attributes: ['user_id', 'kg', [sequelize.literal('(RANK() OVER (ORDER BY kg DESC))'), 'ranking']],
-                    require: true,
-                    raw: true,//dataValues만 가져오기
+            });
+            // console.log(':::::::::::dead_ranks_info', dead_ranks_info)
+            const dead_rank = dead_ranks_info.filter((item) => item['Dead_1rm.user_id'] == user_id)
+            console.log('dead_rank::::::::::::', dead_rank, dead_ranks_info.length)
+            //dead랭킹정보 넣기
+            data.dead_rank = [dead_rank, dead_ranks_info.length]
 
+
+
+            //-------------------------------------------------------------------------------------------------------------------
+            const squat_ranks_info = await Squat_1rm_respect.findAll({
+
+                attributes: ['squat_1rm_id', [sequelize.fn('COUNT', 'squat_1rm_id'), 'respect_count']],
+                group: ['squat_1rm_id'],
+                having: {
+                    'respect_count': { [Op.gte]: 5 }
                 },
-            ],
+                require: true,
+                raw: true,//dataValues만 가져오기
+                include: [
+                    {
+                        model: Squat_1rm,
+                        // where: { user_id },
+                        attributes: ['user_id', 'kg', [sequelize.literal('(RANK() OVER (ORDER BY kg DESC))'), 'ranking']],
+                        require: true,
+                        raw: true,//dataValues만 가져오기
 
-        });
-        // console.log(':::::::::::squat_ranks_info', squat_ranks_info)
-        const squat_rank =squat_ranks_info.filter((item)=>item['Squat_1rm.user_id']==user_id )
-        console.log('squat_rank::::::::::::',squat_rank, squat_ranks_info.length)
-        //squat랭킹정보 넣기
-        data.squat_rank =[squat_rank,squat_ranks_info.length]
+                    },
+                ],
 
-        console.log(data)
-        //---------------------------------------------------------------------------------------------------------
-        
-        
-        res.json({message: 'This is the user information',data})
-        }catch(err){
+            });
+            // console.log(':::::::::::squat_ranks_info', squat_ranks_info)
+            const squat_rank = squat_ranks_info.filter((item) => item['Squat_1rm.user_id'] == user_id)
+            console.log('squat_rank::::::::::::', squat_rank, squat_ranks_info.length)
+            //squat랭킹정보 넣기
+            data.squat_rank = [squat_rank, squat_ranks_info.length]
+
+            console.log(data)
+            //---------------------------------------------------------------------------------------------------------
+
+
+            res.json({ message: 'This is the user information', data })
+        } catch (err) {
             console.log(err)
             return res.status(500).json({ message: 'Server Error!' })
         }
@@ -669,10 +669,63 @@ module.exports = {
 
 
 
-    patch: async(req, res) => {
-        
+    patch: async (req, res) => {
+        try {
+            if (!req.body.user_id) return res.status(400).json({ message: 'Bad Request!' })
+            const { user_id } = req.body;
+            console.log(user_id)
 
-     },
+            //nickname , 프로필 사진 둘다 바꾸는 경우
+            if (req.body.nickname && req.file) {
+                console.log(1111111111111)
+                const { nickname } = req.body;
+                const { location } = req.file;
+                await User.update(
+                    {
+                        where: { id: user_id, }
+                    },
+                    {
+                        profile_picture: location,
+                        nickname
+                    },
+                );
+            }
+
+            //nickname만 바꾸는 경우                
+            else if (req.body.nickname) {
+                const { nickname } = req.body;
+                // console.log(2222222222)
+                await User.update(
+                    {
+                        nickname
+                    },
+                    {
+                        where: { id: user_id, }
+                    }
+                );
+            }
+
+
+            //프로필 사진만 바꾸는 경우   
+            else if (req.file.location) {
+                // console.log(333333333333333333)
+                const { location } = req.file;
+                await User.update(
+                    {
+                        profile_picture: location,
+                    },
+                    {
+                        where: { id: user_id, }
+                    },
+                );
+            }
+            res.json({ message: 'This user information has been changed' })
+        } catch (err) {
+            console.log(err);
+            return res.status(500).json({ message: 'Server Error!' })
+        }
+
+    },
 
 
 
@@ -680,18 +733,18 @@ module.exports = {
 
 
 
-    delete: async (req,res) => {
-        try{
-            const{user_id}=req.params
+    delete: async (req, res) => {
+        try {
+            const { user_id } = req.params
             console.log(user_id)
             await User.destroy({
                 where: { id: user_id },
             });
-            return res.json({message:'Membership information has been deleted'})
-        }catch(err){
+            return res.json({ message: 'Membership information has been deleted' })
+        } catch (err) {
             console.log(err)
             return res.status(500).json({ message: 'Server Error!' })
         }
-     },
+    },
 
 } 
