@@ -10,6 +10,7 @@ router.delete('/ohwunwan_comment/:ohwunwan_comment_id', comment_controller.ohwun
 
 //feedback_comment
 router.post('/feedback_comment', comment_controller.feedback_comment.post);//feedback게시물의 댓글 작성
+router.post('/feedback_comment/selection', comment_controller.feedback_comment.selection);//feedback게시물의 댓글 작성
 router.patch('/feedback_comment', comment_controller.feedback_comment.patch);//feedback게시물의 댓글 수정
 router.delete('/feedback_comment/:feedback_comment_id', comment_controller.feedback_comment.delete);//feedback게시물의 댓글 삭제
 
