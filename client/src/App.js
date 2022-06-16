@@ -70,7 +70,7 @@ function App() {
       <GlobalStyle />
       <Routes>
         
-        <Route path="/" element={<Welcome />}></Route>
+        <Route path="/" element={is_login? <OhWunWan />:<Welcome />}></Route>
         <Route path="/oauth/kakao" element={<Login />}></Route>
         <Route path="/ohwunwan" element={is_login ?<OhWunWan />:<Welcome />}></Route>
         <Route path="/1rm" element={is_login ?<Onerm />:<Welcome />}></Route>
