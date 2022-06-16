@@ -166,7 +166,7 @@ function OhWunWan() {
                           </FlexBox>
                           <BetweenBox>
                             <FlexBox>
-                              <LikeCounts count={post.like.length} />
+                              <LikeCounts count={Object.keys(post.like).length} />
                               <CommentCounts count={post.comment.length} />
                             </FlexBox>
                             <ContentTime time={post.createdAt.slice(0, 10) + ' ' + post.createdAt.slice(11, 19)} />

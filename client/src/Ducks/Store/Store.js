@@ -1,4 +1,3 @@
-import React from 'react';
 import { configureStore } from '@reduxjs/toolkit'
 import Input_reducer from '../Slice/InputSlice'
 import Like_reducer from '../Slice/LikeSlice'
@@ -16,7 +15,7 @@ import Comment_reducer from '../Slice/CommentSlice'
       logout_modal: Logout_reducer,
       header: Header_reducer,
       edit: Edit_reducer,
-      comment: Comment_reducer
+      comment: Comment_reducer,
     }, 
   })  
   export default store

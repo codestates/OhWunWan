@@ -63,7 +63,7 @@ function PostSubmit({formdata,editFormdata,url,replace}) {
   .catch((err)=>console.log(err))
   }
   return(<div>
-    <CancelButton onClick={()=>navigate(`/`)}>{"취소"}</CancelButton>
+    <CancelButton onClick={()=>navigate(`/${replace}`)}>{"취소"}</CancelButton>
     <Button onClick={()=>{editFormdata? editHandler():submitHandler()}}>{editFormdata? "수정":"업로드"}</Button>
     </div>
   )
