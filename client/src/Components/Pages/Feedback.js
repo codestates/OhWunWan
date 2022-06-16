@@ -84,13 +84,13 @@ function Feedback() {
   const [contentMenu, setContentMenu] = useState(false)
   const [commentMenu, setCommentMenu] = useState(false)
   
-  // 게시물의 id를 가져오기 위한 상태관리
-  const [postingId, setPostingId] = useState('')
-  // 게시물의 id를 끌어올려 전달해주는 핸들러 
-  const postingIdHandler = (value) => {
-    setPostingId(value)
-  }
-  //console.log("아래 mapping에서 가져온 게시물의 Id:",postingId)
+    // 게시물의 id를 가져오기 위한 상태관리
+    const [postInfo, setPostInfo] = useState('')
+    // 게시물의 id를 끌어올려 전달해주는 핸들러 
+    const postInfoHandler = (value) => {
+      setPostInfo(value)
+    }
+    console.log(postInfo)
 
 
   // get 정보 // info로 map 함수 실행
@@ -134,7 +134,7 @@ function Feedback() {
     <Fragment>
       <Wrap>
         {/* 메뉴 열고 닫기 */}
-        {contentMenu ? <ContentModal setContentMenu={setContentMenu} category={"feedback"} postingId={postingId}/> : null}
+        {contentMenu ? <ContentModal setContentMenu={setContentMenu} category={"feedback"} postInfo={postInfo}/> : null}
         {commentMenu ? <CommentModal setCommentMenu={setCommentMenu} /> : null}
 
         <HeaderBlock />
@@ -154,7 +154,7 @@ function Feedback() {
                               <ProfilePicture img={post["User.profile_picture"]} />
                               <Id nickname={post["User.nickname"]}></Id>
                             </FlexBox>
-                            {post["User.nickname"]===user_info.nickname ?<ContentButton onClick={() => {setContentMenu(true);postingIdHandler(post.id)}}/>:''}
+                            {post["User.nickname"]===user_info.nickname ?<ContentButton onClick={() => {setContentMenu(true);postInfoHandler(post)}}/>:''}
                           </BetweenBox>
                         </BorderBox>
                         

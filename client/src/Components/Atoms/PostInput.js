@@ -13,7 +13,7 @@ const Input = styled.textarea`
 
 function PostInput({textHandler}) {
   return (
-    <Input type='text' onChange={(e)=>{textHandler(e.target.value)}}></Input>
+    <Input type='text' onChange={(e)=>{textHandler(e.target.value)}}>hi</Input>
   )
 }
 

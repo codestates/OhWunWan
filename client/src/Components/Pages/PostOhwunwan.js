@@ -74,7 +74,7 @@ function PostOhwunwan() {
         </BetweenBox>
 
         <BetweenBox>
-          <PostInput textHandler={textHandler}/>
+          <PostInput textHandler={textHandler} />
           <PostUpload imageHandler={imageHandler}/>
         </BetweenBox>
 

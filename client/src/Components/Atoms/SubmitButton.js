@@ -21,7 +21,7 @@ SubmitButton.defaultProps = {
   onClick: () => {console.log('제출 버튼 동작')}
 }
 
-function SubmitButton({text, type, onClick,editHandler}) {
+function SubmitButton({text, type, onClick,}) {
   return(
     <Button onClick={()=>onClick()} type={type}>{text}</Button>
   )

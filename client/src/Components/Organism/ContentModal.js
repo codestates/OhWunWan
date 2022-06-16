@@ -3,8 +3,9 @@ import { Fragment } from "react";
 import STYLE from "../../config"
 import SubmitButton from "../Atoms/SubmitButton"
 import axios from 'axios';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { SendPostInfo } from '../../Ducks/Slice/EditSlice';
 
 const Div = styled.div`
   width: 100vw;
@@ -26,9 +27,10 @@ const Div2 = styled.div`
   background-color: #fff;
 `
 
-function ContentModal({setContentMenu,category,postingId}) {
+function ContentModal({setContentMenu,category,postInfo}) {
   // 리덕스에 저장된 유저 정보 가져오기 
   const user_info = useSelector((state)=>state.auth.user_info)
+  const dispatch = useDispatch()
   //console.log("컨텐츠 모달이 전달받은 유저 정보:",user_info)  
   //console.log("컨텐츠 모달에서 전달받은 게시물 Id:",postingId)
 
@@ -38,7 +40,7 @@ function ContentModal({setContentMenu,category,postingId}) {
   }
   
   const deleteHandler = () => {
-    axios.delete(`${STYLE.SERVER}/post/${category}/${postingId}`)
+    axios.delete(`${STYLE.SERVER}/post/${category}/${postInfo.id}`)
     .then((res)=>{window.location.replace(`${STYLE.CLIENT}/${category === "bench_1rm" ? "1rm" : category ==="dead_1rm" ? "1rm" : category === "sqaut_1rm" ? "1rm" :category }`)})
     .catch((err)=>console.log(err))
   }
@@ -48,7 +50,7 @@ function ContentModal({setContentMenu,category,postingId}) {
       <Div>
         <Div2>
           <Link to={`/post/${category === "bench_1rm" ? "1rm" : category ==="dead_1rm" ? "1rm" : category === "sqaut_1rm" ? "1rm" :category }`}>
-          <SubmitButton text='수정' type='skyblue' editHandler={editHandler}/>
+          <SubmitButton text='수정' type='skyblue' onClick={()=>{dispatch(SendPostInfo())}}/>
           </Link>
         </Div2>
         <Div2>

@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import axios from 'axios'
 import STYLE from "../../config";
+import { Link } from 'react-router-dom';
 
 
 
@@ -22,8 +23,9 @@ PostSubmit.defaultProps = {
 }
 
 function PostSubmit({formdata,url,replace}) {
-  return(
-    <Button onClick={()=>{axios({
+  // props로 전달받은 formedata를 서버로 전송하는 함수 
+  const submitHandler = () => {
+    axios({
       method: 'post',
       url: `${STYLE.SERVER}/post/${url}`,
       data: formdata,
@@ -32,7 +34,9 @@ function PostSubmit({formdata,url,replace}) {
       },
     }).then((res)=>window.location.replace(`${STYLE.CLIENT}/${replace}`))
   .catch((err)=>console.log(err))
-}}>업로드</Button>
+  } 
+  return(
+    <Button onClick={()=>submitHandler()}>업로드</Button>
   )
 }
 

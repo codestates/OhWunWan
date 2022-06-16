@@ -100,18 +100,18 @@ function Onerm() {
   const [params3, setParams3] = useState(0)
 
   // 게시물의 id 가져오기 
-  const [benchId, setBenchId] = useState('')
-  const [deadId, setDeadId] = useState('')
-  const [squatId, setSquatId] = useState('')
+  const [benchInfo, setBenchInfo] = useState('')
+  const [deadInfo, setDeadInfo] = useState('')
+  const [squatInfo, setSquatInfo] = useState('')
 
-  let benchIdHandler = (value) => {
-    setBenchId(value)
+  let benchInfoHandler = (value) => {
+    setBenchInfo(value)
   }
-  let deadIdHandler = (value) => {
-    setDeadId(value)
+  let deadInfoHandler = (value) => {
+    setDeadInfo(value)
   }
-  let squatIdHandler = (value) => {
-    setSquatId(value)
+  let squatInfoHandler = (value) => {
+    setSquatInfo(value)
   }
 
   // 리덕스에서 가져온 유저 정보
@@ -198,7 +198,7 @@ function Onerm() {
     <Fragment>
       <Wrap>
         {/* 메뉴 열고 닫기 */}
-        {contentMenu ? <ContentModal setContentMenu={setContentMenu} category={categorySelector(select1,select2,select3)} postingId={benchId? benchId : deadId? deadId : squatId? squatId:''}/> : null}
+        {contentMenu ? <ContentModal setContentMenu={setContentMenu} category={categorySelector(select1,select2,select3)} postInfo={benchInfo? benchInfo : deadInfo? deadInfo : squatInfo? squatInfo:''}/> : null}
         {commentMenu ? <CommentModal setCommentMenu={setCommentMenu} /> : null}
 
         <HeaderBlock />
@@ -268,7 +268,7 @@ function Onerm() {
                             <FlexBox>
                               <OnermLogo />
                               <OnermRank count='12' />/<OnermRank count='28' />
-                              {post["User.nickname"]===user_info.nickname? <ContentButton onClick={() => {setContentMenu(true);benchIdHandler(post.id)}} />: ''}
+                              {post["User.nickname"]===user_info.nickname? <ContentButton onClick={() => {setContentMenu(true);benchInfoHandler(post)}} />: ''}
                             </FlexBox>
                           </BetweenBox>
                         </BorderBox>
@@ -349,7 +349,7 @@ function Onerm() {
                             <FlexBox>
                               <OnermLogo />
                               <OnermRank count='12' />/<OnermRank count='28' />
-                              {post["User.nickname"]===user_info.nickname ?<ContentButton onClick={() => {setContentMenu(true);deadIdHandler(post.id)}} />:''}
+                              {post["User.nickname"]===user_info.nickname ?<ContentButton onClick={() => {setContentMenu(true);deadInfoHandler(post)}} />:''}
                             </FlexBox>
                           </BetweenBox>
                         </BorderBox>
@@ -430,7 +430,7 @@ function Onerm() {
                             <FlexBox>
                               <OnermLogo />
                               <OnermRank count='12' />/<OnermRank count='28' />
-                              {post["User.nickname"]===user_info.nickname? <ContentButton onClick={() => {setContentMenu(true);squatIdHandler(post.id)}}/>:''}
+                              {post["User.nickname"]===user_info.nickname? <ContentButton onClick={() => {setContentMenu(true);squatInfoHandler(post)}}/>:''}
                             </FlexBox>
                           </BetweenBox>
                         </BorderBox>
