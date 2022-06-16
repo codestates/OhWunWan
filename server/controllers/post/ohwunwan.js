@@ -139,7 +139,7 @@ module.exports = {
             //텍스트만 바꾸는경우
             else if (req.body.text_content) {
                 const { ohwunwan_id, text_content } = req.body
-                 await Ohwunwan.update(
+                await Ohwunwan.update(
                     {
                         text_content,
                     },
@@ -170,11 +170,10 @@ module.exports = {
     },
 
     //ohwunwan게시물 삭제
-    delete: (req, res) => {
+    delete: async (req, res) => {
         try {
             const { ohwunwan_id } = req.params
-
-            Ohwunwan.destroy({
+            await Ohwunwan.destroy({
                 where: { id: ohwunwan_id },
             });
             return res.json({ message: 'The post has been deleted' })
