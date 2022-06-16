@@ -3,7 +3,7 @@ import { useSelector } from "react-redux"
 import axios from "axios"
 import STYLE from "../../config"
 
-// 게시글 좋아요 버튼 (좋아요 적용 안된 하트 - 하양 하트)
+// 게시글 좋아요 버튼 (좋아요 적용된 하트 - 검정 하트)
 
 // img
 import like from "../Picture/LikeButton/like.png"
@@ -19,19 +19,19 @@ const Button = styled.div`
   margin-left: 0.2em;
 `
 
-LikeButton.defaultProps = {
-  img: like,
+LikedButton.defaultProps = {
+  img: liked,
 }
 
-function LikeButton ({img, post_id, where}) {
-   // state 값 가져오기
-   let select = useSelector(state => state)
+function LikedButton ({img, post_id, where, like_id}) {
+  // state 값 가져오기
+  let select = useSelector(state => state)
 
   return (
     <Button img={img} onClick={() => {
-      // 오운완 좋아요
+      // 오운완 좋아요 취소
       if(where === 'ohwunwan') {
-        axios.post(`${STYLE.SERVER}/like/${where}_like`, {
+        axios.delete(`${STYLE.SERVER}/like/${where}_like/${like_id}`, {
           ohwunwan_id: post_id,
           user_id: select.auth.user_info.id
         })
@@ -43,4 +43,4 @@ function LikeButton ({img, post_id, where}) {
   )
 } 
 
-export default LikeButton
+export default LikedButton
