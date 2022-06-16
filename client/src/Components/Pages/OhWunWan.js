@@ -166,7 +166,7 @@ function OhWunWan() {
                         <Box>
                           <FlexBox>
                             {/* 좋아요 버튼 */}
-                            {post.like.length === 0 ? null : (
+                            {post.like.length === 0 ? <LikeButton post_id={post.id} where='ohwunwan'/> : (
                               (post.like.map((like) => {
                                 if(like.user_id === select.auth.user_info.id) {
                                   return(1)
