@@ -24,9 +24,21 @@ function CommentSubmit({text, post_id, where}) {
   return(
     <Button onClick={() => {
       // console.log(select.auth.user_info.id, select.comment.comment, post_id, where)
-      if(where === ('feedback' ||  'ohwunwan')) {
+      // console.log(`${STYLE.SERVER}/comment/${where}_comment`)
+      if(where === 'feedback') {
         axios.post(`${STYLE.SERVER}/comment/${where}_comment`, {
           feedback_id: post_id,
+          user_id: select.auth.user_info.id,
+          text_content: select.comment.comment
+        })
+        .then(() => {
+          window.location.href = `${STYLE.CLIENT}/${where}`
+        })
+      } else
+
+      if(where === 'ohwunwan') {
+        axios.post(`${STYLE.SERVER}/comment/${where}_comment`, {
+          ohwunwan_id: post_id,
           user_id: select.auth.user_info.id,
           text_content: select.comment.comment
         })
