@@ -31,7 +31,7 @@ module.exports = {
 
             //조회한 게시물들의 고유번호값들 맵
             const ohwunwan_id = ohwunwans.map(item => item.id)
-            console.log(ohwunwan_id)
+            //console.log(ohwunwan_id)
 
 
 
@@ -59,7 +59,7 @@ module.exports = {
                 attributes: ['id', 'user_id', 'ohwunwan_id', 'createdAt'],
                 raw: true,//dataValues만 가져오기
             })
-            console.log(':::::::::::::ohwunwan_likes:', ohwunwan_likes)
+            //console.log(':::::::::::::ohwunwan_likes:', ohwunwan_likes)
 
 
 
@@ -80,7 +80,7 @@ module.exports = {
 
             }
 
-            console.log(':::::::::::::ohwunwans:', ohwunwans)
+            //console.log(':::::::::::::ohwunwans:', ohwunwans)
 
 
             return res.json({ message: 'ok', data: ohwunwans })
@@ -97,9 +97,9 @@ module.exports = {
         try {
             if (!(req.body.user_id && req.body.text_content && req.file.location)) return res.status(400).json({ message: 'Bad Request!' })
             const { user_id, text_content } = req.body
-            console.log('::::::::::::::::user_id:', user_id, text_content)
+            //console.log('::::::::::::::::user_id:', user_id, text_content)
             const { location } = req.file
-            console.log(':::::::::::::location:', location)
+            //console.log(':::::::::::::location:', location)
             const post_info = {
                 user_id,
                 text_content,

@@ -268,7 +268,7 @@ function Onerm() {
                             <FlexBox>
                               <OnermLogo />
                               <OnermRank count='12' />/<OnermRank count='28' />
-                              {post.nickname===user_info.nickname? <ContentButton onClick={() => {setContentMenu(true);benchIdHandler(post.id)}} />: ''}
+                              {post["User.nickname"]===user_info.nickname? <ContentButton onClick={() => {setContentMenu(true);benchIdHandler(post.id)}} />: ''}
                             </FlexBox>
                           </BetweenBox>
                         </BorderBox>
@@ -349,7 +349,7 @@ function Onerm() {
                             <FlexBox>
                               <OnermLogo />
                               <OnermRank count='12' />/<OnermRank count='28' />
-                              {post.nickname===user_info.nickname ?<ContentButton onClick={() => {setContentMenu(true);deadIdHandler(post.id)}} />:''}
+                              {post["User.nickname"]===user_info.nickname ?<ContentButton onClick={() => {setContentMenu(true);deadIdHandler(post.id)}} />:''}
                             </FlexBox>
                           </BetweenBox>
                         </BorderBox>
@@ -430,7 +430,7 @@ function Onerm() {
                             <FlexBox>
                               <OnermLogo />
                               <OnermRank count='12' />/<OnermRank count='28' />
-                              {post.nickname===user_info.nickname ?<ContentButton onClick={() => {setContentMenu(true);squatIdHandler(post.id)}} />:''}
+                              {post["User.nickname"]===user_info.nickname? <ContentButton onClick={() => {setContentMenu(true);squatIdHandler(post.id)}}/>:''}
                             </FlexBox>
                           </BetweenBox>
                         </BorderBox>

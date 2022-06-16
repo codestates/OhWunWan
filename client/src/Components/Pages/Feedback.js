@@ -30,8 +30,9 @@ import ContentButton from "../Atoms/ContentButton";
 import ContentMoreButton from "../Atoms/ContentMoreButton";
 import ContentVideo from "../Atoms/ContentVideo";
 
+
 // Organism
-import FeedbackModal from "../Organism/FeedbackModal";
+import ContentModal from "../Organism/ContentModal"
 import CommentModal from "../Organism/CommentModal";
 
 const Wrap = styled.div`
@@ -83,12 +84,24 @@ function Feedback() {
   const [contentMenu, setContentMenu] = useState(false)
   const [commentMenu, setCommentMenu] = useState(false)
   
+  // 게시물의 id를 가져오기 위한 상태관리
+  const [postingId, setPostingId] = useState('')
+  // 게시물의 id를 끌어올려 전달해주는 핸들러 
+  const postingIdHandler = (value) => {
+    setPostingId(value)
+  }
+  //console.log("아래 mapping에서 가져온 게시물의 Id:",postingId)
+
+
   // get 정보 // info로 map 함수 실행
   const [info, setInfo] = useState([])
 
   // 요청시 parameter로 들어가는 숫자
   const [params, setParams] = useState(0)
+  
 
+  // 리덕스에서 가져온 유저 정보
+  const user_info = useSelector((state)=>state.auth.user_info)
   // 현재 페이지
   const dispatch = useDispatch()
   useEffect(() => {
@@ -121,7 +134,7 @@ function Feedback() {
     <Fragment>
       <Wrap>
         {/* 메뉴 열고 닫기 */}
-        {contentMenu ? <FeedbackModal setContentMenu={setContentMenu} category={"feedback"}/> : null}
+        {contentMenu ? <ContentModal setContentMenu={setContentMenu} category={"feedback"} postingId={postingId}/> : null}
         {commentMenu ? <CommentModal setCommentMenu={setCommentMenu} /> : null}
 
         <HeaderBlock />
@@ -141,7 +154,7 @@ function Feedback() {
                               <ProfilePicture img={post["User.profile_picture"]} />
                               <Id nickname={post["User.nickname"]}></Id>
                             </FlexBox>
-                            <ContentButton onClick={() => {setContentMenu(true)}}/>
+                            {post["User.nickname"]===user_info.nickname ?<ContentButton onClick={() => {setContentMenu(true);postingIdHandler(post.id)}}/>:''}
                           </BetweenBox>
                         </BorderBox>
                         
@@ -203,7 +216,7 @@ function Feedback() {
                             )
                           })
                         )}
-                               
+                      
                         <BorderBox>
                           <CommentInput />
                           <CommentSubmit />

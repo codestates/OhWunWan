@@ -27,8 +27,6 @@ const Div2 = styled.div`
 
 function ContentModal({setContentMenu,category,postingId}) {
   // 리덕스에 저장된 유저 정보 가져오기 
-  console.log(category)
-  console.log(postingId)
   const user_info = useSelector((state)=>state.auth.user_info)
   //console.log("컨텐츠 모달이 전달받은 유저 정보:",user_info)  
   //console.log("컨텐츠 모달에서 전달받은 게시물 Id:",postingId)
