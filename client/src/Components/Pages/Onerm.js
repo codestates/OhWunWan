@@ -359,8 +359,24 @@ function Onerm() {
                         <Box>
                           <BetweenBox>
                             <FlexBox>
-                              <RespectButton />
-                              <RespectedButton />
+                              
+                              {/* 리스펙 버튼 */}
+                              {post.respect.length === 0 ? <RespectButton post_id={post.id} where='dead'/> : (
+                                (post.respect.map((respect) => {
+                                  if(respect.user_id === select.auth.user_info.id) {
+                                    return(1)
+                                  } 
+                                })).indexOf(1) !== -1 ?
+                                post.respect.map((respect, idx2) => {
+                                  if(respect.user_id === select.auth.user_info.id) {
+                                    return(
+                                      <RespectedButton key={idx2} />
+                                    )
+                                  } 
+                                })
+                                : <RespectButton post_id={post.id} where='dead'/>
+                              )}
+
                               <CommentButton />
                             </FlexBox>
                             <OnermRecord record={post.kg}  />

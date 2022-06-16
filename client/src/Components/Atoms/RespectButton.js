@@ -37,6 +37,17 @@ function RespectButton ({img, post_id, where}) {
         .then(() => {
           window.location.href = `${STYLE.CLIENT}/1rm`
         })
+      } else
+
+      // 데드리프트 리스펙
+      if(where === 'dead') {
+        axios.post(`${STYLE.SERVER}/respect/${where}_1rm_respect`, {
+          user_id: select.auth.user_info.id,
+          dead_1rm_id: post_id
+        })
+        .then(() => {
+          window.location.href = `${STYLE.CLIENT}/1rm`
+        })
       }
     }}></Button>
   )
