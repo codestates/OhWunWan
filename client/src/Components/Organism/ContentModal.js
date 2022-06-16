@@ -32,7 +32,7 @@ function ContentModal({setContentMenu,category,postInfo}) {
   const user_info = useSelector((state)=>state.auth.user_info)
   const dispatch = useDispatch()
   //console.log("컨텐츠 모달이 전달받은 유저 정보:",user_info)  
-  //console.log("컨텐츠 모달에서 전달받은 게시물 Id:",postingId)
+  //console.log(postInfo)
 
   const editHandler = () => {
     // axios.patch(`${STYLE.SERVER}/post/${category}/${postingId}`,)
@@ -50,7 +50,7 @@ function ContentModal({setContentMenu,category,postInfo}) {
       <Div>
         <Div2>
           <Link to={`/post/${category === "bench_1rm" ? "1rm" : category ==="dead_1rm" ? "1rm" : category === "sqaut_1rm" ? "1rm" :category }`}>
-          <SubmitButton text='수정' type='skyblue' onClick={()=>{dispatch(SendPostInfo())}}/>
+          <SubmitButton text='수정' type='skyblue' onClick={()=>{dispatch(SendPostInfo(postInfo))}}/>
           </Link>
         </Div2>
         <Div2>

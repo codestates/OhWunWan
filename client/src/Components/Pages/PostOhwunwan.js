@@ -35,6 +35,8 @@ const BetweenBox = styled.div`
 
 
 function PostOhwunwan() {
+  const post_info = useSelector((state)=>state.edit)
+  console.log("수정을 위해 보내는 게시물 정보",post_info)
   // 리덕스에서 유저 정보 가져오기
   const user_info = useSelector((state)=> state.auth.user_info) 
   // 가져온 정보 깊은복사
