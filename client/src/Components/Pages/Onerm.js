@@ -173,7 +173,7 @@ function Onerm() {
     })
   }, [params3])
 
-  // console.log('벤치프레스', info1, params1)
+  console.log('벤치프레스', info1, params1)
   // console.log('데드리프트', info2, params2)
   // console.log('스쿼트', info3, params3)
   // console.log('-----------------')
@@ -304,7 +304,7 @@ function Onerm() {
                         
                         <BorderBox>
                           <CommentInput />
-                          <CommentSubmit />
+                          <CommentSubmit post_id={post.id} where='bench' />
                         </BorderBox>
                       </PostBlock>
                     )
@@ -385,7 +385,7 @@ function Onerm() {
                         
                         <BorderBox>
                           <CommentInput />
-                          <CommentSubmit />
+                          <CommentSubmit post_id={post.id} where='dead' />
                         </BorderBox>
                       </PostBlock>
                     )
@@ -466,7 +466,7 @@ function Onerm() {
                         
                         <BorderBox>
                           <CommentInput />
-                          <CommentSubmit />
+                          <CommentSubmit post_id={post.id} where='squat' />
                         </BorderBox>
                       </PostBlock>
                     )
