@@ -92,6 +92,8 @@ function OhWunWan() {
   // 요청시 parameter로 들어가는 숫자
   const [params, setParams] = useState(0)
 
+  // 리덕스에 저장된 유저정보 가져오기
+  const user_info = useSelector((state)=>state.auth.user_info)
   // 현재 페이지
   const dispatch = useDispatch()
 
@@ -148,7 +150,7 @@ function OhWunWan() {
                               <ProfilePicture img={post["User.profile_picture"]} />
                               <Id nickname={post["User.nickname"]}></Id>
                             </FlexBox>
-                            <ContentButton onClick={() => {setContentMenu(true);postingIdHandler(post.id)}}/>
+                            {post.nickname === user_info.nickname ?<ContentButton onClick={() => {setContentMenu(true);postingIdHandler(post.id)}}/> : ''}
                           </BetweenBox>
                         </BorderBox>
                         

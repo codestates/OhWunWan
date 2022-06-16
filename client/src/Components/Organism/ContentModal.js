@@ -27,17 +27,21 @@ const Div2 = styled.div`
 
 function ContentModal({setContentMenu,category,postingId}) {
   // 리덕스에 저장된 유저 정보 가져오기 
+  console.log(category)
+  console.log(postingId)
   const user_info = useSelector((state)=>state.auth.user_info)
   //console.log("컨텐츠 모달이 전달받은 유저 정보:",user_info)  
   //console.log("컨텐츠 모달에서 전달받은 게시물 Id:",postingId)
 
   const editHandler = () => {
-    
-    axios.patch(`${STYLE.SERVER}/post/${category}`,{})
+    axios.patch(`${STYLE.SERVER}/post/${category}/${postingId}`,)
+    .then((res)=>{window.location.replace(`${STYLE.CLIENT}/post/${category === "bench_1rm" ? "1rm" : category ==="dead_1rm" ? "1rm" : category === "sqaut_1rm" ? "1rm" :category }`)})
   }
   
   const deleteHandler = () => {
-    //axios.delete(`${STYLE.SERVER}/post/${category}/${id}`{})
+    axios.delete(`${STYLE.SERVER}/post/${category}/${postingId}`)
+    .then((res)=>{window.location.replace(`${STYLE.CLIENT}/${category === "bench_1rm" ? "1rm" : category ==="dead_1rm" ? "1rm" : category === "sqaut_1rm" ? "1rm" :category }`)})
+    .catch((err)=>console.log(err))
   }
 
   return(

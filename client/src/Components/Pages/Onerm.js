@@ -99,7 +99,23 @@ function Onerm() {
   const [params2, setParams2] = useState(0)
   const [params3, setParams3] = useState(0)
 
+  // 게시물의 id 가져오기 
+  const [benchId, setBenchId] = useState('')
+  const [deadId, setDeadId] = useState('')
+  const [squatId, setSquatId] = useState('')
 
+  let benchIdHandler = (value) => {
+    setBenchId(value)
+  }
+  let deadIdHandler = (value) => {
+    setDeadId(value)
+  }
+  let squatIdHandler = (value) => {
+    setSquatId(value)
+  }
+
+  // 리덕스에서 가져온 유저 정보
+  const user_info = useSelector((state)=>state.auth.user_info)
   // 현재 페이지
   const dispatch = useDispatch()
   useEffect(() => {
@@ -182,7 +198,7 @@ function Onerm() {
     <Fragment>
       <Wrap>
         {/* 메뉴 열고 닫기 */}
-        {contentMenu ? <ContentModal setContentMenu={setContentMenu} category={categorySelector(select1,select2,select3)}/> : null}
+        {contentMenu ? <ContentModal setContentMenu={setContentMenu} category={categorySelector(select1,select2,select3)} postingId={benchId? benchId : deadId? deadId : squatId? squatId:''}/> : null}
         {commentMenu ? <CommentModal setCommentMenu={setCommentMenu} /> : null}
 
         <HeaderBlock />
@@ -252,7 +268,7 @@ function Onerm() {
                             <FlexBox>
                               <OnermLogo />
                               <OnermRank count='12' />/<OnermRank count='28' />
-                              <ContentButton onClick={() => {setContentMenu(true)}} />
+                              {post.nickname===user_info.nickname? <ContentButton onClick={() => {setContentMenu(true);benchIdHandler(post.id)}} />: ''}
                             </FlexBox>
                           </BetweenBox>
                         </BorderBox>
@@ -333,7 +349,7 @@ function Onerm() {
                             <FlexBox>
                               <OnermLogo />
                               <OnermRank count='12' />/<OnermRank count='28' />
-                              <ContentButton onClick={() => {setContentMenu(true)}} />
+                              {post.nickname===user_info.nickname ?<ContentButton onClick={() => {setContentMenu(true);deadIdHandler(post.id)}} />:''}
                             </FlexBox>
                           </BetweenBox>
                         </BorderBox>
@@ -414,7 +430,7 @@ function Onerm() {
                             <FlexBox>
                               <OnermLogo />
                               <OnermRank count='12' />/<OnermRank count='28' />
-                              <ContentButton onClick={() => {setContentMenu(true)}} />
+                              {post.nickname===user_info.nickname ?<ContentButton onClick={() => {setContentMenu(true);squatIdHandler(post.id)}} />:''}
                             </FlexBox>
                           </BetweenBox>
                         </BorderBox>
