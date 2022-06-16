@@ -669,7 +669,8 @@ module.exports = {
 
 
 
-    patch: (req, res) => {
+    patch: async(req, res) => {
+        
 
      },
 
@@ -679,8 +680,18 @@ module.exports = {
 
 
 
-    delete: (req,res) => {
-        
+    delete: async (req,res) => {
+        try{
+            const{user_id}=req.params
+            console.log(user_id)
+            await User.destroy({
+                where: { id: user_id },
+            });
+            return res.json({message:'Membership information has been deleted'})
+        }catch(err){
+            console.log(err)
+            return res.status(500).json({ message: 'Server Error!' })
+        }
      },
 
 } 
