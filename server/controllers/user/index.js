@@ -404,8 +404,125 @@ module.exports = {
         }
 
      },
-    squat_1rm: () => { },
-    patch: () => { },
+
+    squat_1rm: async(req,res) => { 
+        try {
+            //조회할 게시물 페이지들
+            const { count,user_id } = req.params
+
+
+            //1.squat__1rm게시물+user정보 쿼리
+            const squat_1rms = await Squat_1rm.findAll({
+                where: { user_id },
+                attributes: ['id', 'video', 'text_content', 'kg', 'createdAt'],//squat_1rm 컬럼들
+                include: [
+                    {
+                        model: User,
+                        attributes: ['nickname', 'profile_picture'],
+                        require: true,
+                    },
+                ],
+                order: [['id', 'DESC']],//정렬 id순으로 꺼꾸로
+                raw: true,//dataValues만 가져오기
+                limit: 5,//몇개불러올껀가
+                offset: count * 5,//어디서부터시작할껀지
+            });
+
+
+
+            //2. 조회한 게시물들의 고유번호값들 맵핑해서 뽑기
+            const squat_1rm_id = squat_1rms.map(item => item.id)
+            console.log('::::::squat_1rm_id:', squat_1rm_id)
+
+
+
+            //3. 조회한 게시물들의 댓글 + 유저정보 쿼리
+            const squat_1rm_comments = await Squat_1rm_comment.findAll({
+                where: { squat_1rm_id },
+                attributes: ['id', 'squat_1rm_id', 'text_content', 'createdAt'],
+                include: [
+                    {
+                        model: User,
+                        attributes: ['id', 'nickname', 'profile_picture'],
+                        require: true,
+                    }
+                ],
+                raw: true,//dataValues만 가져오기
+            })
+
+
+
+
+            //4.조회한 게시물들 리스펙 정보 쿼리
+            const squat_1rm_respects = await Squat_1rm_respect.findAll({
+                where: { squat_1rm_id },
+                attributes: ['id', 'user_id', 'squat_1rm_id', 'createdAt'],
+                raw: true,//dataValues만 가져오기
+            })
+            // console.log(':::::::::::::squat_1rm_respects:', squat_1rm_respects)
+
+
+
+
+            //5.조회환 게시물들의 랭킹 정보 쿼리
+            const ranks = await Squat_1rm_respect.findAll({
+
+                attributes: ['squat_1rm_id', [sequelize.fn('COUNT', 'squat_1rm_id'), 'respect_count']],
+                group: ['squat_1rm_id'],
+                having: {
+                    'respect_count': { [Op.gte]: 5 }
+                },
+                require: true,
+                raw: true,//dataValues만 가져오기
+                include: [
+                    {
+                        model: Squat_1rm,
+                        attributes: ['kg', [sequelize.literal('(RANK() OVER (ORDER BY kg DESC))'), 'ranking']],
+                        require: true,
+                        raw: true,//dataValues만 가져오기
+
+                    },
+                ],
+
+            });
+            console.log(':::::::::::rank', ranks)
+
+
+
+
+            //6.(조회한게시물+유저정보)+(댓글+유저정보)+리스펙정보+랭킹정보
+            for (const squat_1rm of squat_1rms) {
+                squat_1rm.comment = []
+                squat_1rm.respect = []
+                squat_1rm.rank = []
+                for (const comment of squat_1rm_comments) {
+                    if (squat_1rm.id === comment.squat_1rm_id) {
+                        squat_1rm.comment.push(comment)
+                    }
+                }
+                for (const respect of squat_1rm_respects) {
+                    if (squat_1rm.id === respect.squat_1rm_id) {
+                        squat_1rm.respect.push(respect)
+                    }
+                }
+                for (const rank of ranks) {
+                    if (squat_1rm.id === rank.squat_1rm_id) {
+                        squat_1rm.rank.push(rank)
+                        squat_1rm.rank.push(ranks.length)
+                    }
+                }
+            }
+            
+            console.log(':::::::::::::squat_1rms:', squat_1rms)
+
+            //7. 데이터 보내주기
+            return res.json({ message: 'ok', data: squat_1rms })
+        } catch (err) {
+            console.log(err);
+            return res.status(500).json({ message: 'Server Error!' })
+        }
+    },
+    patch: (req,res) => { },
     delete: () => { },
 
 } 
