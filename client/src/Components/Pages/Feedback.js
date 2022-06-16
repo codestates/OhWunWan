@@ -43,6 +43,11 @@ const Wrap = styled.div`
 const PostBlock = styled.div`
   margin-bottom: 2em;
 `
+
+const PostBlock2 = styled.div`
+  border: 0.2em solid #2DA44E;
+  margin-bottom: 2em;
+`
 const Box = styled.div`
   width: ${STYLE.WIDTH};
   border: 0.1em solid ${STYLE.BORDER_COLOR};
@@ -70,6 +75,11 @@ const FlexBox = styled.div`
 const CommentBlock = styled.div`
   width: ${STYLE.WIDTH};
   border: 0.1em solid ${STYLE.BORDER_COLOR};
+`
+
+const CommentSelect = styled.div`
+  width: ${STYLE.WIDTH};
+  border: 0.15em solid #2DA44E;
 `
 
 function Feedback() {
@@ -108,6 +118,8 @@ function Feedback() {
       setInfo([...info, res.data.data])
     })
   }, [params])
+
+  // console.log(info)
 
   return(
     <Fragment>
@@ -163,18 +175,35 @@ function Feedback() {
                         {post.comment.length === 0 ? null : (
                           post.comment.map((comment, index3) => {
                             return(
-                              <CommentBlock key={index3}>
-                                <BetweenBox>
-                                  <FlexBox>
-                                    <ProfilePicture img={comment['User.profile_picture']} />
-                                    <Id nickname={comment['User.nickname']} />
-                                  </FlexBox>
-                                  <CommentMenu onClick={() => setCommentMenu(true)} />
-                                </BetweenBox>
-                                <FlexBox>
-                                <Comment text={comment.text_content}  time={comment.createdAt.slice(0, 10) + ' ' + comment.createdAt.slice(11, 19)}/>
-                                </FlexBox>
-                              </CommentBlock>
+                              <div key={index3}>
+                                {comment.selection ? (
+                                  <CommentSelect>
+                                    <BetweenBox>
+                                      <FlexBox>
+                                        <ProfilePicture img={comment['User.profile_picture']} />
+                                        <Id nickname={comment['User.nickname']} />
+                                      </FlexBox>
+                                      <CommentMenu onClick={() => setCommentMenu(true)} />
+                                    </BetweenBox>
+                                    <FlexBox>
+                                    <Comment text={comment.text_content}  time={comment.createdAt.slice(0, 10) + ' ' + comment.createdAt.slice(11, 19)}/>
+                                    </FlexBox>
+                                  </CommentSelect>
+                                ) : (
+                                  <CommentBlock>
+                                    <BetweenBox>
+                                      <FlexBox>
+                                        <ProfilePicture img={comment['User.profile_picture']} />
+                                        <Id nickname={comment['User.nickname']} />
+                                      </FlexBox>
+                                      <CommentMenu onClick={() => setCommentMenu(true)} />
+                                    </BetweenBox>
+                                    <FlexBox>
+                                    <Comment text={comment.text_content}  time={comment.createdAt.slice(0, 10) + ' ' + comment.createdAt.slice(11, 19)}/>
+                                    </FlexBox>
+                                  </CommentBlock>
+                                )}
+                              </div>  
                             )
                           })
                         )}
