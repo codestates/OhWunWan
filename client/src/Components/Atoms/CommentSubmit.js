@@ -72,7 +72,7 @@ function CommentSubmit({text, post_id, where}) {
 
       if(where === 'squat') {
         axios.post(`${STYLE.SERVER}/comment/${where}_1rm_comment`, {
-          sqaut_1rm_id: post_id,
+          squat_1rm_id: post_id,
           user_id: select.auth.user_info.id,
           text_content: select.comment.comment
         })
