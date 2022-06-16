@@ -75,7 +75,7 @@ const CommentBlock = styled.div`
 
 const CommentSelect = styled.div`
   width: ${STYLE.WIDTH};
-  border: 0.15em solid #2DA44E;
+  border: 0.1em solid #2DA44E;
 `
 
 function Feedback() {
@@ -203,12 +203,13 @@ function Feedback() {
                             )
                           })
                         )}
-                               
+                      
                         <BorderBox>
                           <CommentInput />
-                          <CommentSubmit />
+                          <CommentSubmit post_id={post.id} where='feedback' />
                         </BorderBox>
                       </PostBlock>
+                      
                     ) 
                   })
                 )}
