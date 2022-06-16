@@ -189,7 +189,7 @@ function Onerm() {
     })
   }, [params3])
 
-  console.log('벤치프레스', info1, params1)
+  //console.log('벤치프레스', info1, params1)
   // console.log('데드리프트', info2, params2)
   // console.log('스쿼트', info3, params3)
   // console.log('-----------------')
@@ -308,7 +308,7 @@ function Onerm() {
                                     <ProfilePicture img={comment['User.profile_picture']} />
                                     <Id nickname={comment['User.nickname']} />
                                   </FlexBox>
-                                  <CommentMenu onClick={() => setCommentMenu(true)} />
+                                  {post.comment[index3]["User.nickname"]===user_info.nickname? <CommentMenu onClick={() => {setCommentMenu(true);}} />:''}
                                 </BetweenBox>
                                 <FlexBox>
                                   <Comment text={comment.text_content}  time={comment.createdAt.slice(0, 10) + ' ' + comment.createdAt.slice(11, 19)}/>
@@ -389,7 +389,7 @@ function Onerm() {
                                     <ProfilePicture img={comment['User.profile_picture']} />
                                     <Id nickname={comment['User.nickname']} />
                                   </FlexBox>
-                                  <CommentMenu onClick={() => setCommentMenu(true)} />
+                                  {post.comment[index3]["User.nickname"]===user_info.nickname? <CommentMenu onClick={() => {setCommentMenu(true);}} />:''}
                                 </BetweenBox>
                                 <FlexBox>
                                   <Comment text={comment.text_content}  time={comment.createdAt.slice(0, 10) + ' ' + comment.createdAt.slice(11, 19)}/>
@@ -470,7 +470,7 @@ function Onerm() {
                                     <ProfilePicture img={comment['User.profile_picture']} />
                                     <Id nickname={comment['User.nickname']} />
                                   </FlexBox>
-                                  <CommentMenu onClick={() => setCommentMenu(true)} />
+                                  {post.comment[index3]["User.nickname"]===user_info.nickname? <CommentMenu onClick={() => {setCommentMenu(true);}} />:''}
                                 </BetweenBox>
                                 <FlexBox>
                                   <Comment text={comment.text_content}  time={comment.createdAt.slice(0, 10) + ' ' + comment.createdAt.slice(11, 19)}/>
