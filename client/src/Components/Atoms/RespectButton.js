@@ -1,6 +1,9 @@
 import styled from "styled-components"
+import { useSelector } from "react-redux"
+import axios from "axios"
+import STYLE from "../../config"
 
-// 게시글 리스펙 버튼 (하트말고)
+// 게시글 리스펙 버튼 (리스펙 적용 안된 로고)
 
 // img
 import respect from "../Picture/RespectButton/respect.png"
@@ -16,13 +19,26 @@ const Button = styled.div`
 `
 
 RespectButton.defaultProps = {
-  img: respect,
-  like: () => {console.log("리스펙 버튼 동작")}
+  img: respect
 }
 
-function RespectButton ({img, Respect}) {
+function RespectButton ({img, post_id, where}) {
+  // state 값 가져오기
+  let select = useSelector(state => state)
+
   return (
-    <Button img={img} onClick={Respect}></Button>
+    <Button img={img} onClick={() => {
+      // 벤치프레스 리스펙
+      if(where === 'bench') {
+        axios.post(`${STYLE.SERVER}/respect/${where}_1rm_respect`, {
+          user_id: select.auth.user_info.id,
+          bench_1rm_id: post_id
+        })
+        .then(() => {
+          window.location.href = `${STYLE.CLIENT}/1rm`
+        })
+      }
+    }}></Button>
   )
 } 
 
