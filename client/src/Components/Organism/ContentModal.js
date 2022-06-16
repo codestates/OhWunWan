@@ -49,7 +49,7 @@ function ContentModal({setContentMenu,category,postInfo}) {
     <Fragment>
       <Div>
         <Div2>
-          <Link to={`/post/${category === "bench_1rm" ? "1rm" : category ==="dead_1rm" ? "1rm" : category === "sqaut_1rm" ? "1rm" :category }`}>
+          <Link to={`/post/${category === "bench_1rm" ? "1rm/edit" : category ==="dead_1rm" ? "1rm/edit" : category === "sqaut_1rm" ? "1rm/edit" :category+"/edit" }`}>
           <SubmitButton text='수정' type='skyblue' onClick={()=>{dispatch(SendPostInfo(postInfo))}}/>
           </Link>
         </Div2>

@@ -94,7 +94,7 @@ module.exports = {
 
     //ohwunwan게시물 생성
     post: async (req, res) => {
-        try {
+        try {console.log("포스트 요청!!!!!!",req.file)
             if (!(req.body.user_id && req.body.text_content && req.file.location)) return res.status(400).json({ message: 'Bad Request!' })
             const { user_id, text_content } = req.body
             //console.log('::::::::::::::::user_id:', user_id, text_content)
@@ -118,7 +118,7 @@ module.exports = {
 
     //ohwunwan게시물 수정
     patch: async (req, res) => {
-        try {
+        try { console.log(req.body)
             //잘못된 요청
             if (!req.body.ohwunwan_id) return res.status(400).json({ message: 'Bad Request!' });
             //사진 내용 모두 바꾸는 경우
