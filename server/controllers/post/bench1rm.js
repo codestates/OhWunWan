@@ -107,6 +107,7 @@ module.exports = {
                 for (const rank of ranks) {
                     if (bench_1rm.id === rank.bench_1rm_id) {
                         bench_1rm.rank.push(rank)
+                        bench_1rm.rank.push(ranks.length)
                     }
                 }
             }
