@@ -1,6 +1,7 @@
 import styled from "styled-components"
 
-// 게시글 댓글 버튼 (말풍선)
+// 게시판 최하단 부에 있는 버튼
+// 클릭시 get 요청 (5개씩 정보 받기)
 
 // img
 import img from "../Picture/ContentMoreButton/read-more.png"
