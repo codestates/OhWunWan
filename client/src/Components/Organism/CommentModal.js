@@ -29,6 +29,9 @@ function CommentModal(props) {
     <Fragment>
       <Div>
         <Div2>
+          <SubmitButton text='채택' type='blue' />
+        </Div2>
+        <Div2>
           <SubmitButton text='삭제' type='red' />
         </Div2>
         <Div2>
