@@ -249,7 +249,7 @@ function Onerm() {
                             </FlexBox>
                             <FlexBox>
                               <OnermLogo />
-                              <OnermRank count='12' />/<OnermRank count='28' />
+                              <OnermRank count={post.rank[0]['Bench_1rm.ranking']} />/<OnermRank count={post.rank[1]} />
                               <ContentButton onClick={() => {setContentMenu(true)}} />
                             </FlexBox>
                           </BetweenBox>
@@ -346,7 +346,7 @@ function Onerm() {
                             </FlexBox>
                             <FlexBox>
                               <OnermLogo />
-                              <OnermRank count='12' />/<OnermRank count='28' />
+                              <OnermRank count={post.rank[0]['Dead_1rm.ranking']} />/<OnermRank count={post.rank[1]} />
                               <ContentButton onClick={() => {setContentMenu(true)}} />
                             </FlexBox>
                           </BetweenBox>
@@ -443,7 +443,7 @@ function Onerm() {
                             </FlexBox>
                             <FlexBox>
                               <OnermLogo />
-                              <OnermRank count='12' />/<OnermRank count='28' />
+                              <OnermRank count={post.rank[0]['Squat_1rm.ranking']} />/<OnermRank count={post.rank[1]} />
                               <ContentButton onClick={() => {setContentMenu(true)}} />
                             </FlexBox>
                           </BetweenBox>
