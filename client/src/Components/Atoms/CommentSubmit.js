@@ -25,6 +25,7 @@ function CommentSubmit({text, post_id, where}) {
     <Button onClick={() => {
       // console.log(select.auth.user_info.id, select.comment.comment, post_id, where)
       // console.log(`${STYLE.SERVER}/comment/${where}_comment`)
+      // console.log(`${STYLE.SERVER}/comment/${where}_1rm_comment`)
       if(where === 'feedback') {
         axios.post(`${STYLE.SERVER}/comment/${where}_comment`, {
           feedback_id: post_id,
@@ -45,7 +46,40 @@ function CommentSubmit({text, post_id, where}) {
         .then(() => {
           window.location.href = `${STYLE.CLIENT}/${where}`
         })
-      }
+      } else
+
+      if(where === 'bench') {
+        axios.post(`${STYLE.SERVER}/comment/${where}_1rm_comment`, {
+          bench_1rm_id: post_id,
+          user_id: select.auth.user_info.id,
+          text_content: select.comment.comment
+        })
+        .then(() => {
+          window.location.href = `${STYLE.CLIENT}/1rm`
+        })
+      } else
+
+      if(where === 'dead') {
+        axios.post(`${STYLE.SERVER}/comment/${where}_1rm_comment`, {
+          dead_1rm_id: post_id,
+          user_id: select.auth.user_info.id,
+          text_content: select.comment.comment
+        })
+        .then(() => {
+          window.location.href = `${STYLE.CLIENT}/1rm`
+        })
+      } else
+
+      if(where === 'squat') {
+        axios.post(`${STYLE.SERVER}/comment/${where}_1rm_comment`, {
+          sqaut_1rm_id: post_id,
+          user_id: select.auth.user_info.id,
+          text_content: select.comment.comment
+        })
+        .then(() => {
+          window.location.href = `${STYLE.CLIENT}/1rm`
+        })
+      } 
     }}
     >{text}</Button>
   )

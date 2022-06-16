@@ -304,7 +304,7 @@ function Onerm() {
                         
                         <BorderBox>
                           <CommentInput />
-                          <CommentSubmit />
+                          <CommentSubmit post_id={post.id} where='bench' />
                         </BorderBox>
                       </PostBlock>
                     )
@@ -385,7 +385,7 @@ function Onerm() {
                         
                         <BorderBox>
                           <CommentInput />
-                          <CommentSubmit />
+                          <CommentSubmit post_id={post.id} where='dead' />
                         </BorderBox>
                       </PostBlock>
                     )
@@ -466,7 +466,7 @@ function Onerm() {
                         
                         <BorderBox>
                           <CommentInput />
-                          <CommentSubmit />
+                          <CommentSubmit post_id={post.id} where='squat' />
                         </BorderBox>
                       </PostBlock>
                     )
