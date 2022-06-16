@@ -48,6 +48,17 @@ function RespectButton ({img, post_id, where}) {
         .then(() => {
           window.location.href = `${STYLE.CLIENT}/1rm`
         })
+      } else
+
+      // 스쿼트 리스펙
+      if(where === 'squat') {
+        axios.post(`${STYLE.SERVER}/respect/${where}_1rm_respect`, {
+          user_id: select.auth.user_info.id,
+          squat_1rm_id: post_id
+        })
+        .then(() => {
+          window.location.href = `${STYLE.CLIENT}/1rm`
+        })
       }
     }}></Button>
   )
