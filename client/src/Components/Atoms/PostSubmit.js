@@ -30,7 +30,9 @@ function PostSubmit({formdata,url,replace}) {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
-    }).then((res)=>window.location.replace(`${STYLE.CLIENT}/${replace}`))}}>업로드</Button>
+    }).then((res)=>window.location.replace(`${STYLE.CLIENT}/${replace}`))
+  .catch((err)=>console.log(err))
+}}>업로드</Button>
   )
 }
 

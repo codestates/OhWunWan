@@ -4,6 +4,7 @@ import STYLE from "../../config"
 import SubmitButton from "../Atoms/SubmitButton"
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const Div = styled.div`
   width: 100vw;
@@ -32,8 +33,8 @@ function ContentModal({setContentMenu,category,postingId}) {
   //console.log("컨텐츠 모달에서 전달받은 게시물 Id:",postingId)
 
   const editHandler = () => {
-    axios.patch(`${STYLE.SERVER}/post/${category}/${postingId}`,)
-    .then((res)=>{window.location.replace(`${STYLE.CLIENT}/post/${category === "bench_1rm" ? "1rm" : category ==="dead_1rm" ? "1rm" : category === "sqaut_1rm" ? "1rm" :category }`)})
+    // axios.patch(`${STYLE.SERVER}/post/${category}/${postingId}`,)
+    // .then((res)=>{window.location.replace(`${STYLE.CLIENT}/post/${category === "bench_1rm" ? "1rm" : category ==="dead_1rm" ? "1rm" : category === "sqaut_1rm" ? "1rm" :category }`)})
   }
   
   const deleteHandler = () => {
@@ -46,7 +47,9 @@ function ContentModal({setContentMenu,category,postingId}) {
     <Fragment>
       <Div>
         <Div2>
-          <SubmitButton text='수정' type='skyblue' onClick={editHandler}/>
+          <Link to={`/post/${category === "bench_1rm" ? "1rm" : category ==="dead_1rm" ? "1rm" : category === "sqaut_1rm" ? "1rm" :category }`}>
+          <SubmitButton text='수정' type='skyblue' editHandler={editHandler}/>
+          </Link>
         </Div2>
         <Div2>
           <SubmitButton text='삭제' type='red' onClick={deleteHandler}/>

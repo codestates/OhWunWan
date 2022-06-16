@@ -150,7 +150,7 @@ function OhWunWan() {
                               <ProfilePicture img={post["User.profile_picture"]} />
                               <Id nickname={post["User.nickname"]}></Id>
                             </FlexBox>
-                            {post["User.nickname"]===user_info.nickname ?<ContentButton onClick={() => {setContentMenu(true);postingIdHandler(post.id);console.log(post["User.nickname"]);console.log(user_info)}}/>:''}
+                            {post["User.nickname"]===user_info.nickname ?<ContentButton onClick={() => {setContentMenu(true);postingIdHandler(post.id)}}/>:''}
                           </BetweenBox>
                         </BorderBox>
                         
