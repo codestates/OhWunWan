@@ -15,7 +15,7 @@ module.exports={
         }
     },
 
-    //feedback_comment 작성
+    //feedback_comment 수정
     patch :async(req,res)=>{
         try{
             if (!(req.body.feedback_comment_id && req.body.text_content)) return res.status(400).json({ message: 'Bad Request!' })
@@ -36,7 +36,7 @@ module.exports={
         }
     },
 
-    //feedback_comment 수정
+    //feedback_comment 삭제
     delete :async(req,res)=>{
         try{
             const { feedback_comment_id } = req.params
@@ -50,4 +50,23 @@ module.exports={
         }
 
     },
+    selection: async(req,res)=>{
+        try{
+            // console.log(req.body)
+            if(!req.body.feedback_comment_id) return res.status(400).json({ message: 'Bad Request!' })
+            const{feedback_comment_id} =req.body
+            await Feedback_comment.update(
+                {
+                    selection:1,
+                },
+                {
+                    where: { id: feedback_comment_id, }
+                },
+            );
+            return res.json({ message: 'The comment has been selected' })
+        }catch(err){
+            console.log(err);
+            return  res.status(500).json({ message: 'Server Error!' })
+        }
+    }
 }

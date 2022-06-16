@@ -107,6 +107,7 @@ module.exports = {
                 for (const rank of ranks) {
                     if (dead_1rm.id === rank.dead_1rm_id) {
                         dead_1rm.rank.push(rank)
+                        dead_1rm.rank.push(ranks.length)
                     }
                 }
             }

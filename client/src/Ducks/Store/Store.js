@@ -6,6 +6,7 @@ import Logout_reducer from '../Slice/LogoutSlice'
 import Header_reducer from '../Slice/HeaderSlice'
 import Auth_reducer from '../Slice/AuthSlice'
 import Edit_reducer from '../Slice/EditSlice'
+import Comment_reducer from '../Slice/CommentSlice'
 
     let store = configureStore({ 
     reducer: {
@@ -15,6 +16,7 @@ import Edit_reducer from '../Slice/EditSlice'
       logout_modal: Logout_reducer,
       header: Header_reducer,
       edit: Edit_reducer,
+      comment: Comment_reducer
     }, 
   })  
   export default store

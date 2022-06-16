@@ -108,9 +108,11 @@ module.exports = {
                 for (const rank of ranks) {
                     if (squat_1rm.id === rank.squat_1rm_id) {
                         squat_1rm.rank.push(rank)
+                        squat_1rm.rank.push(ranks.length)
                     }
                 }
             }
+            
             console.log(':::::::::::::squat_1rms:', squat_1rms)
 
             //7. 데이터 보내주기

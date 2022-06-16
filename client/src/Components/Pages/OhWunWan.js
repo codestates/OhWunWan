@@ -124,7 +124,7 @@ function OhWunWan() {
     })
   }, [params])
 
-  //console.log(info)
+  // console.log(info)
 
   return(
     <Fragment>
@@ -198,7 +198,7 @@ function OhWunWan() {
                           
                         <BorderBox>
                           <CommentInput />
-                          <CommentSubmit />
+                          <CommentSubmit post_id={post.id} where='ohwunwan' />
                         </BorderBox>
                       </PostBlock>
                     )

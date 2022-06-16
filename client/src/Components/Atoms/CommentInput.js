@@ -1,5 +1,6 @@
 import styled from "styled-components"
-import STYLE  from "../../config";
+import { useDispatch } from "react-redux";
+import { comment } from "../../Ducks/Slice/CommentSlice"
 
 // 게시글 - 댓글 입력창
 
@@ -13,8 +14,9 @@ const Input = styled.textarea`
 `
 
 function CommentInput() {
+  const dispatch = useDispatch()
   return (
-    <Input placeholder="댓글을 입력해주세요"></Input>
+    <Input placeholder="댓글을 입력해주세요" onChange={(e) => {dispatch(comment({comment: e.target.value}))}}></Input>
   )
 }
 
