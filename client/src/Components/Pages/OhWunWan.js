@@ -80,11 +80,19 @@ function OhWunWan() {
 
   // 게시물의 id를 가져오기 위한 상태관리
   const [postInfo, setPostInfo] = useState('')
+  // 댓글의 id를 가져오기 위한 상태관리
+  const [commentInfo, setCommentInfo] = useState('')
+
   // 게시물의 id를 끌어올려 전달해주는 핸들러 
   const postInfoHandler = (value) => {
     setPostInfo(value)
   }
-  console.log(postInfo)
+  //console.log(postInfo)
+
+  const commentInfoHandler = (value) => {
+    setCommentInfo(value)
+  }
+
 
 
   // get 정보 // info[0]으로 map 함수 실행
@@ -131,7 +139,7 @@ function OhWunWan() {
       <Wrap>
         {/* 메뉴 열고 닫기 */}
         {contentMenu ? <ContentModal setContentMenu={setContentMenu} category={"ohwunwan"} postInfo={postInfo}/> : null}
-        {commentMenu ? <CommentModal setCommentMenu={setCommentMenu} /> : null}
+        {commentMenu ? <CommentModal setCommentMenu={setCommentMenu} category={"ohwunwan"} commentInfo={commentInfo}/> : null}
         
         <HeaderBlock/>
         <MarginBox />
@@ -186,7 +194,7 @@ function OhWunWan() {
                                     <ProfilePicture img={comment['User.profile_picture']} />
                                     <Id nickname={comment['User.nickname']} />
                                   </FlexBox>
-                                  <CommentMenu onClick={() => setCommentMenu(true)} />
+                                  {post.comment[index3]["User.nickname"]===user_info.nickname? <CommentMenu onClick={() => {setCommentMenu(true);commentInfoHandler(post.comment[index3])}} />:''}
                                 </BetweenBox>
                                 <FlexBox>
                                   <Comment text={comment.text_content}  time={comment.createdAt.slice(0, 10) + ' ' + comment.createdAt.slice(11, 19)}/>

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Fragment } from "react";
 import STYLE from "../../config"
 import SubmitButton from "../Atoms/SubmitButton"
+import axios from 'axios';
 
 const Div = styled.div`
   width: 100vw;
@@ -23,19 +24,28 @@ const Div2 = styled.div`
   background-color: #fff;
 `
 
-function CommentModal(props) {
+function CommentModal({setCommentMenu, category,commentInfo}) {
+  console.log(commentInfo)
+  
+  const deleteHandler = () => {
+    axios.delete(`${STYLE.SERVER}/comment/${category}_comment/${commentInfo.id}`)
+    .then((res)=>{window.location.replace(`${STYLE.CLIENT}/${category === "bench_1rm" ? "1rm" : category ==="dead_1rm" ? "1rm" : category ==="squat_1rm" ? "1rm" :category }`)})
+    .catch((err)=>console.log(err))
+  }
+  
 
   return(
     <Fragment>
       <Div>
+        {category ==='feedback' ?
         <Div2>
-          <SubmitButton text='채택' type='blue' />
+          <SubmitButton text='채택' type='black' />
+        </Div2>:''}
+        <Div2>
+          <SubmitButton text='삭제' type='red' onClick={()=>deleteHandler()}/>
         </Div2>
         <Div2>
-          <SubmitButton text='삭제' type='red' />
-        </Div2>
-        <Div2>
-          <SubmitButton text='취소' type='black' onClick={() => {props.setCommentMenu(false)}} />
+          <SubmitButton text='취소' type='black' onClick={() => {setCommentMenu(false)}} />
         </Div2>
       </Div>
     </Fragment>

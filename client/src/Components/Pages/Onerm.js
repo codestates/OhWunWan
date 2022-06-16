@@ -114,6 +114,23 @@ function Onerm() {
     setSquatInfo(value)
   }
 
+  // 댓글의 id 가져오기
+  const [benchCommentInfo, setBenchCommentInfo] = useState('')
+  const [deadCommentInfo, setDeadCommentInfo] = useState('')
+  const [squatCommentInfo, setSquatCommentInfo] = useState('')
+  
+  const benchCommentInfoHandler = (value) => {
+    setBenchCommentInfo(value)
+  }
+  
+  const deadCommentInfoHandler = (value) => {
+    setDeadCommentInfo(value)
+  }
+  
+  const squatCommentInfoHandler = (value) => {
+    setSquatCommentInfo(value)
+  }
+  
   // 리덕스에서 가져온 유저 정보
   const user_info = useSelector((state)=>state.auth.user_info)
   // 현재 페이지
@@ -199,7 +216,7 @@ function Onerm() {
       <Wrap>
         {/* 메뉴 열고 닫기 */}
         {contentMenu ? <ContentModal setContentMenu={setContentMenu} category={categorySelector(select1,select2,select3)} postInfo={benchInfo? benchInfo : deadInfo? deadInfo : squatInfo? squatInfo:''}/> : null}
-        {commentMenu ? <CommentModal setCommentMenu={setCommentMenu} /> : null}
+        {commentMenu ? <CommentModal setCommentMenu={setCommentMenu} category={categorySelector(select1,select2,select3)} commentInfo={benchCommentInfo? benchCommentInfo : deadCommentInfo? deadCommentInfo : squatCommentInfo? squatCommentInfo:'' }/> : null}
 
         <HeaderBlock />
         <MarginBox />
@@ -308,7 +325,7 @@ function Onerm() {
                                     <ProfilePicture img={comment['User.profile_picture']} />
                                     <Id nickname={comment['User.nickname']} />
                                   </FlexBox>
-                                  {post.comment[index3]["User.nickname"]===user_info.nickname? <CommentMenu onClick={() => {setCommentMenu(true);}} />:''}
+                                  {post.comment[index3]["User.nickname"]===user_info.nickname? <CommentMenu onClick={() => {setCommentMenu(true);benchCommentInfoHandler(post.comment[index3])}} />:''}
                                 </BetweenBox>
                                 <FlexBox>
                                   <Comment text={comment.text_content}  time={comment.createdAt.slice(0, 10) + ' ' + comment.createdAt.slice(11, 19)}/>
@@ -389,7 +406,7 @@ function Onerm() {
                                     <ProfilePicture img={comment['User.profile_picture']} />
                                     <Id nickname={comment['User.nickname']} />
                                   </FlexBox>
-                                  {post.comment[index3]["User.nickname"]===user_info.nickname? <CommentMenu onClick={() => {setCommentMenu(true);}} />:''}
+                                  {post.comment[index3]["User.nickname"]===user_info.nickname? <CommentMenu onClick={() => {setCommentMenu(true);deadCommentInfoHandler(post.comment[index3])}} />:''}
                                 </BetweenBox>
                                 <FlexBox>
                                   <Comment text={comment.text_content}  time={comment.createdAt.slice(0, 10) + ' ' + comment.createdAt.slice(11, 19)}/>
@@ -470,7 +487,7 @@ function Onerm() {
                                     <ProfilePicture img={comment['User.profile_picture']} />
                                     <Id nickname={comment['User.nickname']} />
                                   </FlexBox>
-                                  {post.comment[index3]["User.nickname"]===user_info.nickname? <CommentMenu onClick={() => {setCommentMenu(true);}} />:''}
+                                  {post.comment[index3]["User.nickname"]===user_info.nickname? <CommentMenu onClick={() => {setCommentMenu(true);squatCommentInfoHandler(post.comment[index3])}} />:''}
                                 </BetweenBox>
                                 <FlexBox>
                                   <Comment text={comment.text_content}  time={comment.createdAt.slice(0, 10) + ' ' + comment.createdAt.slice(11, 19)}/>
