@@ -33,13 +33,18 @@ function CommentModal({setCommentMenu, category,commentInfo}) {
     .catch((err)=>console.log(err))
   }
   
+  const selectHandler = () => {
+    axios.post(`${STYLE.SERVER}/${category}_comment/selection`,{data:commentInfo.id})
+    .then((res)=>{window.location.replace(`${STYLE.CLIENT}/${category === "bench_1rm" ? "1rm" : category ==="dead_1rm" ? "1rm" : category ==="squat_1rm" ? "1rm" :category }`)})
+    .catch((err)=>console.log(err))
+  }
 
   return(
     <Fragment>
       <Div>
         {category ==='feedback' ?
         <Div2>
-          <SubmitButton text='채택' type='black' />
+          <SubmitButton text='채택' type='blue' onClick={()=>selectHandler()}/>
         </Div2>:''}
         <Div2>
           <SubmitButton text='삭제' type='red' onClick={()=>deleteHandler()}/>

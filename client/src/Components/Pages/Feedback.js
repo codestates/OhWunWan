@@ -212,7 +212,8 @@ function Feedback() {
                                         <ProfilePicture img={comment['User.profile_picture']} />
                                         <Id nickname={comment['User.nickname']} />
                                       </FlexBox>
-                                      {post.comment[index3]["User.nickname"]===user_info.nickname? <CommentMenu onClick={() => {setCommentMenu(true);commentInfoHandler(post.comment[index3])}} />:''}
+                                      {post["User.nickname"]===user_info.nickname? <CommentMenu onClick={() => {setCommentMenu(true);commentInfoHandler(post.comment[index3])}} /> 
+                                      : post.comment[index3]["User.nickname"]===user_info.nickname? <CommentMenu onClick={() => {setCommentMenu(true);commentInfoHandler(post.comment[index3])}} />:''}
                                     </BetweenBox>
                                     <FlexBox>
                                     <Comment text={comment.text_content}  time={comment.createdAt.slice(0, 10) + ' ' + comment.createdAt.slice(11, 19)}/>
