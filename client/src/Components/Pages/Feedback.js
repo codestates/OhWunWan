@@ -44,10 +44,6 @@ const PostBlock = styled.div`
   margin-bottom: 2em;
 `
 
-const PostBlock2 = styled.div`
-  border: 0.2em solid #2DA44E;
-  margin-bottom: 2em;
-`
 const Box = styled.div`
   width: ${STYLE.WIDTH};
   border: 0.1em solid ${STYLE.BORDER_COLOR};
