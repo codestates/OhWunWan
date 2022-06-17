@@ -7,6 +7,9 @@ import { useSelector } from 'react-redux';
 import HeaderBlock from "../Organism/HeaderBlock";
 import MarginBox from "../Atoms/MarginBox";
 
+// 더미 동영상
+import dummy from "../Picture/dummy.mp4"
+
 // Atoms
 import PostSubject from "../Atoms/PostSubject";
 import PostSubmit from "../Atoms/PostSubmit";
@@ -15,6 +18,7 @@ import PostUpload from "../Atoms/PostUpload";
 import PostMenu from "../Atoms/PostMenu";
 import PostSelect from "../Atoms/PostSelect";
 import PostInput2 from "../Atoms/PostInput2";
+import ContentVideo from "../Atoms/ContentVideo";
 
 const Wrap = styled.div`
   display: flex;
@@ -101,6 +105,10 @@ function Post1rm() {
             <PostInput2 weightHandler={weightHandler}/>
             <PostMenu text='KG' />
           </FlexBox>
+        </BetweenBox>
+
+        <BetweenBox>
+          <ContentVideo video={video ? URL.createObjectURL(video) : dummy} />
         </BetweenBox>
 
       </Wrap>

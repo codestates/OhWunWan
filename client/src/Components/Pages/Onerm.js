@@ -9,16 +9,10 @@ import axios from "axios";
 import HeaderBlock from "../Organism/HeaderBlock";
 import MarginBox from "../Atoms/MarginBox";
 
-// 더미 사진
-import user from "../Picture/HeaderButton/user.png"
-import respected from "../Picture/RespectButton/respected.png"
-import pic1 from "../Picture/ContentPicture/pic1.webp"
-
 // Atoms
 import OnermCategory from "../Atoms/OnermCategory";
 import ProfilePicture from "../Atoms/ProfilePicture"
 import Id from "../Atoms/Id";
-import ContentPicture from "../Atoms/ContentPicture";
 import CommentButton from "../Atoms/CommentButton";
 import CommentCounts from "../Atoms/CommentCounts"
 import ContentTime from "../Atoms/ContentTime";
@@ -35,6 +29,7 @@ import OnermRank from "../Atoms/OnermRank";
 import OnermRecord from "../Atoms/OnermRecord";
 import ContentMoreButton from "../Atoms/ContentMoreButton";
 import ContentVideo from "../Atoms/ContentVideo";
+import RespectedButton from "../Atoms/RespectedButton";
 
 // Organism
 import ContentModal from "../Organism/ContentModal";
@@ -173,7 +168,10 @@ function Onerm() {
     })
   }, [params3])
 
-  console.log('벤치프레스', info1, params1)
+  // state 값 가져오기
+  let select = useSelector(state => state)
+
+  // console.log('벤치프레스', info1, params1)
   // console.log('데드리프트', info2, params2)
   // console.log('스쿼트', info3, params3)
   // console.log('-----------------')
@@ -251,7 +249,8 @@ function Onerm() {
                             </FlexBox>
                             <FlexBox>
                               <OnermLogo />
-                              <OnermRank count='12' />/<OnermRank count='28' />
+                              {post.rank.length !== 0 ? <OnermRank count={`${post.rank[0]['Bench_1rm.ranking']}/`} /> : null}
+                              {post.rank.length !== 0 ? <OnermRank count={post.rank[1]} /> : null}
                               <ContentButton onClick={() => {setContentMenu(true)}} />
                             </FlexBox>
                           </BetweenBox>
@@ -264,8 +263,24 @@ function Onerm() {
                         <Box>
                           <BetweenBox>
                             <FlexBox>
-                              <RespectButton />
-                              <RespectButton img={respected} />
+
+                              {/* 리스펙 버튼 */}
+                              {post.respect.length === 0 ? <RespectButton post_id={post.id} where='bench'/> : (
+                                (post.respect.map((respect) => {
+                                  if(respect.user_id === select.auth.user_info.id) {
+                                    return(1)
+                                  } 
+                                })).indexOf(1) !== -1 ?
+                                post.respect.map((respect, idx1) => {
+                                  if(respect.user_id === select.auth.user_info.id) {
+                                    return(
+                                      <RespectedButton key={idx1} />
+                                    )
+                                  } 
+                                })
+                                : <RespectButton post_id={post.id} where='bench'/>
+                              )}
+                            
                               <CommentButton />
                             </FlexBox>
                             <OnermRecord record={post.kg}  />
@@ -332,7 +347,8 @@ function Onerm() {
                             </FlexBox>
                             <FlexBox>
                               <OnermLogo />
-                              <OnermRank count='12' />/<OnermRank count='28' />
+                              {post.rank.length !== 0 ? <OnermRank count={`${post.rank[0]['Dead_1rm.ranking']}/`} /> : null}
+                              {post.rank.length !== 0 ? <OnermRank count={post.rank[1]} /> : null}
                               <ContentButton onClick={() => {setContentMenu(true)}} />
                             </FlexBox>
                           </BetweenBox>
@@ -345,8 +361,24 @@ function Onerm() {
                         <Box>
                           <BetweenBox>
                             <FlexBox>
-                              <RespectButton />
-                              <RespectButton img={respected} />
+                              
+                              {/* 리스펙 버튼 */}
+                              {post.respect.length === 0 ? <RespectButton post_id={post.id} where='dead'/> : (
+                                (post.respect.map((respect) => {
+                                  if(respect.user_id === select.auth.user_info.id) {
+                                    return(1)
+                                  } 
+                                })).indexOf(1) !== -1 ?
+                                post.respect.map((respect, idx2) => {
+                                  if(respect.user_id === select.auth.user_info.id) {
+                                    return(
+                                      <RespectedButton key={idx2} />
+                                    )
+                                  } 
+                                })
+                                : <RespectButton post_id={post.id} where='dead'/>
+                              )}
+
                               <CommentButton />
                             </FlexBox>
                             <OnermRecord record={post.kg}  />
@@ -413,7 +445,8 @@ function Onerm() {
                             </FlexBox>
                             <FlexBox>
                               <OnermLogo />
-                              <OnermRank count='12' />/<OnermRank count='28' />
+                              {post.rank.length !== 0 ? <OnermRank count={`${post.rank[0]['Squat_1rm.ranking']}/`} /> : null}
+                              {post.rank.length !== 0 ? <OnermRank count={post.rank[1]} /> : null}
                               <ContentButton onClick={() => {setContentMenu(true)}} />
                             </FlexBox>
                           </BetweenBox>
@@ -426,8 +459,24 @@ function Onerm() {
                         <Box>
                           <BetweenBox>
                             <FlexBox>
-                              <RespectButton />
-                              <RespectButton img={respected} />
+                              
+                              {/* 리스펙 버튼 */}
+                              {post.respect.length === 0 ? <RespectButton post_id={post.id} where='squat'/> : (
+                                (post.respect.map((respect) => {
+                                  if(respect.user_id === select.auth.user_info.id) {
+                                    return(1)
+                                  } 
+                                })).indexOf(1) !== -1 ?
+                                post.respect.map((respect, idx3) => {
+                                  if(respect.user_id === select.auth.user_info.id) {
+                                    return(
+                                      <RespectedButton key={idx3} />
+                                    )
+                                  } 
+                                })
+                                : <RespectButton post_id={post.id} where='squat'/>
+                              )}
+
                               <CommentButton />
                             </FlexBox>
                             <OnermRecord record={post.kg}  />

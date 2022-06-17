@@ -30,6 +30,7 @@ import CommentSubmit from "../Atoms/CommentSubmit";
 import CommentMenu from "../Atoms/CommentMenu";
 import ContentButton from "../Atoms/ContentButton";
 import ContentMoreButton from "../Atoms/ContentMoreButton";
+import LikedButton from "../Atoms/LikedButton";
 
 // Organism
 import ContentModal from "../Organism/ContentModal";
@@ -122,6 +123,12 @@ function OhWunWan() {
     })
   }, [params])
 
+  // state 값 가져오기
+  let select = useSelector(state => state)
+  
+  // 유저 아이디 값
+  // console.log(select.auth.user_info.id)
+
   // console.log(info)
 
   return(
@@ -139,9 +146,9 @@ function OhWunWan() {
             return(
               <div key={index}>
                 {arr.length === 0 ? null : (
-                  arr.map((post, index2) => {
+                  arr.map((post, index) => {
                     return(
-                      <PostBlock key={index2}>
+                      <PostBlock key={index}>
                         <BorderBox>
                           <BetweenBox>
                             <FlexBox>
@@ -158,8 +165,23 @@ function OhWunWan() {
 
                         <Box>
                           <FlexBox>
-                            <LikeButton />
-                            <LikeButton img={liked} />
+                            {/* 좋아요 버튼 */}
+                            {post.like.length === 0 ? <LikeButton post_id={post.id} where='ohwunwan'/> : (
+                              (post.like.map((like) => {
+                                if(like.user_id === select.auth.user_info.id) {
+                                  return(1)
+                                } 
+                              })).indexOf(1) !== -1 ?
+                              post.like.map((like) => {
+                                if(like.user_id === select.auth.user_info.id) {
+                                  return(
+                                    <LikedButton key={index} post_id={post.id} where='ohwunwan' like_id={like.id}/>
+                                  )
+                                } 
+                              })
+                              : <LikeButton post_id={post.id} where='ohwunwan'/>
+                            )}
+                            
                             <CommentButton />
                           </FlexBox>
                           <BetweenBox>
@@ -176,9 +198,9 @@ function OhWunWan() {
                         </Box>
                         
                         {post.comment.length === 0 ? null : (
-                          post.comment.map((comment, index3) => {
+                          post.comment.map((comment, index) => {
                             return(
-                              <CommentBlock key={index3}>
+                              <CommentBlock key={index}>
                                 <BetweenBox>
                                   <FlexBox>
                                     <ProfilePicture img={comment['User.profile_picture']} />
