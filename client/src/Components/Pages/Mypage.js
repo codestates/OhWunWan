@@ -40,6 +40,8 @@ import CommentSubmit from "../Atoms/CommentSubmit";
 import ContentButton from "../Atoms/ContentButton";
 import CommentMenu from "../Atoms/CommentMenu";
 import MypageCafegory from "../Atoms/MypageCafegory";
+import ContentMoreButton from "../Atoms/ContentMoreButton";
+import LikedButton from "../Atoms/LikedButton";
 
 // Organism
 import LogoutModal from "../Organism/LogoutModal";
@@ -126,8 +128,30 @@ function Mypage() {
   const [select4, setSelect4] = useState(false)
   const [select5, setSelect5] = useState(false)
 
+  // get 정보 // info로 map 함수 실행
+  const [info1, setInfo1] = useState([])
+  const [info2, setInfo2] = useState([])
+  const [info3, setInfo3] = useState([])
+  const [info4, setInfo4] = useState([])
+  const [info5, setInfo5] = useState([])
+
+  // 요청시 parameter로 들어가는 숫자
+  const [params1, setParams1] = useState(0)
+  const [params2, setParams2] = useState(0)
+  const [params3, setParams3] = useState(0)
+  const [params4, setParams4] = useState(0)
+  const [params5, setParams5] = useState(0)
+
   // 정보
   const [mypage_info, setMypage_info] = useState([])
+
+   // 게시물의 id를 가져오기 위한 상태관리
+   const [postingId, setPostingId] = useState('')
+
+   // 게시물의 id를 끌어올려 전달해주는 핸들러 
+  const postingIdHandler = (value) => {
+    setPostingId(value)
+  }
 
   // 현재 페이지
   let select = useSelector(state => state)
@@ -150,7 +174,106 @@ function Mypage() {
     })
   }, [])
 
-  console.log(mypage_info)
+  // 페이지 전환시 초기값(오운완)
+  useEffect(() => {
+    setInfo1([])
+    setParams1(0)
+  }, [select1])
+
+  // 페이지 전환시 초기값(벤치프레스)
+  useEffect(() => {
+    setInfo2([])
+    setParams2(0)
+  }, [select2])
+
+  // 페이지 전환시 초기값(데드리프트)
+  useEffect(() => {
+    setInfo3([])
+    setParams3(0)
+  }, [select3])
+
+  // 페이지 전환시 초기값(스쿼트)
+  useEffect(() => {
+    setInfo4([])
+    setParams4(0)
+  }, [select4])
+
+  // 페이지 전환시 초기값(피드백)
+  useEffect(() => {
+    setInfo5([])
+    setParams5(0)
+  }, [select5])
+
+  // Read-More 버튼 추가 정보(오운완)
+  useEffect(() => {
+    axios({
+      method: 'get',
+      url: `${STYLE.SERVER}/user/ohwunwan/${select.auth.user_info.id}/${params1}`
+      // url: `${STYLE.SERVER}/user/ohwunwan/${mypage_info[0].user_info.id}/${params1}`
+    })
+    .then(res => {
+      setInfo1([...info1, res.data.data])
+    })
+  }, [params1])
+
+  // Read-More 버튼 추가 정보(벤치프레스)
+  useEffect(() => {
+    axios({
+      method: 'get',
+      url: `${STYLE.SERVER}/user/bench_1rm/${select.auth.user_info.id}/${params2}`
+      // url: `${STYLE.SERVER}/user/bench_1rm/${mypage_info[0].user_info.id}/${params2}`
+    })
+    .then(res => {
+      setInfo2([...info2, res.data.data])
+    })
+  }, [params2])
+
+  // Read-More 버튼 추가 정보(데드리프트)
+  useEffect(() => {
+    axios({
+      method: 'get',
+      url: `${STYLE.SERVER}/user/dead_1rm/${select.auth.user_info.id}/${params3}`
+      // url: `${STYLE.SERVER}/user/dead_1rm/${mypage_info[0].user_info.id}/${params3}`
+    })
+    .then(res => {
+      setInfo3([...info3, res.data.data])
+    })
+  }, [params3])
+
+  // Read-More 버튼 추가 정보(스쿼트)
+  useEffect(() => {
+    axios({
+      method: 'get',
+      url: `${STYLE.SERVER}/user/squat_1rm/${select.auth.user_info.id}/${params4}`
+      // url: `${STYLE.SERVER}/user/squat_1rm/${mypage_info[0].user_info.id}/${params4}`
+    })
+    .then(res => {
+      setInfo4([...info4, res.data.data])
+    })
+  }, [params4])
+
+  // Read-More 버튼 추가 정보(피드백)
+  useEffect(() => {
+    axios({
+      method: 'get',
+      url: `${STYLE.SERVER}/user/feedback/${select.auth.user_info.id}/${params5}`
+      // url: `${STYLE.SERVER}/user/feedback/${mypage_info[0].user_info.id}/${params5}`
+    })
+    .then(res => {
+      setInfo5([...info5, res.data.data])
+    })
+  }, [params5])
+
+  
+
+  // console.log(mypage_info)
+  console.log(info1)
+  // console.log(params1)
+  // console.log(info2)
+  // console.log(info3)
+  // console.log(info4)
+  // console.log(info5)
+  // console.log(params5)
 
   return(
     <Fragment>
@@ -225,6 +348,9 @@ function Mypage() {
                   setSelect3(false);
                   setSelect4(false);
                   setSelect5(false);
+
+                  // 초기값 데이터 변경을 위한 셋팅
+                  setParams1(1)
                 }
               }}
             />
@@ -239,6 +365,9 @@ function Mypage() {
                   setSelect3(false);
                   setSelect4(false);
                   setSelect5(false);
+
+                  // 초기값 데이터 변경을 위한 셋팅
+                  setParams2(1)
                 }
               }}
             />
@@ -253,6 +382,9 @@ function Mypage() {
                   setSelect3(true);
                   setSelect4(false);
                   setSelect5(false);
+
+                  // 초기값 데이터 변경을 위한 셋팅
+                  setParams3(1)
                 }
               }}
             />
@@ -267,6 +399,9 @@ function Mypage() {
                   setSelect3(false);
                   setSelect4(true);
                   setSelect5(false);
+
+                  // 초기값 데이터 변경을 위한 셋팅
+                  setParams4(1)
                 }
               }}
             />
@@ -281,69 +416,134 @@ function Mypage() {
                   setSelect3(false);
                   setSelect4(false);
                   setSelect5(true);
+
+                  // 초기값 데이터 변경을 위한 셋팅
+                  setParams5(1)
                 }
               }}
             />
           </BetweenBox>
         </Box>
-
       </Wrap>
 
       <Wrap>
+
+      {/* 오운완 map */}
+      {select1 ? (!info1.length ? <p>로딩중</p> : 
+          info1.map((arr, index) => {
+            return(
+              <div key={index}>
+                {arr.length === 0 ? null : (
+                  arr.map((post, index) => {
+                    return(
+                      <PostBlock key={index}>
+                        <BorderBox>
+                          <BetweenBox>
+                            <FlexBox>
+                              <ProfilePicture img={post["User.profile_picture"]} />
+                              <Id nickname={post["User.nickname"]}></Id>
+                            </FlexBox>
+                            <ContentButton onClick={() => {setContentMenu(true);postingIdHandler(post.id)}}/>
+                          </BetweenBox>
+                        </BorderBox>
+                        
+                        <BorderBox>
+                          <ContentPicture img={post.picture} />
+                        </BorderBox>
+
+                        <Box>
+                          <FlexBox>
+                            {/* 좋아요 버튼 */}
+                            {post.like.length === 0 ? <LikeButton post_id={post.id} where='ohwunwan'/> : (
+                              (post.like.map((like) => {
+                                if(like.user_id === select.auth.user_info.id) {
+                                  return(1)
+                                } 
+                              })).indexOf(1) !== -1 ?
+                              post.like.map((like) => {
+                                if(like.user_id === select.auth.user_info.id) {
+                                  return(
+                                    <LikedButton key={index} post_id={post.id} where='ohwunwan' like_id={like.id}/>
+                                  )
+                                } 
+                              })
+                              : <LikeButton post_id={post.id} where='ohwunwan'/>
+                            )}
+                            
+                            <CommentButton />
+                          </FlexBox>
+                          <BetweenBox>
+                            <FlexBox>
+                              <LikeCounts count={post.like.length} />
+                              <CommentCounts count={post.comment.length} />
+                            </FlexBox>
+                            <ContentTime time={post.createdAt.slice(0, 10) + ' ' + post.createdAt.slice(11, 19)} />
+                          </BetweenBox>
+                        </Box>
+
+                        <Box>
+                          <ContentText text={post.text_content} />
+                        </Box>
+                        
+                        {post.comment.length === 0 ? null : (
+                          post.comment.map((comment, index) => {
+                            return(
+                              <CommentBlock key={index}>
+                                <BetweenBox>
+                                  <FlexBox>
+                                    <ProfilePicture img={comment['User.profile_picture']} />
+                                    <Id nickname={comment['User.nickname']} />
+                                  </FlexBox>
+                                  <CommentMenu onClick={() => setCommentMenu(true)} />
+                                </BetweenBox>
+                                <FlexBox>
+                                  <Comment text={comment.text_content}  time={comment.createdAt.slice(0, 10) + ' ' + comment.createdAt.slice(11, 19)}/>
+                                </FlexBox>
+                              </CommentBlock>
+                            )
+                          })
+                        )}
+                          
+                        <BorderBox>
+                          <CommentInput />
+                          <CommentSubmit post_id={post.id} where='ohwunwan' />
+                        </BorderBox>
+                      </PostBlock>
+                    )
+                  })
+                )}    
+            </div>
+          )
+        })
+      ) : null}
+
+      
         
-      <PostBlock>
-          <BorderBox>
-            <BetweenBox>
-              <FlexBox>
-                <ProfilePicture img={user} />
-                <Id nickname='손흥민'></Id>
-              </FlexBox>
-              <ContentButton onClick={() => {setContentMenu(true)}} />
-            </BetweenBox>
-          </BorderBox>
-          
-          <BorderBox>
-            <ContentPicture img={pic1} />
-          </BorderBox>
 
-          <Box>
-            <FlexBox>
-              <LikeButton />
-              <LikeButton img={liked} />
-              <CommentButton />
-            </FlexBox>
-            <BetweenBox>
-              <FlexBox>
-                <LikeCounts count='0' />
-                <CommentCounts count='0' />
-              </FlexBox>
-              <ContentTime time='2022-06-10 20:40:08' />
-            </BetweenBox>
-          </Box>
+      {/* 오운완 more 버튼 */}
+      {select1 ? <ContentMoreButton onClick={() => {
+        setParams1(params1 + 1)
+      }} /> : null}
 
-          <Box>
-            <ContentText text='텍스트가 들어갈 자리입니다' />
-          </Box>
-          
-          <CommentBlock>
-            <BetweenBox>
-              <FlexBox>
-                <ProfilePicture img={user} />
-                <Id nickname='helloworld123' />
-              </FlexBox>
-              <CommentMenu onClick={() => setCommentMenu(true)} />
-            </BetweenBox>
-            <FlexBox>
-              <Comment text='댓글이 들어갈 자리입니다'  time='2022-06-13 20:40:08'/>
-            </FlexBox>
-          </CommentBlock>
-            
-          <BorderBox>
-            <CommentInput />
-            <CommentSubmit />
-          </BorderBox>
-        </PostBlock>
+      {/* 벤치프레스 more 버튼 */}
+      {select2 ? <ContentMoreButton onClick={() => {
+        setParams2(params2 + 1)
+      }} /> : null}
 
+      {/* 데드리프트 more 버튼 */}
+      {select3 ? <ContentMoreButton onClick={() => {
+        setParams3(params3 + 1)
+      }} /> : null}
+
+      {/* 스쿼트 more 버튼 */}
+      {select4 ? <ContentMoreButton onClick={() => {
+        setParams4(params4 + 1)
+      }} /> : null}
+
+      {/* 피드백 more 버튼 */}
+      {select5 ? <ContentMoreButton onClick={() => {
+        setParams5(params5 + 1)
+      }} /> : null}
       </Wrap>
     </Fragment>
   )
