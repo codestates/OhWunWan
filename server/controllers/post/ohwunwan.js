@@ -122,7 +122,7 @@ module.exports = {
             //잘못된 요청
             if (!req.body.ohwunwan_id) return res.status(400).json({ message: 'Bad Request!' });
             //사진 내용 모두 바꾸는 경우
-            if (req.file.location && req.body.text_content) {
+            if (req.file && req.body.text_content) {
                 const { ohwunwan_id, text_content } = req.body
                 const { location } = req.file
                 await Ohwunwan.update(
@@ -150,7 +150,7 @@ module.exports = {
                 return res.json({ message: 'The post has been changed' })
             }
             //사진만 바꾸는경우
-            else if (req.file.location) {
+            else if (req.file) {
                 const { ohwunwan_id } = req.body
                 const { location } = req.file
                 await Ohwunwan.update(

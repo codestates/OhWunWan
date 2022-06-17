@@ -149,7 +149,7 @@ module.exports = {
             //잘못된 요청
             if (!req.body.dead_1rm_id) return res.status(400).json({ message: 'Bad Request!' });
             //동영상 text_content 모두 바꾸는 경우
-            if (req.file.location && req.body.text_content) {
+            if (req.file && req.body.text_content) {
                 const { dead_1rm_id, text_content } = req.body
                 const { location } = req.file
                 await Dead_1rm.update(
@@ -177,7 +177,7 @@ module.exports = {
                 return res.json({ message: 'The post has been changed' })
             }
             //동영상만 바꾸는경우
-            else if (req.file.location) {
+            else if (req.file) {
                 const { dead_1rm_id } = req.body
                 const { location } = req.file
                 await Dead_1rm.update(
