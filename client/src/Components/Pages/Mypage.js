@@ -146,7 +146,7 @@ function Mypage() {
   useEffect(() => {
     axios.get(`${STYLE.SERVER}/user/${select.auth.user_info.id}`)
     .then((req) => {
-      setMypage_info(req.data.data)
+      setMypage_info([req.data.data])
     })
   }, [])
 
@@ -166,9 +166,9 @@ function Mypage() {
         <MarginBox />
 
         <BorderBox>
-          <MypagePicture img={user} />
+          {mypage_info.length ? <MypagePicture img={mypage_info[0].user_info.profile_picture} /> : <MypagePicture img={user} /> }
           <FlexBox2>
-            <MypageId nickname='코드스테이츠' />
+            {mypage_info.length ? <MypageId nickname={mypage_info[0].user_info.nickname} /> : <MypageId /> }
             <Link to='/userinfo'>
               <MypageButton text='회원정보수정' />
             </Link>
@@ -183,33 +183,33 @@ function Mypage() {
           </AroundBox>
           <AroundBox>
             <FlexBox3>
-              <RecordRank record='33' />
-              <RecordTotal record='50' />
+              {mypage_info.length ? <RecordRank record={mypage_info[0].bench_rank[0]["Bench_1rm.ranking"]} /> : <RecordRank record='0' />}
+              {mypage_info.length ? <RecordTotal record={mypage_info[0].bench_rank[1]} /> : <RecordTotal record='0' />}
             </FlexBox3>
             <FlexBox3>
-              <RecordRank record='34' />
-              <RecordTotal record='51' />
+              {mypage_info.length ? <RecordRank record={mypage_info[0].dead_rank[0]["Dead_1rm.ranking"]} /> : <RecordRank record='0' />}
+              {mypage_info.length ? <RecordTotal record={mypage_info[0].dead_rank[1]} /> : <RecordTotal record='0' />}
             </FlexBox3>
             <FlexBox3>
-              <RecordRank record='35' />
-              <RecordTotal record='52' />
+              {mypage_info.length ? <RecordRank record={mypage_info[0].squat_rank[0]["Squat_1rm.ranking"]} /> : <RecordRank record='0' />}
+              {mypage_info.length ? <RecordTotal record={mypage_info[0].squat_rank[1]} /> : <RecordTotal record='0' />}
             </FlexBox3>
           </AroundBox>
           <AroundBox>
             <FlexBox3>
-              <RecordWeight record='10' />kg
+              {mypage_info.length ? <RecordWeight record={mypage_info[0].bench_rank[0]["Bench_1rm.ranking"]} /> : <RecordWeight record='0' />}kg
             </FlexBox3>
             <FlexBox3>
-              <RecordWeight record='15' />kg
+              {mypage_info.length ? <RecordWeight record={mypage_info[0].dead_rank[0]["Dead_1rm.ranking"]} /> : <RecordWeight record='0' />}kg
             </FlexBox3>
             <FlexBox3>
-              <RecordWeight record='20' />kg
+              {mypage_info.length ? <RecordWeight record={mypage_info[0].squat_rank[0]["Squat_1rm.ranking"]} /> : <RecordWeight record='0' />}kg
             </FlexBox3>
           </AroundBox>
         </Box>
 
         <CenterBox>
-          <Id nickname='코드스테이츠'></Id>
+          {mypage_info.length ? <Id nickname={mypage_info[0].user_info.nickname}></Id> : <Id nickname='코드스테이츠'></Id>}
           <Id nickname='님의 작성글'></Id>
         </CenterBox>
 
