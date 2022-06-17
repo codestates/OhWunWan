@@ -39,6 +39,7 @@ import CommentInput from "../Atoms/CommentInput";
 import CommentSubmit from "../Atoms/CommentSubmit";
 import ContentButton from "../Atoms/ContentButton";
 import CommentMenu from "../Atoms/CommentMenu";
+import MypageCafegory from "../Atoms/MypageCafegory";
 
 // Organism
 import LogoutModal from "../Organism/LogoutModal";
@@ -118,6 +119,13 @@ function Mypage() {
   const [contentMenu, setContentMenu] = useState(false)
   const [commentMenu, setCommentMenu] = useState(false)
 
+  // 카테코리 - 오운완, 벤치프레스, 데드리프트, 스쿼트, 피드백 변경하기 위한 state
+  const [select1, setSelect1] = useState(true)
+  const [select2, setSelect2] = useState(false)
+  const [select3, setSelect3] = useState(false)
+  const [select4, setSelect4] = useState(false)
+  const [select5, setSelect5] = useState(false)
+
   // 현재 페이지
   let select = useSelector(state => state)
   const dispatch = useDispatch()
@@ -191,6 +199,81 @@ function Mypage() {
           <Id nickname='코드스테이츠'></Id>
           <Id nickname='님의 작성글'></Id>
         </CenterBox>
+
+        <Box>
+          <BetweenBox>
+            {/* 오운완 버튼 누를 때 */}
+            <MypageCafegory subject='오운완' select={select1 ? 'select' : 'none'}
+              onClick={() => {
+                if(select1) {
+                } else {
+                  setSelect1(true);
+                  setSelect2(false);
+                  setSelect3(false);
+                  setSelect4(false);
+                  setSelect5(false);
+                }
+              }}
+            />
+
+            {/* 벤치프레스 버튼 누를 때 */}
+            <MypageCafegory subject='벤치프레스' select={select2 ? 'select' : 'none'}
+              onClick={() => {
+                if(select2) {
+                } else {
+                  setSelect1(false);
+                  setSelect2(true);
+                  setSelect3(false);
+                  setSelect4(false);
+                  setSelect5(false);
+                }
+              }}
+            />
+
+            {/* 데드리프트 버튼 누를 때 */}
+            <MypageCafegory subject='데드리프트' select={select3 ? 'select' : 'none'}
+              onClick={() => {
+                if(select3) {
+                } else {
+                  setSelect1(false);
+                  setSelect2(false);
+                  setSelect3(true);
+                  setSelect4(false);
+                  setSelect5(false);
+                }
+              }}
+            />
+
+            {/* 스쿼트 버튼 누를 때 */}
+            <MypageCafegory subject='스쿼트' select={select4 ? 'select' : 'none'}
+              onClick={() => {
+                if(select4) {
+                } else {
+                  setSelect1(false);
+                  setSelect2(false);
+                  setSelect3(false);
+                  setSelect4(true);
+                  setSelect5(false);
+                }
+              }}
+            />
+
+            {/* 피드백 버튼 누를 때 */}
+            <MypageCafegory subject='피드백' select={select5 ? 'select' : 'none'}
+              onClick={() => {
+                if(select5) {
+                } else {
+                  setSelect1(false);
+                  setSelect2(false);
+                  setSelect3(false);
+                  setSelect4(false);
+                  setSelect5(true);
+                }
+              }}
+            />
+          </BetweenBox>
+        </Box>
+
       </Wrap>
 
       <Wrap>
