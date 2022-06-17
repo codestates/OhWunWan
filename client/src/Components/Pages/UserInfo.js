@@ -16,6 +16,7 @@ import UserInfoInput from "../Atoms/UserInfoInput";
 import UserInfoSubmit from "../Atoms/UserInfoSubmit";
 import UserInfoSubmit2 from "../Atoms/UserInfoSubmit2";
 import ProfileUpload from "../Atoms/ProfileUpload";
+import { useSelector } from 'react-redux';
 
 const Wrap = styled.div`
   display: flex;
@@ -53,6 +54,8 @@ const BetweenBox = styled.div`
 `
 
 function UserInfo() {
+  const user_info = useSelector((state)=>state.auth.user_info)
+
   return (
     <Fragment>
       <Wrap>
@@ -61,10 +64,10 @@ function UserInfo() {
 
         <Box>
           <FlexBox>
-            <UserinfoPicture img={user} />
+            <UserinfoPicture img={user_info.profile_picture} />
             <FlexBox2>
-              <Id nickname='코드스테이츠' />
-              <ProfileUpload text='프로필 사진 바꾸기' />
+              <Id nickname={user_info.nickname} />
+              <ProfileUpload text='프로필 사진 바꾸기'/>
             </FlexBox2>
           </FlexBox>
 

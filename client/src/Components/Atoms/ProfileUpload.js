@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { Fragment } from "react"
+import { Fragment, useState } from "react"
 
 // 마이페이지 - 회원정보수정 - 프로필 사진 바꾸기
 
@@ -15,7 +15,8 @@ ProfileUpload.defaultProps = {
   onChange: (e) => console.log(e.target.files[0])
 }
 
-function ProfileUpload({text, onChange}) {
+function ProfileUpload({text}) {
+
   return(
     <Fragment>
       <label htmlFor='upload'>
@@ -25,7 +26,7 @@ function ProfileUpload({text, onChange}) {
         type='file'
         id='upload'
         accept="image/*"
-        onChange={onChange}
+        onChange={(e)=>{}}
         style={{ display: "none" }} 
       />
     </Fragment>

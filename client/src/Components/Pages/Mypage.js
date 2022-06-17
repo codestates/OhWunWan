@@ -117,7 +117,10 @@ function Mypage() {
   // 메뉴 열고 닫기
   const [contentMenu, setContentMenu] = useState(false)
   const [commentMenu, setCommentMenu] = useState(false)
-
+  
+  // 리덕스에서 유저 정보 가져오기  
+  const user_info = useSelector((state)=>state.auth.user_info)
+  console.log(user_info)
   // 현재 페이지
   let select = useSelector(state => state)
   const dispatch = useDispatch()
@@ -145,9 +148,9 @@ function Mypage() {
         <MarginBox />
 
         <BorderBox>
-          <MypagePicture img={user} />
+          <MypagePicture img={user_info.profile_picture}/>
           <FlexBox2>
-            <MypageId nickname='코드스테이츠' />
+            <MypageId nickname={user_info.nickname} />
             <Link to='/userinfo'>
               <MypageButton text='회원정보수정' />
             </Link>

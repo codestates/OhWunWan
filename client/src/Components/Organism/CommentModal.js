@@ -3,6 +3,8 @@ import { Fragment } from "react";
 import STYLE from "../../config"
 import SubmitButton from "../Atoms/SubmitButton"
 import axios from 'axios';
+import { useSelector } from 'react-redux';
+import UserInfo from '../Pages/UserInfo';
 
 const Div = styled.div`
   width: 100vw;
@@ -25,6 +27,8 @@ const Div2 = styled.div`
 `
 
 function CommentModal({setCommentMenu, category,commentInfo}) {
+  const user_info = useSelector((state)=>state.auth.user_info)
+  console.log(user_info)
   console.log(commentInfo)
   
   const deleteHandler = () => {
@@ -34,7 +38,7 @@ function CommentModal({setCommentMenu, category,commentInfo}) {
   }
   
   const selectHandler = () => {
-    axios.post(`${STYLE.SERVER}/${category}_comment/selection`,{data:commentInfo.id})
+    axios.post(`${STYLE.SERVER}/comment/${category}_comment/selection`,{feedback_comment_id:commentInfo.id})
     .then((res)=>{window.location.replace(`${STYLE.CLIENT}/${category === "bench_1rm" ? "1rm" : category ==="dead_1rm" ? "1rm" : category ==="squat_1rm" ? "1rm" :category }`)})
     .catch((err)=>console.log(err))
   }
@@ -42,7 +46,7 @@ function CommentModal({setCommentMenu, category,commentInfo}) {
   return(
     <Fragment>
       <Div>
-        {category ==='feedback' ?
+        {category ==='feedback' && user_info.id!==commentInfo["User.id"] ?
         <Div2>
           <SubmitButton text='채택' type='blue' onClick={()=>selectHandler()}/>
         </Div2>:''}
