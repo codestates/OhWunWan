@@ -1,21 +1,20 @@
 import styled from "styled-components"
-import STYLE  from "../../config";
+import STYLE from "../../config"
+import {useDispatch,useSelector} from "react-redux"
+// 포스팅 페이지 => 텍스트 입력창
 
 const Input = styled.textarea`
-  width: ${props => props.comment === 'comment' ? "34em" : "92%"};
-  height: ${props => props.comment === 'comment' ? "1.5em" : "15em"};
-  font-size: 1em;
-  resize: none; // 크기 변경 불가
-  border: none;
+  width: 37.5em;
+  height: 10em;
+  border: 0.1em solid ${STYLE.BORDER_COLOR};
+  resize: none;
+  outline: none;
 `
 
-PostInput.defaultProps = {
-}
+function PostInput({textHandler,editText}) {
 
-function PostInput({comment, type}) {
   return (
-    <Input comment={comment} placeholder={comment === "comment" ? "댓글을 입력해주세요" : 
-    type === "nickname" ? "바꾸실 닉네임을 입력하세요" : "댓글을 입력해주세요"}></Input>
+    <Input type='text' defaultValue={editText ? editText:''} onChange={(e)=>textHandler(e.target.value)}></Input>
   )
 }
 

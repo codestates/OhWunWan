@@ -18,7 +18,7 @@ module.exports = {
         },
       },
       video: {
-        type: Sequelize.BLOB,
+        type: Sequelize.STRING(1000),
         allowNull: false,
       },
       text_content: {

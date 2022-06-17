@@ -1,5 +1,7 @@
 import styled from "styled-components"
 
+// 게시물 시간
+
 const Time = styled.span`
   font-size: 1em;
   background-color: ${props => props.subject === "comment" ? "#000" : "#fff" };

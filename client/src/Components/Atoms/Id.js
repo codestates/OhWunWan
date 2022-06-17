@@ -1,22 +1,25 @@
 import styled from "styled-components"
+import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+
+// 게시글에 들어가는 아이디
+// 일단 댓글에도 사용중
+// 마이페이지 - 회원정보수정 - 아이디
 
 const Name = styled.span`
-  font-size: ${props => props.type === 'user' ? '1.6em' : '1em'};
-  margin-left: 0.2em;
-  width: 5em;
+  font-size: 1em;
+  /* margin-left: 0.2em; */
   user-select: none; // 드래그 금지
-  /* border: 0.1em solid #000; */
-  font-weight: ${props => props.type === 'user' ? 'bold' : 
-  props.type === 'mypage' ? 'bold' : 'none'}
+  font-weight: bold;
 `
 
-Id.defaultProps = {
-  nickname: 'codestates'
-}
+function Id({nickname}) {
+  const user = useSelector((state)=>state.auth.user_info.nickname)
 
-function Id({nickname, type}) {
   return(
-    <Name type={type}>{nickname}</Name>
+    <Link to={`/mypage/${user}`}>
+      <Name >{nickname}</Name>
+    </Link>
   )
 }
 

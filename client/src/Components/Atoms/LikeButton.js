@@ -1,4 +1,9 @@
 import styled from "styled-components"
+import { useSelector } from "react-redux"
+import axios from "axios"
+import STYLE from "../../config"
+
+// 게시글 좋아요 버튼 (좋아요 적용 안된 하트 - 하양 하트)
 
 // img
 import like from "../Picture/LikeButton/like.png"
@@ -16,12 +21,36 @@ const Button = styled.div`
 
 LikeButton.defaultProps = {
   img: like,
-  like: () => {console.log("좋아요 버튼 동작")}
 }
 
-function LikeButton ({img, like}) {
+function LikeButton ({img, post_id, where}) {
+   // state 값 가져오기
+   let select = useSelector(state => state)
+
   return (
-    <Button img={img} onClick={like}></Button>
+    <Button img={img} onClick={() => {
+      // 오운완 좋아요
+      if(where === 'ohwunwan') {
+        axios.post(`${STYLE.SERVER}/like/${where}_like`, {
+          ohwunwan_id: post_id,
+          user_id: select.auth.user_info.id
+        })
+        .then(() => {
+          window.location.href = `${STYLE.CLIENT}/${where}`
+        })
+      } else 
+
+      // 피드백 좋아요
+      if(where === 'feedback') {
+        axios.post(`${STYLE.SERVER}/like/${where}_like`, {
+          feedback_id: post_id,
+          user_id: select.auth.user_info.id
+        })
+        .then(() => {
+          window.location.href = `${STYLE.CLIENT}/${where}`
+        })
+      }
+    }}></Button>
   )
 } 
 

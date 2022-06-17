@@ -1,7 +1,9 @@
 import styled from "styled-components"
 
+// 헤더랑 게시글 중간에 마진용으로 사용
+
 const Div = styled.div`
-  margin-top: ${props => props.type !== 'cafegory' ? '3.8em' : '3.6em'}
+  margin-top: 3.6em;
 `
 
 function MarginBox({type}) {
