@@ -212,7 +212,7 @@ function Feedback() {
                                         <ProfilePicture img={comment['User.profile_picture']} />
                                         <Id nickname={comment['User.nickname']} />
                                       </FlexBox>
-                                      {post["User.nickname"]===user_info.nickname? <CommentMenu onClick={() => {setCommentMenu(true);commentInfoHandler(post.comment[index3])}} /> 
+                                      {post["User.nickname"]===user_info.nickname? <CommentMenu onClick={() => {setCommentMenu(true);commentInfoHandler(post.comment[index3]);console.log(post["User.nickname"])}} /> 
                                       : post.comment[index3]["User.nickname"]===user_info.nickname? <CommentMenu onClick={() => {setCommentMenu(true);commentInfoHandler(post.comment[index3])}} />:''}
                                     </BetweenBox>
                                     <FlexBox>

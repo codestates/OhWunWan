@@ -31,12 +31,14 @@ function CommentModal({setCommentMenu, category,commentInfo}) {
   console.log(user_info)
   console.log(commentInfo)
   
+  // 댓글 삭제 핸들러
   const deleteHandler = () => {
     axios.delete(`${STYLE.SERVER}/comment/${category}_comment/${commentInfo.id}`)
     .then((res)=>{window.location.replace(`${STYLE.CLIENT}/${category === "bench_1rm" ? "1rm" : category ==="dead_1rm" ? "1rm" : category ==="squat_1rm" ? "1rm" :category }`)})
     .catch((err)=>console.log(err))
   }
   
+  // 댓글 채택 핸들러
   const selectHandler = () => {
     axios.post(`${STYLE.SERVER}/comment/${category}_comment/selection`,{feedback_comment_id:commentInfo.id})
     .then((res)=>{window.location.replace(`${STYLE.CLIENT}/${category === "bench_1rm" ? "1rm" : category ==="dead_1rm" ? "1rm" : category ==="squat_1rm" ? "1rm" :category }`)})
@@ -46,7 +48,7 @@ function CommentModal({setCommentMenu, category,commentInfo}) {
   return(
     <Fragment>
       <Div>
-        {category ==='feedback' && user_info.id!==commentInfo["User.id"] ?
+        {(category ==='feedback' && user_info.nickname!==commentInfo["User.nickname"])?
         <Div2>
           <SubmitButton text='채택' type='blue' onClick={()=>selectHandler()}/>
         </Div2>:''}

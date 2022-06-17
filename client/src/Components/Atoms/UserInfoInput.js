@@ -13,9 +13,9 @@ const Input = styled.textarea`
   outline: none;
 `
 
-function UserInfoInput() {
+function UserInfoInput({nicknameHandler}) {
   return (
-    <Input type='text'></Input>
+    <Input type='text' onChange={(e)=>nicknameHandler(e.target.value)}></Input>
   )
 }
 

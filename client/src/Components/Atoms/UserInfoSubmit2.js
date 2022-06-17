@@ -1,4 +1,7 @@
 import styled from "styled-components"
+import STYLE from '../../config'
+import axios from 'axios'
+import { useSelector } from 'react-redux'
 
 // 마이페이지 - 회원정보수정 - 회원탈퇴 버튼
 
@@ -20,9 +23,18 @@ UserInfoSubmit2.defaultProps = {
   onClick: () => {console.log('제출 버튼 동작')}
 }
 
-function UserInfoSubmit2({text, onClick}) {
+function UserInfoSubmit2({text}) {
+  const user_info = useSelector((state)=>state.auth.user_info)
+  console.log(user_info)
+  const deleteHandler = () => {
+    axios.post(`${STYLE.SERVER}/auth/logout`).then(()=>
+    axios.delete(`${STYLE.SERVER}/user/${user_info.id}`))
+    .then((res)=>{window.location.replace(`${STYLE.CLIENT}/`)})
+    .catch((err)=>console.log(err))
+  }
+
   return(
-    <Button onClick={onClick} >{text}</Button>
+    <Button onClick={()=>deleteHandler()} >{text}</Button>
   )
 }
 

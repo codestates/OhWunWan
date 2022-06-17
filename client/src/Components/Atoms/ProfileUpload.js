@@ -15,8 +15,7 @@ ProfileUpload.defaultProps = {
   onChange: (e) => console.log(e.target.files[0])
 }
 
-function ProfileUpload({text}) {
-
+function ProfileUpload({text, profilePictureHandler}) {
   return(
     <Fragment>
       <label htmlFor='upload'>
@@ -26,7 +25,7 @@ function ProfileUpload({text}) {
         type='file'
         id='upload'
         accept="image/*"
-        onChange={(e)=>{}}
+        onChange={(e)=>{profilePictureHandler(e.target.files[0])}}
         style={{ display: "none" }} 
       />
     </Fragment>

@@ -670,7 +670,7 @@ module.exports = {
 
 
     patch: async (req, res) => {
-        try {
+        try {console.log(req.body)
             if (!req.body.user_id) return res.status(400).json({ message: 'Bad Request!' })
             const { user_id } = req.body;
             console.log(user_id)

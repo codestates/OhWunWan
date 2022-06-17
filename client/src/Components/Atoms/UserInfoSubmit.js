@@ -1,4 +1,6 @@
 import styled from "styled-components"
+import axios from 'axios'
+import STYLE from '../../config'
 
 // 마이페이지 - 회원정보수정 - 닉네임 변경 버튼
 
@@ -17,9 +19,22 @@ UserInfoSubmit.defaultProps = {
   onClick: () => {console.log('제출 버튼 동작')}
 }
 
-function UserInfoSubmit({text, onClick,}) {
+function UserInfoSubmit({text,nickname, onClick,editFormdata}) {
+  // 수정을 위해 서버로 보내는 요청 
+  const editHandler = () => {
+    axios({
+      method: 'patch',
+      url: `${STYLE.SERVER}/user`,
+      data: editFormdata,
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    }).then((res)=>window.location.replace(`${STYLE.CLIENT}/user`))
+  .catch((err)=>console.log(err))
+  }
+
   return(
-    <Button onClick={onClick} >{text}</Button>
+    <Button onClick={()=>editHandler()} >{text}</Button>
   )
 }
 
