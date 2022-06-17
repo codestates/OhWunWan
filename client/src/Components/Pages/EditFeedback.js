@@ -79,7 +79,7 @@ function EditFeedback() {
         
         <BetweenBox>
           <PostSubject text='' />
-          <PostSubject text='오운완' />
+          <PostSubject text='피드백' />
           <PostSubmit editFormdata={editFormdata} url={"ohwunwan"} replace={"ohwunwan"} />
         </BetweenBox>
 
