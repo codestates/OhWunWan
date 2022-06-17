@@ -52,7 +52,7 @@ module.exports={
     },
     selection: async(req,res)=>{
         try{
-            // console.log(req.body)
+            console.log("채택!!!!",req.body)
             if(!req.body.feedback_comment_id) return res.status(400).json({ message: 'Bad Request!' })
             const{feedback_comment_id} =req.body
             await Feedback_comment.update(

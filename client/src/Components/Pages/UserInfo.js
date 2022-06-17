@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import STYLE from "../../config";
 
 // header, 마진
@@ -16,6 +16,7 @@ import UserInfoInput from "../Atoms/UserInfoInput";
 import UserInfoSubmit from "../Atoms/UserInfoSubmit";
 import UserInfoSubmit2 from "../Atoms/UserInfoSubmit2";
 import ProfileUpload from "../Atoms/ProfileUpload";
+import { useSelector } from 'react-redux';
 
 const Wrap = styled.div`
   display: flex;
@@ -53,6 +54,28 @@ const BetweenBox = styled.div`
 `
 
 function UserInfo() {
+  const user_info = useSelector((state)=>state.auth.user_info)
+  console.log(user_info)
+
+  // user_info 변경을 위한 상태관리와 핸들러 
+  const [nickname, setNickname] = useState('')
+  const [profilePicture, setProfilePicture ] = useState('')
+  
+  const nicknameHandler = (value) => {
+    setNickname(value)
+  }
+
+  const profilePictureHandler = (value) => {
+    setProfilePicture(value)
+  }
+
+
+  // 서버로 전송을 위한 객체 생성
+  const editFormdata = new FormData()
+  editFormdata.append('user_id',user_info.id)
+  editFormdata.append('nickname',nickname)
+  editFormdata.append('file',profilePicture)
+
   return (
     <Fragment>
       <Wrap>
@@ -61,18 +84,18 @@ function UserInfo() {
 
         <Box>
           <FlexBox>
-            <UserinfoPicture img={user} />
+            <UserinfoPicture img={user_info.profile_picture} />
             <FlexBox2>
-              <Id nickname='코드스테이츠' />
-              <ProfileUpload text='프로필 사진 바꾸기' />
+              <Id nickname={user_info.nickname} />
+              <ProfileUpload text='프로필 사진 바꾸기' profilePictureHandler={profilePictureHandler}/>
             </FlexBox2>
           </FlexBox>
 
           <div>
             <Id text='닉네임' />
             <FlexBox>
-              <UserInfoInput />
-              <UserInfoSubmit onClick={() => {}} />
+              <UserInfoInput nicknameHandler={nicknameHandler}/>
+              <UserInfoSubmit onClick={() => {}} nickname={nickname} editFormdata={editFormdata}/>
             </FlexBox>
           </div>
         </Box>
@@ -81,7 +104,7 @@ function UserInfo() {
           <Box2>
             <BetweenBox>
               <span>회원탈퇴를 진행하시고, 되돌릴 수 없으니 신중히 선택해주세요.</span>
-              <UserInfoSubmit2 onClick={() => {}}/>
+              <UserInfoSubmit2/>
             </BetweenBox>
           </Box2>
           

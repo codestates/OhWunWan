@@ -1,7 +1,8 @@
 import styled from "styled-components"
-import { Fragment, useState } from "react";
+import { Fragment, useState ,useEffect} from "react";
 import STYLE from "../../config";
 import {useSelector} from "react-redux" 
+
 
 
 // header, 마진
@@ -43,23 +44,26 @@ function PostOhwunwan() {
   // 작성글, 업로드 사진 상태관리
   const [text_content,setText_content] = useState('')
   const [picture, setPicture] = useState('')
-  
+
   // 서버로 전송을 위한 객체 생성
   const formdata = new FormData()
+  // 수정을 위한 객체 생성 
   
   // 핸들러를 통한 상태 관리
   const textHandler = (value) => {
     setText_content(value)
   }   
+  //console.log(text_content)
   const imageHandler = (value) => {
     setPicture(value)
   }
-
+  
   // 생성된 객체에 데이터 담아주기
   formdata.append('user_id', copied.id)
   formdata.append('text_content', text_content)
   formdata.append('file', picture)
-  // console.log(formdata.getAll("file"))
+  console.log(formdata.getAll("file"))
+  
 
   return(
     <Fragment>
@@ -74,12 +78,12 @@ function PostOhwunwan() {
         </BetweenBox>
 
         <BetweenBox>
-          <PostInput textHandler={textHandler}/>
-          <PostUpload imageHandler={imageHandler}/>
+          <PostInput textHandler={textHandler} />
+          <PostUpload imageHandler={imageHandler} />
         </BetweenBox>
 
         <BetweenBox>
-          <PostPicture img={picture? URL.createObjectURL(picture):preview} /> 
+          <PostPicture img={picture? URL.createObjectURL(picture) : preview} /> 
         </BetweenBox>
 
       </Wrap>

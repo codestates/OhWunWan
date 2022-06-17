@@ -13,10 +13,6 @@ const Name = styled.span`
   font-weight: bold;
 `
 
-Id.defaultProps = {
-  nickname: 'codestates'
-}
-
 function Id({nickname}) {
   const user = useSelector((state)=>state.auth.user_info.nickname)
 

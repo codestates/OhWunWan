@@ -80,12 +80,20 @@ function OhWunWan() {
   const [commentMenu, setCommentMenu] = useState(false)
 
   // 게시물의 id를 가져오기 위한 상태관리
-  const [postingId, setPostingId] = useState('')
+  const [postInfo, setPostInfo] = useState('')
+  // 댓글의 id를 가져오기 위한 상태관리
+  const [commentInfo, setCommentInfo] = useState('')
+
   // 게시물의 id를 끌어올려 전달해주는 핸들러 
-  const postingIdHandler = (value) => {
-    setPostingId(value)
+  const postInfoHandler = (value) => {
+    setPostInfo(value)
   }
-  //console.log("아래 mapping에서 가져온 게시물의 Id:",postingId)
+  //console.log(postInfo)
+
+  const commentInfoHandler = (value) => {
+    setCommentInfo(value)
+  }
+
 
 
   // get 정보 // info[0]으로 map 함수 실행
@@ -93,6 +101,8 @@ function OhWunWan() {
   // 요청시 parameter로 들어가는 숫자
   const [params, setParams] = useState(0)
 
+  // 리덕스에 저장된 유저정보 가져오기
+  const user_info = useSelector((state)=>state.auth.user_info)
   // 현재 페이지
   const dispatch = useDispatch()
 
@@ -135,8 +145,8 @@ function OhWunWan() {
     <Fragment>
       <Wrap>
         {/* 메뉴 열고 닫기 */}
-        {contentMenu ? <ContentModal setContentMenu={setContentMenu} category={"ohwunwan"} postingId={postingId}/> : null}
-        {commentMenu ? <CommentModal setCommentMenu={setCommentMenu} /> : null}
+        {contentMenu ? <ContentModal setContentMenu={setContentMenu} category={"ohwunwan"} postInfo={postInfo}/> : null}
+        {commentMenu ? <CommentModal setCommentMenu={setCommentMenu} category={"ohwunwan"} commentInfo={commentInfo}/> : null}
         
         <HeaderBlock/>
         <MarginBox />
@@ -155,7 +165,7 @@ function OhWunWan() {
                               <ProfilePicture img={post["User.profile_picture"]} />
                               <Id nickname={post["User.nickname"]}></Id>
                             </FlexBox>
-                            <ContentButton onClick={() => {setContentMenu(true);postingIdHandler(post.id)}}/>
+                            {post["User.nickname"]===user_info.nickname ?<ContentButton onClick={() => {setContentMenu(true);postInfoHandler(post)}}/>:''}
                           </BetweenBox>
                         </BorderBox>
                         
@@ -186,7 +196,7 @@ function OhWunWan() {
                           </FlexBox>
                           <BetweenBox>
                             <FlexBox>
-                              <LikeCounts count={post.like.length} />
+                              <LikeCounts count={Object.keys(post.like).length} />
                               <CommentCounts count={post.comment.length} />
                             </FlexBox>
                             <ContentTime time={post.createdAt.slice(0, 10) + ' ' + post.createdAt.slice(11, 19)} />
@@ -206,7 +216,7 @@ function OhWunWan() {
                                     <ProfilePicture img={comment['User.profile_picture']} />
                                     <Id nickname={comment['User.nickname']} />
                                   </FlexBox>
-                                  <CommentMenu onClick={() => setCommentMenu(true)} />
+                                  {post.comment[index]["User.nickname"]===user_info.nickname? <CommentMenu onClick={() => {setCommentMenu(true);commentInfoHandler(post.comment[index])}} />:''}
                                 </BetweenBox>
                                 <FlexBox>
                                   <Comment text={comment.text_content}  time={comment.createdAt.slice(0, 10) + ' ' + comment.createdAt.slice(11, 19)}/>
