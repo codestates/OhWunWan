@@ -123,6 +123,11 @@ const CommentBlock = styled.div`
   border: 0.1em solid ${STYLE.BORDER_COLOR};
 `
 
+const CommentSelect = styled.div`
+  width: ${STYLE.WIDTH};
+  border: 0.1em solid #2DA44E;
+`
+
 function Mypage() {
   // 메뉴 열고 닫기
   const [contentMenu, setContentMenu] = useState(false)
@@ -271,16 +276,9 @@ function Mypage() {
     })
   }, [params5])
 
-  
-
   // console.log(mypage_info)
-  console.log(info1)
+  // console.log(info1)
   // console.log(params1)
-  // console.log(info2)
-  // console.log(info3)
-  // console.log(info4)
-  // console.log(info5)
-  // console.log(params5)
 
   return(
     <Fragment>
@@ -818,6 +816,111 @@ function Mypage() {
           })
         ) : null}
         
+        {/* 피드백 map */}
+        {select5 ? (!info5.length ? <p>로딩중</p> : 
+          info5.map((arr, index) => {
+            return(
+              <div key={index}>
+                {arr.length === 0 ? null : (
+                  arr.map((post, index2) => {
+                    return(
+                      <PostBlock key={index2}>
+                        <BorderBox>
+                          <BetweenBox>
+                            <FlexBox>
+                              <ProfilePicture img={post["User.profile_picture"]} />
+                              <Id nickname={post["User.nickname"]}></Id>
+                            </FlexBox>
+                            <ContentButton onClick={() => {setContentMenu(true)}}/>
+                          </BetweenBox>
+                        </BorderBox>
+                        
+                        <BorderBox>
+                          <ContentVideo video={post.video} />
+                        </BorderBox>
+
+                        <Box>
+                          <FlexBox>
+                            {/* 좋아요 버튼 */}
+                            {post.like.length === 0 ? <LikeButton post_id={post.id} where='feedback'/> : (
+                              (post.like.map((like) => {
+                                if(like.user_id === select.auth.user_info.id) {
+                                  return(1)
+                                } 
+                              })).indexOf(1) !== -1 ?
+                              post.like.map((like) => {
+                                if(like.user_id === select.auth.user_info.id) {
+                                  return(
+                                    <LikedButton key={index} post_id={post.id} where='feedback' like_id={like.id}/>
+                                  )
+                                } 
+                              })
+                              : <LikeButton post_id={post.id} where='feedback'/>
+                            )}
+                            <CommentButton />
+                          </FlexBox>
+                          <BetweenBox>
+                            <FlexBox>
+                              <LikeCounts count={post.like.length}/>
+                              <CommentCounts count={post.comment.length} />
+                            </FlexBox>
+                            <ContentTime time={post.createdAt.slice(0, 10) + ' ' + post.createdAt.slice(11, 19)} />
+                          </BetweenBox>
+                        </Box>
+
+                        <Box>
+                          <ContentText text={post.text_content} />
+                        </Box>
+                        
+                        {post.comment.length === 0 ? null : (
+                          post.comment.map((comment, index3) => {
+                            return(
+                              <div key={index3}>
+                                {comment.selection ? (
+                                  <CommentSelect>
+                                    <BetweenBox>
+                                      <FlexBox>
+                                        <ProfilePicture img={comment['User.profile_picture']} />
+                                        <Id nickname={comment['User.nickname']} />
+                                      </FlexBox>
+                                      <CommentMenu onClick={() => setCommentMenu(true)} />
+                                    </BetweenBox>
+                                    <FlexBox>
+                                    <Comment text={comment.text_content}  time={comment.createdAt.slice(0, 10) + ' ' + comment.createdAt.slice(11, 19)}/>
+                                    </FlexBox>
+                                  </CommentSelect>
+                                ) : (
+                                  <CommentBlock>
+                                    <BetweenBox>
+                                      <FlexBox>
+                                        <ProfilePicture img={comment['User.profile_picture']} />
+                                        <Id nickname={comment['User.nickname']} />
+                                      </FlexBox>
+                                      <CommentMenu onClick={() => setCommentMenu(true)} />
+                                    </BetweenBox>
+                                    <FlexBox>
+                                    <Comment text={comment.text_content}  time={comment.createdAt.slice(0, 10) + ' ' + comment.createdAt.slice(11, 19)}/>
+                                    </FlexBox>
+                                  </CommentBlock>
+                                )}
+                              </div>  
+                            )
+                          })
+                        )}
+                      
+                        <BorderBox>
+                          <CommentInput />
+                          <CommentSubmit post_id={post.id} where='feedback' />
+                        </BorderBox>
+                      </PostBlock>
+                      
+                    ) 
+                  })
+                )}
+              </div>
+            )
+          })
+        ) : null}
 
       {/* 오운완 more 버튼 */}
       {select1 ? <ContentMoreButton onClick={() => {

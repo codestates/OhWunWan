@@ -176,8 +176,6 @@ function Onerm() {
   // console.log('스쿼트', info3, params3)
   // console.log('-----------------')
 
-  console.log(info1)
-
   return(
     <Fragment>
       <Wrap>
