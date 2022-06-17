@@ -719,6 +719,104 @@ function Mypage() {
             )
           })
         ) : null}
+
+        {/* 스쿼트 map */}
+        {select4 ? (!info4.length ? <p>로딩중</p> : 
+          info4.map((arr, index1) => {
+            return(
+              <div key={index1}>
+                {arr.length === 0 ? null : (
+                  arr.map((post, index2) => {
+                    return(
+                      <PostBlock key={index2}>
+                        <BorderBox>
+                          <BetweenBox>
+                            <FlexBox>
+                              <ProfilePicture img={post["User.profile_picture"]} />
+                              <Id nickname={post["User.nickname"]}></Id>
+                            </FlexBox>
+                            <FlexBox>
+                              <OnermLogo />
+                              {post.rank.length !== 0 ? <OnermRank count={`${post.rank[0]['Squat_1rm.ranking']}/`} /> : null}
+                              {post.rank.length !== 0 ? <OnermRank count={post.rank[1]} /> : null}
+                              <ContentButton onClick={() => {setContentMenu(true)}} />
+                            </FlexBox>
+                          </BetweenBox>
+                        </BorderBox>
+                        
+                        <BorderBox>
+                          <ContentVideo video={post.video} />
+                        </BorderBox>
+
+                        <Box>
+                          <BetweenBox>
+                            <FlexBox>
+                              
+                              {/* 리스펙 버튼 */}
+                              {post.respect.length === 0 ? <RespectButton post_id={post.id} where='squat'/> : (
+                                (post.respect.map((respect) => {
+                                  if(respect.user_id === select.auth.user_info.id) {
+                                    return(1)
+                                  } 
+                                })).indexOf(1) !== -1 ?
+                                post.respect.map((respect, idx3) => {
+                                  if(respect.user_id === select.auth.user_info.id) {
+                                    return(
+                                      <RespectedButton key={idx3} />
+                                    )
+                                  } 
+                                })
+                                : <RespectButton post_id={post.id} where='squat'/>
+                              )}
+
+                              <CommentButton />
+                            </FlexBox>
+                            <OnermRecord record={post.kg}  />
+                          </BetweenBox>
+                          <BetweenBox>
+                            <FlexBox>
+                              <RespectCounts count={post.respect.length} />
+                              <CommentCounts count={post.comment.length} />
+                            </FlexBox>
+                            <ContentTime time={post.createdAt.slice(0, 10) + ' ' + post.createdAt.slice(11, 19)} />
+                          </BetweenBox>
+                        </Box>
+
+                        <Box>
+                          <ContentText text={post.text_content} />
+                        </Box>
+                        
+                        {post.comment.length === 0 ? null : (
+                          post.comment.map((comment, index3) => {
+                            return(
+                              <CommentBlock key={index3}>
+                                <BetweenBox>
+                                  <FlexBox>
+                                    <ProfilePicture img={comment['User.profile_picture']} />
+                                    <Id nickname={comment['User.nickname']} />
+                                  </FlexBox>
+                                  <CommentMenu onClick={() => setCommentMenu(true)} />
+                                </BetweenBox>
+                                <FlexBox>
+                                  <Comment text={comment.text_content}  time={comment.createdAt.slice(0, 10) + ' ' + comment.createdAt.slice(11, 19)}/>
+                                </FlexBox>
+                              </CommentBlock>
+                            )
+                          })
+                        )}
+                        
+                        <BorderBox>
+                          <CommentInput />
+                          <CommentSubmit post_id={post.id} where='squat' />
+                        </BorderBox>
+                      </PostBlock>
+                    )
+                  })
+                )}
+              </div>
+            )
+          })
+        ) : null}
         
 
       {/* 오운완 more 버튼 */}
