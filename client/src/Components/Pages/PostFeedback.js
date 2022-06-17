@@ -8,15 +8,15 @@ import { useSelector,useDispatch } from 'react-redux';
 import HeaderBlock from "../Organism/HeaderBlock";
 import MarginBox from "../Atoms/MarginBox";
 
-// 더미데이터
-import preview from "../Picture/PostPicture/preview.webp"
+// 더미 동영상
+import dummy from "../Picture/dummy.mp4"
 
 // Atoms
 import PostSubject from "../Atoms/PostSubject";
 import PostSubmit from "../Atoms/PostSubmit";
 import PostInput from "../Atoms/PostInput";
 import PostUpload from "../Atoms/PostUpload";
-import PostPicture from "../Atoms/PostPicture";
+import ContentViedo from "../Atoms/ContentVideo"
 
 const Wrap = styled.div`
   display: flex;
@@ -81,7 +81,7 @@ function PostFeedback() {
         </BetweenBox>
 
         <BetweenBox>
-          <PostPicture img={preview}/>
+          <ContentViedo video={video ? URL.createObjectURL(video) : dummy} />
         </BetweenBox>
 
       </Wrap>
