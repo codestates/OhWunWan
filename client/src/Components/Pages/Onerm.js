@@ -176,6 +176,8 @@ function Onerm() {
   // console.log('스쿼트', info3, params3)
   // console.log('-----------------')
 
+  console.log(info1)
+
   return(
     <Fragment>
       <Wrap>
@@ -249,7 +251,8 @@ function Onerm() {
                             </FlexBox>
                             <FlexBox>
                               <OnermLogo />
-                              <OnermRank count={post.rank[0]['Bench_1rm.ranking']} />/<OnermRank count={post.rank[1]} />
+                              {post.rank.length !== 0 ? <OnermRank count={`${post.rank[0]['Bench_1rm.ranking']}/`} /> : null}
+                              {post.rank.length !== 0 ? <OnermRank count={post.rank[1]} /> : null}
                               <ContentButton onClick={() => {setContentMenu(true)}} />
                             </FlexBox>
                           </BetweenBox>
@@ -346,7 +349,8 @@ function Onerm() {
                             </FlexBox>
                             <FlexBox>
                               <OnermLogo />
-                              <OnermRank count={post.rank[0]['Dead_1rm.ranking']} />/<OnermRank count={post.rank[1]} />
+                              {post.rank.length !== 0 ? <OnermRank count={`${post.rank[0]['Dead_1rm.ranking']}/`} /> : null}
+                              {post.rank.length !== 0 ? <OnermRank count={post.rank[1]} /> : null}
                               <ContentButton onClick={() => {setContentMenu(true)}} />
                             </FlexBox>
                           </BetweenBox>
@@ -443,7 +447,8 @@ function Onerm() {
                             </FlexBox>
                             <FlexBox>
                               <OnermLogo />
-                              <OnermRank count={post.rank[0]['Squat_1rm.ranking']} />/<OnermRank count={post.rank[1]} />
+                              {post.rank.length !== 0 ? <OnermRank count={`${post.rank[0]['Squat_1rm.ranking']}/`} /> : null}
+                              {post.rank.length !== 0 ? <OnermRank count={post.rank[1]} /> : null}
                               <ContentButton onClick={() => {setContentMenu(true)}} />
                             </FlexBox>
                           </BetweenBox>

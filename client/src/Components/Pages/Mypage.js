@@ -126,6 +126,9 @@ function Mypage() {
   const [select4, setSelect4] = useState(false)
   const [select5, setSelect5] = useState(false)
 
+  // 정보
+  const [mypage_info, setMypage_info] = useState([])
+
   // 현재 페이지
   let select = useSelector(state => state)
   const dispatch = useDispatch()
@@ -138,6 +141,16 @@ function Mypage() {
     axios.post(`${STYLE.SERVER}/auth/logout`)
     .then((res)=>{dispatch(logout_modal(false));window.location.replace(`${STYLE.CLIENT}/`)})
   }
+
+  // 페이지 렌더링 시 초기 데이터 받기(유저정보, 기록)
+  useEffect(() => {
+    axios.get(`${STYLE.SERVER}/user/${select.auth.user_info.id}`)
+    .then((req) => {
+      setMypage_info(req.data.data)
+    })
+  }, [])
+
+  console.log(mypage_info)
 
   return(
     <Fragment>
