@@ -234,7 +234,7 @@ const feedbackCommentInfoHandler = (value) => {
   
   // 리덕스에서 유저 정보 가져오기  
   const user_info = useSelector((state)=>state.auth.user_info)
-  console.log(user_info)
+  // console.log(user_info)
   // 현재 페이지
   let select = useSelector(state => state)
   const dispatch = useDispatch()

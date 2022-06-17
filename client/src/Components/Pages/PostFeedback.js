@@ -81,7 +81,7 @@ function PostFeedback() {
         </BetweenBox>
 
         <BetweenBox>
-          <ContentVideo video={video ? URL.createObjectURL(video) : dummy} />
+          <ContentVideo video={video ? URL.createObjectURL(video) : null} />
         </BetweenBox>
 
       </Wrap>
