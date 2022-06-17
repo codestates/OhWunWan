@@ -16,7 +16,7 @@ import PostSubject from "../Atoms/PostSubject";
 import PostSubmit from "../Atoms/PostSubmit";
 import PostInput from "../Atoms/PostInput";
 import PostUpload from "../Atoms/PostUpload";
-import ContentViedo from "../Atoms/ContentVideo"
+import ContentVideo from "../Atoms/ContentVideo"
 
 const Wrap = styled.div`
   display: flex;
@@ -81,7 +81,7 @@ function PostFeedback() {
         </BetweenBox>
 
         <BetweenBox>
-          <ContentViedo video={video ? URL.createObjectURL(video) : dummy} />
+          <ContentVideo video={video ? URL.createObjectURL(video) : dummy} />
         </BetweenBox>
 
       </Wrap>
