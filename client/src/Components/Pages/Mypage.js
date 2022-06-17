@@ -311,27 +311,27 @@ function Mypage() {
           </AroundBox>
           <AroundBox>
             <FlexBox3>
-              {mypage_info.length ? <RecordRank record={mypage_info[0].bench_rank[0]["Bench_1rm.ranking"]} /> : <RecordRank record='0' />}
+              {mypage_info.length ? (mypage_info[0].bench_rank[0][0] ? <RecordRank record={mypage_info[0].bench_rank[0][0]["Bench_1rm.ranking"]} /> : <RecordRank record='0' />) : <RecordRank record='0' />}
               {mypage_info.length ? <RecordTotal record={mypage_info[0].bench_rank[1]} /> : <RecordTotal record='0' />}
             </FlexBox3>
             <FlexBox3>
-              {mypage_info.length ? <RecordRank record={mypage_info[0].dead_rank[0]["Dead_1rm.ranking"]} /> : <RecordRank record='0' />}
+              {mypage_info.length ? (mypage_info[0].dead_rank[0][0] ? <RecordRank record={mypage_info[0].dead_rank[0][0]["Dead_1rm.ranking"]} /> : <RecordRank record='0' />) : <RecordRank record='0' />}
               {mypage_info.length ? <RecordTotal record={mypage_info[0].dead_rank[1]} /> : <RecordTotal record='0' />}
             </FlexBox3>
             <FlexBox3>
-              {mypage_info.length ? <RecordRank record={mypage_info[0].squat_rank[0]["Squat_1rm.ranking"]} /> : <RecordRank record='0' />}
+              {mypage_info.length ? (mypage_info[0].squat_rank[0][0] ? <RecordRank record={mypage_info[0].bench_rank[0][0]["Squat_1rm.ranking"]} /> : <RecordRank record='0' />) : <RecordRank record='0' />}
               {mypage_info.length ? <RecordTotal record={mypage_info[0].squat_rank[1]} /> : <RecordTotal record='0' />}
             </FlexBox3>
           </AroundBox>
           <AroundBox>
             <FlexBox3>
-              {mypage_info.length ? <RecordWeight record={mypage_info[0].bench_rank[0]["Bench_1rm.ranking"]} /> : <RecordWeight record='0' />}kg
+              {mypage_info.length ? (mypage_info[0].bench_rank[0][0] ? <RecordWeight record={mypage_info[0].bench_rank[0][0]["Bench_1rm.kg"]} /> : <RecordWeight record='0' />) : <RecordRank record='0' />}kg
             </FlexBox3>
             <FlexBox3>
-              {mypage_info.length ? <RecordWeight record={mypage_info[0].dead_rank[0]["Dead_1rm.ranking"]} /> : <RecordWeight record='0' />}kg
+              {mypage_info.length ? (mypage_info[0].dead_rank[0][0] ? <RecordWeight record={mypage_info[0].dead_rank[0][0]["Dead_1rm.kg"]} /> : <RecordWeight record='0' />) : <RecordRank record='0' />}kg
             </FlexBox3>
             <FlexBox3>
-              {mypage_info.length ? <RecordWeight record={mypage_info[0].squat_rank[0]["Squat_1rm.ranking"]} /> : <RecordWeight record='0' />}kg
+              {mypage_info.length ? (mypage_info[0].bench_rank[0][0] ? <RecordWeight record={mypage_info[0].bench_rank[0][0]["Squat_1rm.kg"]} /> : <RecordWeight record='0' />) : <RecordRank record='0' />}kg
             </FlexBox3>
           </AroundBox>
         </Box>
