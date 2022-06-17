@@ -158,13 +158,17 @@ function Mypage() {
   const [mypage_info, setMypage_info] = useState([])
 
    // 게시물의 id를 가져오기 위한 상태관리
-   const [postingId, setPostingId] = useState('')
+  const [postingId, setPostingId] = useState('')
 
    // 게시물의 id를 끌어올려 전달해주는 핸들러 
   const postingIdHandler = (value) => {
     setPostingId(value)
   }
 
+  
+  // 리덕스에서 유저 정보 가져오기  
+  const user_info = useSelector((state)=>state.auth.user_info)
+  console.log(user_info)
   // 현재 페이지
   let select = useSelector(state => state)
   const dispatch = useDispatch()
@@ -297,6 +301,9 @@ function Mypage() {
           {mypage_info.length ? <MypagePicture img={mypage_info[0].user_info.profile_picture} /> : <MypagePicture img={user} /> }
           <FlexBox2>
             {mypage_info.length ? <MypageId nickname={mypage_info[0].user_info.nickname} /> : <MypageId /> }
+          {/* <MypagePicture img={user_info.profile_picture}/>
+          <FlexBox2>
+            <MypageId nickname={user_info.nickname} /> */}
             <Link to='/userinfo'>
               <MypageButton text='회원정보수정' />
             </Link>

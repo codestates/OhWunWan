@@ -670,7 +670,7 @@ module.exports = {
 
 
     patch: async (req, res) => {
-        try {
+        try {console.log(req.body)
             if (!req.body.user_id) return res.status(400).json({ message: 'Bad Request!' })
             const { user_id } = req.body;
             console.log(user_id)
@@ -682,11 +682,11 @@ module.exports = {
                 const { location } = req.file;
                 await User.update(
                     {
-                        where: { id: user_id, }
-                    },
-                    {
                         profile_picture: location,
                         nickname
+                    },
+                    {
+                        where: { id: user_id, }
                     },
                 );
             }

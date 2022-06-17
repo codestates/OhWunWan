@@ -22,6 +22,9 @@ import Post1rm from "./Components/Pages/Post1rm"
 import PostFeedback from "./Components/Pages/PostFeedback";
 import Mypage from "./Components/Pages/Mypage";
 import UserInfo from "./Components/Pages/UserInfo";
+import EditOhwunwan from './Components/Pages/EditOhwunwan.js';
+import EditFeedback from './Components/Pages/EditFeedback.js';
+import Edit1rm from './Components/Pages/Edit1rm.js';
 
 function App() {
   // store에서 state를 가져온다
@@ -70,7 +73,7 @@ function App() {
       <GlobalStyle />
       <Routes>
         
-        <Route path="/" element={<Welcome />}></Route>
+        <Route path="/" element={is_login? <OhWunWan />:<Welcome />}></Route>
         <Route path="/oauth/kakao" element={<Login />}></Route>
         <Route path="/ohwunwan" element={is_login ?<OhWunWan />:<Welcome />}></Route>
         <Route path="/1rm" element={is_login ?<Onerm />:<Welcome />}></Route>
@@ -79,6 +82,11 @@ function App() {
         <Route path="/post/ohwunwan" element={is_login ?<PostOhwunwan />:<Welcome />}></Route>
         <Route path="/post/1rm" element={is_login ?<Post1rm />:<Welcome />}></Route>
         <Route path="/post/feedback" element={is_login ?<PostFeedback />:<Welcome />}></Route>
+        <Route path="/post/ohwunwan/edit" element={is_login ?<EditOhwunwan />:<Welcome />}></Route>
+        <Route path="/post/feedback/edit" element={is_login ?<EditFeedback />:<Welcome />}></Route>
+        <Route path="/post/1rm/edit" element={is_login ?<Edit1rm />:<Welcome />}></Route>
+
+
         <Route path="/user" element={is_login ?<Mypage />:<Welcome />}></Route>
         <Route path="/userinfo" element={is_login ?<UserInfo />:<Welcome />}></Route>
       </Routes>

@@ -94,7 +94,40 @@ function Onerm() {
   const [params2, setParams2] = useState(0)
   const [params3, setParams3] = useState(0)
 
+  // 게시물의 id 가져오기 
+  const [benchInfo, setBenchInfo] = useState('')
+  const [deadInfo, setDeadInfo] = useState('')
+  const [squatInfo, setSquatInfo] = useState('')
 
+  let benchInfoHandler = (value) => {
+    setBenchInfo(value)
+  }
+  let deadInfoHandler = (value) => {
+    setDeadInfo(value)
+  }
+  let squatInfoHandler = (value) => {
+    setSquatInfo(value)
+  }
+
+  // 댓글의 id 가져오기
+  const [benchCommentInfo, setBenchCommentInfo] = useState('')
+  const [deadCommentInfo, setDeadCommentInfo] = useState('')
+  const [squatCommentInfo, setSquatCommentInfo] = useState('')
+  
+  const benchCommentInfoHandler = (value) => {
+    setBenchCommentInfo(value)
+  }
+  
+  const deadCommentInfoHandler = (value) => {
+    setDeadCommentInfo(value)
+  }
+  
+  const squatCommentInfoHandler = (value) => {
+    setSquatCommentInfo(value)
+  }
+  
+  // 리덕스에서 가져온 유저 정보
+  const user_info = useSelector((state)=>state.auth.user_info)
   // 현재 페이지
   const dispatch = useDispatch()
   useEffect(() => {
@@ -172,6 +205,7 @@ function Onerm() {
   let select = useSelector(state => state)
 
   // console.log('벤치프레스', info1, params1)
+  //console.log('벤치프레스', info1, params1)
   // console.log('데드리프트', info2, params2)
   // console.log('스쿼트', info3, params3)
   // console.log('-----------------')
@@ -180,8 +214,8 @@ function Onerm() {
     <Fragment>
       <Wrap>
         {/* 메뉴 열고 닫기 */}
-        {contentMenu ? <ContentModal setContentMenu={setContentMenu} category={categorySelector(select1,select2,select3)}/> : null}
-        {commentMenu ? <CommentModal setCommentMenu={setCommentMenu} /> : null}
+        {contentMenu ? <ContentModal setContentMenu={setContentMenu} category={categorySelector(select1,select2,select3)} postInfo={benchInfo? benchInfo : deadInfo? deadInfo : squatInfo? squatInfo:''}/> : null}
+        {commentMenu ? <CommentModal setCommentMenu={setCommentMenu} category={categorySelector(select1,select2,select3)} commentInfo={benchCommentInfo? benchCommentInfo : deadCommentInfo? deadCommentInfo : squatCommentInfo? squatCommentInfo:'' }/> : null}
 
         <HeaderBlock />
         <MarginBox />
@@ -251,7 +285,9 @@ function Onerm() {
                               <OnermLogo />
                               {post.rank.length !== 0 ? <OnermRank count={`${post.rank[0]['Bench_1rm.ranking']}/`} /> : null}
                               {post.rank.length !== 0 ? <OnermRank count={post.rank[1]} /> : null}
-                              <ContentButton onClick={() => {setContentMenu(true)}} />
+                              {/* <ContentButton onClick={() => {setContentMenu(true)}} />
+                              <OnermRank count='12' />/<OnermRank count='28' /> */}
+                              {post["User.nickname"]===user_info.nickname? <ContentButton onClick={() => {setContentMenu(true);benchInfoHandler(post)}} />: ''}
                             </FlexBox>
                           </BetweenBox>
                         </BorderBox>
@@ -307,7 +343,7 @@ function Onerm() {
                                     <ProfilePicture img={comment['User.profile_picture']} />
                                     <Id nickname={comment['User.nickname']} />
                                   </FlexBox>
-                                  <CommentMenu onClick={() => setCommentMenu(true)} />
+                                  {post.comment[index3]["User.nickname"]===user_info.nickname? <CommentMenu onClick={() => {setCommentMenu(true);benchCommentInfoHandler(post.comment[index3])}} />:''}
                                 </BetweenBox>
                                 <FlexBox>
                                   <Comment text={comment.text_content}  time={comment.createdAt.slice(0, 10) + ' ' + comment.createdAt.slice(11, 19)}/>
@@ -349,7 +385,9 @@ function Onerm() {
                               <OnermLogo />
                               {post.rank.length !== 0 ? <OnermRank count={`${post.rank[0]['Dead_1rm.ranking']}/`} /> : null}
                               {post.rank.length !== 0 ? <OnermRank count={post.rank[1]} /> : null}
-                              <ContentButton onClick={() => {setContentMenu(true)}} />
+                              {/* <ContentButton onClick={() => {setContentMenu(true)}} />
+                              <OnermRank count='12' />/<OnermRank count='28' /> */}
+                              {post["User.nickname"]===user_info.nickname ?<ContentButton onClick={() => {setContentMenu(true);deadInfoHandler(post)}} />:''}
                             </FlexBox>
                           </BetweenBox>
                         </BorderBox>
@@ -405,7 +443,7 @@ function Onerm() {
                                     <ProfilePicture img={comment['User.profile_picture']} />
                                     <Id nickname={comment['User.nickname']} />
                                   </FlexBox>
-                                  <CommentMenu onClick={() => setCommentMenu(true)} />
+                                  {post.comment[index3]["User.nickname"]===user_info.nickname? <CommentMenu onClick={() => {setCommentMenu(true);deadCommentInfoHandler(post.comment[index3])}} />:''}
                                 </BetweenBox>
                                 <FlexBox>
                                   <Comment text={comment.text_content}  time={comment.createdAt.slice(0, 10) + ' ' + comment.createdAt.slice(11, 19)}/>
@@ -447,7 +485,9 @@ function Onerm() {
                               <OnermLogo />
                               {post.rank.length !== 0 ? <OnermRank count={`${post.rank[0]['Squat_1rm.ranking']}/`} /> : null}
                               {post.rank.length !== 0 ? <OnermRank count={post.rank[1]} /> : null}
-                              <ContentButton onClick={() => {setContentMenu(true)}} />
+                              {/* <ContentButton onClick={() => {setContentMenu(true)}} />
+                              <OnermRank count='12' />/<OnermRank count='28' /> */}
+                              {post["User.nickname"]===user_info.nickname? <ContentButton onClick={() => {setContentMenu(true);squatInfoHandler(post)}}/>:''}
                             </FlexBox>
                           </BetweenBox>
                         </BorderBox>
@@ -503,7 +543,7 @@ function Onerm() {
                                     <ProfilePicture img={comment['User.profile_picture']} />
                                     <Id nickname={comment['User.nickname']} />
                                   </FlexBox>
-                                  <CommentMenu onClick={() => setCommentMenu(true)} />
+                                  {post.comment[index3]["User.nickname"]===user_info.nickname? <CommentMenu onClick={() => {setCommentMenu(true);squatCommentInfoHandler(post.comment[index3])}} />:''}
                                 </BetweenBox>
                                 <FlexBox>
                                   <Comment text={comment.text_content}  time={comment.createdAt.slice(0, 10) + ' ' + comment.createdAt.slice(11, 19)}/>

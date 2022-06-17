@@ -4,7 +4,6 @@ import STYLE from "../../config";
 import {useSelector} from "react-redux" 
 
 
-
 // header, 마진
 import HeaderBlock from "../Organism/HeaderBlock";
 import MarginBox from "../Atoms/MarginBox";
@@ -35,9 +34,13 @@ const BetweenBox = styled.div`
 `
 
 
-function PostOhwunwan() {
+function EditOhwunwan() {
   // 리덕스에서 유저 정보 가져오기
   const user_info = useSelector((state)=> state.auth.user_info) 
+
+  // 게시물 수정을 위해 리덕스에 저장된 해당 게시물 정보 가져오기
+  const post_info = useSelector((state)=>state.edit.postInfo)
+  //console.log("수정을 위해 보내는 게시물 정보",post_info.id)
   // 가져온 정보 깊은복사
   const copied = JSON.parse(JSON.stringify(user_info))
   
@@ -45,26 +48,30 @@ function PostOhwunwan() {
   const [text_content,setText_content] = useState('')
   const [picture, setPicture] = useState('')
 
+
   // 서버로 전송을 위한 객체 생성
-  const formdata = new FormData()
+  const editFormdata = new FormData()
   // 수정을 위한 객체 생성 
   
   // 핸들러를 통한 상태 관리
   const textHandler = (value) => {
     setText_content(value)
   }   
-  //console.log(text_content)
   const imageHandler = (value) => {
     setPicture(value)
   }
-  
-  // 생성된 객체에 데이터 담아주기
-  formdata.append('user_id', copied.id)
-  formdata.append('text_content', text_content)
-  formdata.append('file', picture)
-  console.log(formdata.getAll("file"))
-  
+  // 초기 값 
+  useEffect(()=>{
+    setText_content(post_info.text_content)
+  },[])
 
+  // 생성된 객체에 데이터 담아주기
+  editFormdata.append('ohwunwan_id', post_info.id)
+  editFormdata.append('text_content', text_content)
+  editFormdata.append('file',picture)
+  console.log(editFormdata.getAll("file"))
+  //console.log(editFormdata.getAll('text_content'))
+  //console.log(post_info.text_content)
   return(
     <Fragment>
       <Wrap>
@@ -74,16 +81,16 @@ function PostOhwunwan() {
         <BetweenBox>
           <PostSubject text='' />
           <PostSubject text='오운완' />
-          <PostSubmit formdata={formdata} url={"ohwunwan"} replace={"ohwunwan"}/>
+          <PostSubmit editFormdata={editFormdata} url={"ohwunwan"} replace={"ohwunwan"} />
         </BetweenBox>
 
         <BetweenBox>
-          <PostInput textHandler={textHandler} />
+          <PostInput textHandler={textHandler} editText={post_info.text_content} />
           <PostUpload imageHandler={imageHandler} />
         </BetweenBox>
 
         <BetweenBox>
-          <PostPicture img={picture? URL.createObjectURL(picture) : preview} /> 
+          <PostPicture img={picture? URL.createObjectURL(picture) :post_info.picture? post_info.picture:preview } /> 
         </BetweenBox>
 
       </Wrap>
@@ -91,4 +98,4 @@ function PostOhwunwan() {
   )
 }
 
-export default PostOhwunwan
+export default EditOhwunwan
