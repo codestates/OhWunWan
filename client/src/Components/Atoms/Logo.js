@@ -7,16 +7,16 @@ import styled from "styled-components"
 import logo from "../Picture/Logo/logo.svg"
 
 const Image = styled.img`
-  width: 10em;
+  width: ${props => props.width ? props.width : '10em'}
 `
 
 Logo.defaultProps = {
   img: logo
 }
 
-function Logo({img}) {
+function Logo({img, width}) {
   return (
-    <Image src={img}></Image>
+    <Image src={img} width={width}></Image>
   )
 }
 
