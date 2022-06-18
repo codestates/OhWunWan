@@ -56,7 +56,7 @@ function EditFeedback() {
   const textHandler = (value) => {
     setText_content(value)
   }   
-  const imageHandler = (value) => {
+  const videoHandler = (value) => {
     setVideo(value)
   }
   // 초기 값 
@@ -85,7 +85,7 @@ function EditFeedback() {
 
         <BetweenBox>
           <PostInput textHandler={textHandler} editText={post_info.text_content} />
-          <PostUpload imageHandler={imageHandler} />
+          <PostUpload videoHandler={videoHandler} />
         </BetweenBox>
 
         <BetweenBox>
