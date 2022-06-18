@@ -8,6 +8,7 @@ border: 0.1em solid #000;
 display: flex;
 justify-content: center;
 align-items: center;
+margin-top: 2em;
 `
 
 function FooterBlock() {

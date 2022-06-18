@@ -8,9 +8,6 @@ import { useSelector,useDispatch } from 'react-redux';
 import HeaderBlock from "../Organism/HeaderBlock";
 import MarginBox from "../Atoms/MarginBox";
 
-// 더미 동영상
-import dummy from "../Picture/dummy.mp4"
-
 // Atoms
 import PostSubject from "../Atoms/PostSubject";
 import PostSubmit from "../Atoms/PostSubmit";
