@@ -65,7 +65,7 @@ function EditFeedback() {
   },[])
 
   // 생성된 객체에 데이터 담아주기
-  editFormdata.append('user_id', post_info.id)
+  editFormdata.append('feedback_id', post_info.id)
   editFormdata.append('text_content', text_content)
   editFormdata.append('file',video)
   console.log(editFormdata.getAll("file"))
@@ -80,7 +80,7 @@ function EditFeedback() {
         <BetweenBox>
           <PostSubject text='' />
           <PostSubject text='피드백' />
-          <PostSubmit editFormdata={editFormdata} url={"ohwunwan"} replace={"ohwunwan"} />
+          <PostSubmit editFormdata={editFormdata} url={"feedback"} replace={"feedback"} />
         </BetweenBox>
 
         <BetweenBox>

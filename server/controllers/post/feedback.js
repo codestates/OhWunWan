@@ -112,6 +112,7 @@ module.exports = {
     //feedback게시물 수정
     patch: async (req, res) => {
         try {
+            console.log(req.body)
             //잘못된 요청
             if (!req.body.feedback_id) return res.status(400).json({ message: 'Bad Request!' });
             //동영상 내용 모두 바꾸는 경우

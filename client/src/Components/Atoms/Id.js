@@ -17,7 +17,7 @@ function Id({nickname}) {
   const user = useSelector((state)=>state.auth.user_info.nickname)
 
   return(
-    <Link to={`/mypage/${user}`}>
+    <Link to={`/user/${nickname}`}>
       <Name >{nickname}</Name>
     </Link>
   )

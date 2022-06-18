@@ -234,7 +234,7 @@ const feedbackCommentInfoHandler = (value) => {
   
   // 리덕스에서 유저 정보 가져오기  
   const user_info = useSelector((state)=>state.auth.user_info)
-  console.log(user_info)
+  //console.log(user_info)
   // 현재 페이지
   let select = useSelector(state => state)
   const dispatch = useDispatch()
@@ -969,7 +969,7 @@ const feedbackCommentInfoHandler = (value) => {
                                         <ProfilePicture img={comment['User.profile_picture']} />
                                         <Id nickname={comment['User.nickname']} />
                                       </FlexBox>
-                                      <CommentMenu onClick={() => setCommentMenu(true)} />
+                                      {post.comment[index]["User.nickname"]===user_info.nickname? <CommentMenu onClick={() => {setCommentMenu(true);feedbackCommentInfoHandler(post.comment[index])}} />:''}
                                     </BetweenBox>
                                     <FlexBox>
                                     <Comment text={comment.text_content}  time={comment.createdAt.slice(0, 10) + ' ' + comment.createdAt.slice(11, 19)}/>

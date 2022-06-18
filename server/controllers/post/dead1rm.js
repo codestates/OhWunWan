@@ -123,6 +123,7 @@ module.exports = {
     //dead_1rm게시묵 작성
     post: async (req, res) => {
         try {
+            console.log(req.body)
             if (!(req.body.user_id && req.body.text_content && req.file.location)) return res.status(400).json({ message: 'Bad Request!' })
             const { user_id, text_content, kg } = req.body
             console.log('::::::::::::::::user_id, text_content,kg:', user_id, text_content, kg)
