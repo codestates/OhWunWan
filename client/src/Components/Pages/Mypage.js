@@ -969,7 +969,7 @@ const feedbackCommentInfoHandler = (value) => {
                                         <ProfilePicture img={comment['User.profile_picture']} />
                                         <Id nickname={comment['User.nickname']} />
                                       </FlexBox>
-                                      <CommentMenu onClick={() => setCommentMenu(true)} />
+                                      {post.comment[index]["User.nickname"]===user_info.nickname? <CommentMenu onClick={() => {setCommentMenu(true);feedbackCommentInfoHandler(post.comment[index])}} />:''}
                                     </BetweenBox>
                                     <FlexBox>
                                     <Comment text={comment.text_content}  time={comment.createdAt.slice(0, 10) + ' ' + comment.createdAt.slice(11, 19)}/>

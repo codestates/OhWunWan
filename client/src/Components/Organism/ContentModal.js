@@ -5,7 +5,7 @@ import SubmitButton from "../Atoms/SubmitButton"
 import axios from 'axios';
 import { useSelector,useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { SendPostInfo } from '../../Ducks/Slice/EditSlice';
+import { SendPostInfo,SendCategory } from '../../Ducks/Slice/EditSlice';
 
 const Div = styled.div`
   width: 100vw;
@@ -41,7 +41,7 @@ function ContentModal({setContentMenu,category,postInfo}) {
   
   const deleteHandler = () => {
     axios.delete(`${STYLE.SERVER}/post/${category}/${postInfo.id}`)
-    .then((res)=>{window.location.replace(`${STYLE.CLIENT}/${category === "bench_1rm" ? "1rm" : category ==="dead_1rm" ? "1rm" : category === "sqaut_1rm" ? "1rm" :category }`)})
+    .then((res)=>{window.location.replace(`${STYLE.CLIENT}/${category === "bench_1rm" ? "1rm" : category ==="dead_1rm" ? "1rm" : category === "squat_1rm" ? "1rm" :category }`)})
     .catch((err)=>console.log(err))
   }
 
@@ -49,8 +49,8 @@ function ContentModal({setContentMenu,category,postInfo}) {
     <Fragment>
       <Div>
         <Div2>
-          <Link to={`/post/${category === "bench_1rm" ? "1rm/edit" : category ==="dead_1rm" ? "1rm/edit" : category === "sqaut_1rm" ? "1rm/edit" :category+"/edit" }`}>
-          <SubmitButton text='수정' type='skyblue' onClick={()=>{dispatch(SendPostInfo(postInfo))}}/>
+          <Link to={`/post/${category === "bench_1rm" ? "1rm/edit" : category ==="dead_1rm" ? "1rm/edit" : category === "squat_1rm" ? "1rm/edit" :category+"/edit" }`}>
+          <SubmitButton text='수정' type='skyblue' onClick={()=>{dispatch(SendPostInfo(postInfo));dispatch(SendCategory(category))}}/>
           </Link>
         </Div2>
         <Div2>

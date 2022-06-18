@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {postInfo:"" };
+const initialState = {postInfo:"",category:"" };
 
 const EditSlice = createSlice({
   name: 'edit',
@@ -9,9 +9,12 @@ const EditSlice = createSlice({
     SendPostInfo: (state,actions) => {
       state.postInfo = actions.payload;
     },
+    SendCategory:(state,actions) => {
+      state.category = actions.payload
+    }
   }
 });
 
-export const { SendPostInfo  } = EditSlice.actions;
+export const { SendPostInfo,SendCategory  } = EditSlice.actions;
 
 export default EditSlice.reducer;
