@@ -84,7 +84,7 @@ function UserInfo() {
 
         <Box>
           <FlexBox>
-            <UserinfoPicture img={user_info.profile_picture} />
+            <UserinfoPicture img={ profilePicture? URL.createObjectURL(profilePicture): user_info.profile_picture} />
             <FlexBox2>
               <Id nickname={user_info.nickname} />
               <ProfileUpload text='프로필 사진 바꾸기' profilePictureHandler={profilePictureHandler}/>

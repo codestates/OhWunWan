@@ -41,6 +41,8 @@ function Edit1rm() {
   const user_info = useSelector((state)=> state.auth.user_info) 
   // 게시물 수정을 위해 리덕스에 저장된 해당 게시물 정보 가져오기
   const post_info = useSelector((state)=>state.edit.postInfo)
+  const category = useSelector((state)=>state.edit.category)
+  console.log(category)
   console.log("수정을 위해 보내는 게시물 정보",post_info)
 
   // 가져온 정보 깊은복사
@@ -49,7 +51,6 @@ function Edit1rm() {
   // 작성글, 업로드 비디오, 종목선택, 무게 상태관리
   const [text_content,setText_content] = useState('')
   const [video, setVideo] = useState('')
-  const [fitness, setFitness] = useState('')
   const [weight, setWeight] = useState('')
   
   // 서버 전송을 위한 객체 생성
@@ -62,9 +63,6 @@ function Edit1rm() {
   const videoHandler = (value) => {
     setVideo(value)
   }
-  const selectFitness = (value) => {
-    setFitness(value)
-  }
   const weightHandler = (value) => {
     setWeight(value)
   }
@@ -73,9 +71,11 @@ function Edit1rm() {
     setText_content(post_info.text_content)
     setWeight(post_info.kg)
   },[])
+  
 
+  //console.log(fitness)
   // 생성된 객체에 데이터 담아주기
-  editFormdata.append('user_id', post_info.id)
+  editFormdata.append(`${category}_id`, post_info.id)
   editFormdata.append('text_content', text_content)
   editFormdata.append('file',video)
     
@@ -88,17 +88,12 @@ function Edit1rm() {
         <BetweenBox>
           <PostSubject text='' />
           <PostSubject text='1RM' />
-          <PostSubmit editFormdata={editFormdata} url={fitness} replace={"1rm"}/>
+          <PostSubmit editFormdata={editFormdata} url={category} replace={"1rm"}/>
         </BetweenBox>
 
         <BetweenBox>
           <PostInput textHandler={textHandler} editText={post_info.text_content}/>
           <PostUpload videoHandler={videoHandler}/>
-        </BetweenBox>
-
-        <BetweenBox>
-          <PostMenu text='종목선택' />
-          <PostSelect selectFitness={selectFitness} />
         </BetweenBox>
 
         <BetweenBox>

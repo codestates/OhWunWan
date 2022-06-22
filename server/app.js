@@ -53,3 +53,12 @@ if (fs.existsSync(process.env.KEY_PEM) && fs.existsSync(process.env.CERT_PEM)) {
   server = app.listen(HTTPS_PORT, () => console.log('http server running'));
 }
 module.exports = server;
+
+const httpsAgent = new https.Agent({
+  rejectUnauthorized: false, // (NOTE: this will disable client verification)
+  cert: fs.readFileSync("./cert.pem"),
+  key: fs.readFileSync("./key.pem"),
+  passphrase: "YYY"
+})
+
+const instance = axios.create({ httpsAgent })

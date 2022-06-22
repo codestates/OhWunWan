@@ -140,6 +140,29 @@ function Mypage() {
   const [select4, setSelect4] = useState(false)
   const [select5, setSelect5] = useState(false)
 
+  // contentMenu에 선택 카테고리를 내려주는 함수
+
+  const categorySelector = (select1,select2,select3,select4,select5) => {
+    if(select1){
+      return "ohwunwan"
+    }
+    if(select2){
+      return "bench_1rm"
+    }
+
+    if(select3){
+      return "dead_1rm"
+    }
+
+    if(select4){
+      return "squat_1rm"
+    }
+    
+    if(select5){
+      return "feedback"
+    }
+  }
+
   // get 정보 // info로 map 함수 실행
   const [info1, setInfo1] = useState([])
   const [info2, setInfo2] = useState([])
@@ -157,18 +180,61 @@ function Mypage() {
   // 정보
   const [mypage_info, setMypage_info] = useState([])
 
-   // 게시물의 id를 가져오기 위한 상태관리
-  const [postingId, setPostingId] = useState('')
+// 게시물의 id 가져오기
+const [ohwunwanInfo, setOhwunwanInfo] =useState('') 
+const [benchInfo, setBenchInfo] = useState('')
+const [deadInfo, setDeadInfo] = useState('')
+const [squatInfo, setSquatInfo] = useState('')
+const [feedbackInfo, setFeedbackInfo] = useState('')
 
-   // 게시물의 id를 끌어올려 전달해주는 핸들러 
-  const postingIdHandler = (value) => {
-    setPostingId(value)
-  }
+const ohwunwanInfoHandler = (value) => {
+  setOhwunwanInfo(value)
+}
 
+const benchInfoHandler = (value) => {
+  setBenchInfo(value)
+}
+const deadInfoHandler = (value) => {
+  setDeadInfo(value)
+}
+const squatInfoHandler = (value) => {
+  setSquatInfo(value)
+}
+
+const feedbackInfoHandler = (value) => {
+  setFeedbackInfo(value)
+}
+
+// 댓글의 id 가져오기
+const [ohwunwanCommentInfo, setOhwuwnwnaCommentInfo] = useState('')
+const [benchCommentInfo, setBenchCommentInfo] = useState('')
+const [deadCommentInfo, setDeadCommentInfo] = useState('')
+const [squatCommentInfo, setSquatCommentInfo] = useState('')
+const [feedbackCommentInfo, setFeedbackCommentInfo] = useState('')
+
+const ohwunwanCommentInfoHandler = (value) => {
+  setOhwuwnwnaCommentInfo(value)
+}
+
+const benchCommentInfoHandler = (value) => {
+  setBenchCommentInfo(value)
+}
+
+const deadCommentInfoHandler = (value) => {
+  setDeadCommentInfo(value)
+}
+
+const squatCommentInfoHandler = (value) => {
+  setSquatCommentInfo(value)
+}
+
+const feedbackCommentInfoHandler = (value) => {
+  setFeedbackCommentInfo(value)
+}
   
   // 리덕스에서 유저 정보 가져오기  
   const user_info = useSelector((state)=>state.auth.user_info)
-  console.log(user_info)
+  // console.log(user_info)
   // 현재 페이지
   let select = useSelector(state => state)
   const dispatch = useDispatch()
@@ -291,8 +357,8 @@ function Mypage() {
         {select.logout_modal.logout_modal ? <LogoutModal logoutHandler={logoutHandler}/> : null}
 
         {/* 메뉴 열고 닫기 */}
-        {contentMenu ? <ContentModal setContentMenu={setContentMenu} /> : null}
-        {commentMenu ? <CommentModal setCommentMenu={setCommentMenu} /> : null}
+        {contentMenu ? <ContentModal setContentMenu={setContentMenu} category={categorySelector(select1,select2,select3,select4,select5)} postInfo={ohwunwanInfo? ohwunwanInfo :benchInfo? benchInfo : deadInfo? deadInfo : squatInfo? squatInfo:feedbackInfo ? feedbackInfo:''}/> : null}
+        {commentMenu ? <CommentModal setCommentMenu={setCommentMenu} category={categorySelector(select1,select2,select3,select4,select5)} commentInfo ={ohwunwanCommentInfo? ohwunwanCommentInfo: benchCommentInfo? benchCommentInfo : deadCommentInfo ? deadCommentInfo: squatCommentInfo? squatCommentInfo: feedbackCommentInfo? feedbackCommentInfo:''}/> : null}
         
         <HeaderBlock />
         <MarginBox />
@@ -313,7 +379,7 @@ function Mypage() {
         <Box>
           <AroundBox>
             <RecordSubject subject='벤치프레스' />
-            <RecordSubject subject='데드프레스' />
+            <RecordSubject subject='데드리프트' />
             <RecordSubject subject='스쿼트' />
           </AroundBox>
           <AroundBox>
@@ -455,7 +521,7 @@ function Mypage() {
                               <ProfilePicture img={post["User.profile_picture"]} />
                               <Id nickname={post["User.nickname"]}></Id>
                             </FlexBox>
-                            <ContentButton onClick={() => {setContentMenu(true);postingIdHandler(post.id)}}/>
+                            {post["User.nickname"]===user_info.nickname? <ContentButton onClick={() => {setContentMenu(true);ohwunwanInfoHandler(post)}} />: ''}
                           </BetweenBox>
                         </BorderBox>
                         
@@ -506,7 +572,7 @@ function Mypage() {
                                     <ProfilePicture img={comment['User.profile_picture']} />
                                     <Id nickname={comment['User.nickname']} />
                                   </FlexBox>
-                                  <CommentMenu onClick={() => setCommentMenu(true)} />
+                                  {post.comment[index]["User.nickname"]===user_info.nickname? <CommentMenu onClick={() => {setCommentMenu(true);ohwunwanCommentInfoHandler(post.comment[index])}} />:''}
                                 </BetweenBox>
                                 <FlexBox>
                                   <Comment text={comment.text_content}  time={comment.createdAt.slice(0, 10) + ' ' + comment.createdAt.slice(11, 19)}/>
@@ -548,7 +614,7 @@ function Mypage() {
                               <OnermLogo />
                               {post.rank.length !== 0 ? <OnermRank count={`${post.rank[0]['Bench_1rm.ranking']}/`} /> : null}
                               {post.rank.length !== 0 ? <OnermRank count={post.rank[1]} /> : null}
-                              <ContentButton onClick={() => {setContentMenu(true)}} />
+                              {post["User.nickname"]===user_info.nickname? <ContentButton onClick={() => {setContentMenu(true);benchInfoHandler(post)}} />: ''}
                             </FlexBox>
                           </BetweenBox>
                         </BorderBox>
@@ -604,7 +670,7 @@ function Mypage() {
                                     <ProfilePicture img={comment['User.profile_picture']} />
                                     <Id nickname={comment['User.nickname']} />
                                   </FlexBox>
-                                  <CommentMenu onClick={() => setCommentMenu(true)} />
+                                  {post.comment[index3]["User.nickname"]===user_info.nickname? <CommentMenu onClick={() => {setCommentMenu(true);benchCommentInfoHandler(post.comment[index3])}} />:''}
                                 </BetweenBox>
                                 <FlexBox>
                                   <Comment text={comment.text_content}  time={comment.createdAt.slice(0, 10) + ' ' + comment.createdAt.slice(11, 19)}/>
@@ -646,7 +712,7 @@ function Mypage() {
                               <OnermLogo />
                               {post.rank.length !== 0 ? <OnermRank count={`${post.rank[0]['Dead_1rm.ranking']}/`} /> : null}
                               {post.rank.length !== 0 ? <OnermRank count={post.rank[1]} /> : null}
-                              <ContentButton onClick={() => {setContentMenu(true)}} />
+                              {post["User.nickname"]===user_info.nickname ?<ContentButton onClick={() => {setContentMenu(true);deadInfoHandler(post)}} />:''}
                             </FlexBox>
                           </BetweenBox>
                         </BorderBox>
@@ -702,7 +768,7 @@ function Mypage() {
                                     <ProfilePicture img={comment['User.profile_picture']} />
                                     <Id nickname={comment['User.nickname']} />
                                   </FlexBox>
-                                  <CommentMenu onClick={() => setCommentMenu(true)} />
+                                  {post.comment[index3]["User.nickname"]===user_info.nickname? <CommentMenu onClick={() => {setCommentMenu(true);deadCommentInfoHandler(post.comment[index3])}} />:''}
                                 </BetweenBox>
                                 <FlexBox>
                                   <Comment text={comment.text_content}  time={comment.createdAt.slice(0, 10) + ' ' + comment.createdAt.slice(11, 19)}/>
@@ -744,7 +810,7 @@ function Mypage() {
                               <OnermLogo />
                               {post.rank.length !== 0 ? <OnermRank count={`${post.rank[0]['Squat_1rm.ranking']}/`} /> : null}
                               {post.rank.length !== 0 ? <OnermRank count={post.rank[1]} /> : null}
-                              <ContentButton onClick={() => {setContentMenu(true)}} />
+                              {post["User.nickname"]===user_info.nickname? <ContentButton onClick={() => {setContentMenu(true);squatInfoHandler(post)}}/>:''}
                             </FlexBox>
                           </BetweenBox>
                         </BorderBox>
@@ -800,7 +866,7 @@ function Mypage() {
                                     <ProfilePicture img={comment['User.profile_picture']} />
                                     <Id nickname={comment['User.nickname']} />
                                   </FlexBox>
-                                  <CommentMenu onClick={() => setCommentMenu(true)} />
+                                  {post.comment[index3]["User.nickname"]===user_info.nickname? <CommentMenu onClick={() => {setCommentMenu(true);squatCommentInfoHandler(post.comment[index3])}} />:''}
                                 </BetweenBox>
                                 <FlexBox>
                                   <Comment text={comment.text_content}  time={comment.createdAt.slice(0, 10) + ' ' + comment.createdAt.slice(11, 19)}/>
@@ -838,7 +904,7 @@ function Mypage() {
                               <ProfilePicture img={post["User.profile_picture"]} />
                               <Id nickname={post["User.nickname"]}></Id>
                             </FlexBox>
-                            <ContentButton onClick={() => {setContentMenu(true)}}/>
+                            {post["User.nickname"]===user_info.nickname? <ContentButton onClick={() => {setContentMenu(true);feedbackInfoHandler(post)}}/>:''}
                           </BetweenBox>
                         </BorderBox>
                         
@@ -890,7 +956,7 @@ function Mypage() {
                                         <ProfilePicture img={comment['User.profile_picture']} />
                                         <Id nickname={comment['User.nickname']} />
                                       </FlexBox>
-                                      <CommentMenu onClick={() => setCommentMenu(true)} />
+                                      {post.comment[index3]["User.nickname"]===user_info.nickname? <CommentMenu onClick={() => {setCommentMenu(true);feedbackCommentInfoHandler(post.comment[index3])}} />:''}
                                     </BetweenBox>
                                     <FlexBox>
                                     <Comment text={comment.text_content}  time={comment.createdAt.slice(0, 10) + ' ' + comment.createdAt.slice(11, 19)}/>
@@ -903,7 +969,7 @@ function Mypage() {
                                         <ProfilePicture img={comment['User.profile_picture']} />
                                         <Id nickname={comment['User.nickname']} />
                                       </FlexBox>
-                                      <CommentMenu onClick={() => setCommentMenu(true)} />
+                                      {post.comment[index]["User.nickname"]===user_info.nickname? <CommentMenu onClick={() => {setCommentMenu(true);feedbackCommentInfoHandler(post.comment[index])}} />:''}
                                     </BetweenBox>
                                     <FlexBox>
                                     <Comment text={comment.text_content}  time={comment.createdAt.slice(0, 10) + ' ' + comment.createdAt.slice(11, 19)}/>

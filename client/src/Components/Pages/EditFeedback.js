@@ -56,7 +56,7 @@ function EditFeedback() {
   const textHandler = (value) => {
     setText_content(value)
   }   
-  const imageHandler = (value) => {
+  const videoHandler = (value) => {
     setVideo(value)
   }
   // 초기 값 
@@ -65,7 +65,7 @@ function EditFeedback() {
   },[])
 
   // 생성된 객체에 데이터 담아주기
-  editFormdata.append('user_id', post_info.id)
+  editFormdata.append('feedback_id', post_info.id)
   editFormdata.append('text_content', text_content)
   editFormdata.append('file',video)
   console.log(editFormdata.getAll("file"))
@@ -79,13 +79,13 @@ function EditFeedback() {
         
         <BetweenBox>
           <PostSubject text='' />
-          <PostSubject text='오운완' />
-          <PostSubmit editFormdata={editFormdata} url={"ohwunwan"} replace={"ohwunwan"} />
+          <PostSubject text='피드백' />
+          <PostSubmit editFormdata={editFormdata} url={"feedback"} replace={"feedback"} />
         </BetweenBox>
 
         <BetweenBox>
           <PostInput textHandler={textHandler} editText={post_info.text_content} />
-          <PostUpload imageHandler={imageHandler} />
+          <PostUpload videoHandler={videoHandler} />
         </BetweenBox>
 
         <BetweenBox>
