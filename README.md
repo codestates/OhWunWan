@@ -14,4 +14,4 @@
 **오운완**과 함께 운동을 시작해보세요!
 
 # 배포링크
-[오운완](https://localhost:3000)
+[오운완](www.ohwunwan.shop)
